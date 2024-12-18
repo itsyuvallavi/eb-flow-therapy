@@ -1,54 +1,100 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import floralPattern from '../assets/floral-pattern.jpg'; // You'll need to add the image to your assets
 
 const Services = () => {
   const [expandedService, setExpandedService] = useState(null);
 
   const services = [
     {
-      title: "Individual Therapy",
-      description: "A collaborative space to explore personal challenges, develop coping strategies, and work towards meaningful change.",
+      title: "Adult Therapy",
+      description: "Individual sessions are available for those seeking to learn more about themselves, work towards change and improvement, learn coping skills, understand patterns of behavior, and just have a private space to focus on your needs. We will collaborate in working towards your life best lived.",
       details: [
-        "Anxiety & Depression",
+        "Personal Growth & Self-Discovery",
+        "Coping Skills Development",
+        "Behavioral Pattern Analysis",
+        "Individual Goal Setting",
         "Life Transitions",
-        "Personal Growth",
-        "Cultural Identity",
-        "Self-Esteem",
-        "Trauma Recovery"
+        "Mental Health Support"
       ]
     },
     {
-      title: "Couples Therapy",
-      description: "Supporting couples in strengthening their relationship through improved communication, understanding, and connection.",
+      title: "Family Therapy",
+      description: "Family relationships become complex as maladaptive patterns and roles create obstacles in connection. I provide a safe space for family members to recreate, break down and rebuild patterns of communication as you work towards a cohesive family unit.",
       details: [
-        "Communication Issues",
-        "Trust Building",
+        "Family Communication",
+        "Role Pattern Analysis",
+        "Relationship Building",
         "Conflict Resolution",
-        "Premarital Counseling",
-        "Intimacy Concerns",
-        "Life Transitions as a Couple"
+        "Family Unity Development",
+        "Inter-generational Healing"
       ]
     },
     {
-      title: "Group Therapy",
-      description: "A supportive environment where individuals can connect, share experiences, and grow together.",
+      title: "Couples/Partners Therapy",
+      description: "Being in a relationship is a difficult process of ongoing hard work in uniting, connecting and repairing. I hope to join you and you partner(s) in learning more effective tools for communication, recreating trust, and understanding each other to continue growing together.",
       details: [
-        "Women's Support Group",
+        "Communication Enhancement",
+        "Trust Building",
+        "Mutual Understanding",
+        "Conflict Resolution",
+        "Relationship Growth",
+        "Partnership Skills"
+      ]
+    },
+    {
+      title: "Relationships",
+      description: "Managing the relationships in our life is a challenging and demanding skill. If you are identifying patterns of impairments in important relationships in your life, struggling with professional or casual relationships, or experiencing distress and anxiety in relationships, I can provide interpersonal and mindfulness skills practice.",
+      details: [
+        "Interpersonal Skills",
+        "Relationship Pattern Analysis",
+        "Professional Relations",
+        "Social Anxiety Management",
+        "Mindfulness Practice",
+        "Communication Skills"
+      ]
+    },
+    {
+      title: "Anxiety and Related Disorders",
+      description: "Anxiety has become a prominent concept in popular culture, though we lack the skills to cope with high levels of anxiety. If you experience anxiety, life impairments to relationships/work because of anxiety, or if you have been diagnosed with an anxiety-related disorder, I can provide services to learn how to live with anxiety and reclaim your life best lived.",
+      details: [
         "Anxiety Management",
-        "Cultural Identity",
-        "Relationship Skills",
-        "Personal Development",
-        "Stress Management"
+        "Coping Strategies",
+        "Work-Life Balance",
+        "Stress Reduction",
+        "Behavioral Techniques",
+        "Life Skills Development"
+      ]
+    },
+    {
+      title: "Personality Disorders",
+      description: "Personality disorders are highly stigmatized, though frequently misunderstood disorders. You may be struggling with managing relationships in your life, told you are 'too sensitive', struggle with regulating emotions, or have struggled with thoughts of suicide or self-harm. I can provide a non-judgmental, validating environment for those ready to build alternative coping skills and ways of interacting in the world to reach your life best lived.",
+      details: [
+        "Emotional Regulation",
+        "Relationship Management",
+        "Coping Skills Development",
+        "Self-awareness Building",
+        "Support System Development",
+        "Life Skills Enhancement"
       ]
     }
   ];
 
   return (
     <div className="min-h-screen bg-beige-50">
-      {/* Hero Section */}
-      <div className="bg-brown-400/10 py-20">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* Hero Section with Floral Pattern */}
+      <div className="relative bg-brown-400/10 py-20">
+        <div 
+          className="absolute inset-0 opacity-15"
+          style={{
+            backgroundImage: `url(${floralPattern})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            mixBlendMode: 'multiply'
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-4 z-10">
           <h1 className="text-4xl md:text-5xl font-light text-brown-700 mb-6 text-center">
             Our Services
           </h1>
@@ -116,23 +162,6 @@ const Services = () => {
               )}
             </div>
           ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-light text-brown-700 mb-4">
-            Ready to Begin Your Journey?
-          </h3>
-          <p className="text-brown-500 mb-8">
-            Schedule a complimentary 15-minute consultation to discuss how we can best support your needs.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center px-8 py-3 bg-brown-500 text-white rounded-full hover:bg-brown-600 transition-colors duration-300"
-          >
-            <Mail className="w-5 h-5 mr-2" />
-            Schedule Consultation
-          </Link>
         </div>
       </div>
     </div>

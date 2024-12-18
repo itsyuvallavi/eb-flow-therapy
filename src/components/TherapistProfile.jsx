@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { Languages, Mail, CalendarCheck, GraduationCap, Heart } from 'lucide-react';
 import therapistsData from '../data/therapists.json';
+import floralPattern from "../assets/floral-pattern.jpg";
 
 const TherapistProfile = () => {
   const [activeTab, setActiveTab] = useState('background');
@@ -71,10 +72,32 @@ const TherapistProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-beige-50">
+    <div className="relative min-h-screen bg-beige-50">
+      {/* Main Background Pattern */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `url(${floralPattern})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          mixBlendMode: 'multiply'
+        }}
+      />
+
       {/* Hero Section */}
       <div className="relative bg-brown-400/10 py-20">
-        <div className="max-w-6xl mx-auto px-4">
+        {/* Decorative top pattern */}
+        <div 
+          className="absolute top-0 left-0 w-full h-24 opacity-15"
+          style={{
+            backgroundImage: `url(${floralPattern})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center top',
+            mixBlendMode: 'multiply'
+          }}
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl font-light text-brown-700">
@@ -106,9 +129,9 @@ const TherapistProfile = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
         {/* Navigation Tabs */}
-        <div className="flex space-x-8 border-b border-beige-200 mb-12">
+        <div className="flex space-x-8 border-b border-beige-200 mb-12 bg-beige-50/80 backdrop-blur-sm rounded-t-lg p-4">
           {tabs.map(({ id, icon: Icon, label }) => (
             <button
               key={id}
@@ -129,25 +152,45 @@ const TherapistProfile = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="space-y-8">
+        <div className="space-y-8 bg-white/90 backdrop-blur-sm rounded-lg p-8 shadow-md">
           {renderTabContent()}
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-light text-brown-700 mb-4">
-            Ready to Start Your Journey?
-          </h3>
-          <p className="text-brown-500 mb-8">
-            Schedule a complimentary 15-minute consultation to see if we're a good fit.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center px-8 py-3 bg-brown-500 text-white rounded-full hover:bg-brown-600 transition-colors duration-300"
-          >
-            <Mail className="w-5 h-5 mr-2" />
-            Schedule a Consultation
-          </Link>
+        <div className="relative mt-16 text-center">
+          {/* Decorative corner elements */}
+          <div 
+            className="absolute top-0 right-0 w-24 h-24 opacity-15 transform translate-x-1/2 -translate-y-1/2"
+            style={{
+              backgroundImage: `url(${floralPattern})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat'
+            }}
+          />
+          <div 
+            className="absolute bottom-0 left-0 w-24 h-24 opacity-15 transform -translate-x-1/2 translate-y-1/2"
+            style={{
+              backgroundImage: `url(${floralPattern})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat'
+            }}
+          />
+
+          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-8 shadow-md">
+            <h3 className="text-2xl font-light text-brown-700 mb-4">
+              Ready to Start Your Journey?
+            </h3>
+            <p className="text-brown-500 mb-8">
+              Schedule a complimentary 15-minute consultation to see if we're a good fit.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center px-8 py-3 bg-brown-500 text-white rounded-full hover:bg-brown-600 transition-colors duration-300"
+            >
+              <Mail className="w-5 h-5 mr-2" />
+              Schedule a Consultation
+            </Link>
+          </div>
         </div>
       </div>
     </div>
