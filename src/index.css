@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: #FAF7F2; /* beige-50 */
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #FAF7F2; /* beige-50 */
+  color: #D39A8B; /* terra-400 */
+}
+
+a {
+  font-weight: 500;
+  color: #96AB8B; /* sage-400 */
+  text-decoration: inherit;
+}
+a:hover {
+  color: #7B916F; /* sage-500 */
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #FAF7F2; /* beige-50 */
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #C7816E; /* terra-500 */
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid #B69B6B; /* beige-500 */
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #F5EFE6; /* beige-100 */
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: #C7816E; /* terra-500 */
+}
+
+button:hover {
+  border-color: #96AB8B; /* sage-400 */
+  background-color: #E8EBE4; /* sage-100 */
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto #96AB8B; /* sage-400 */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #D39A8B; /* terra-400 */
+    background-color: #FAF7F2; /* beige-50 */
+  }
+  a:hover {
+    color: #7B916F; /* sage-500 */
+  }
+  button {
+    background-color: #F5EFE6; /* beige-100 */
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "elinor": {
+    "id": "elinor",
+    "name": "Elinor Bawnik",
+    "title": "Lead Therapist, LMFT",
+    "license": "LMFT #124458",
+    "image": "/src/assets/portrait.png",
+    "languages": ["English", "Hebrew"],
+    "featured": true,
+    "shortBio": "With years of experience in individual and couples therapy, I create a safe space for growth and healing through evidence-based practices and genuine human connection.",
+    "education": [
+      "Master of Arts in Clinical Psychology, Antioch University Los Angeles",
+      "Bachelor of Arts in Psychology, University of California, Los Angeles"
+    ],
+    "background": "I am a Licensed Marriage and Family Therapist dedicated to providing a safe and nurturing space for individuals and couples on their journey toward healing and growth. With a multicultural background and extensive experience in cross-cultural therapy, I bring a unique perspective to my practice.",
+    "specializations": ["Individual Therapy", "Couples Counseling", "Anxiety & OCD", "Cultural Transitions"],
+    "approach": "My therapeutic approach combines various evidence-based methods tailored to each client's unique needs. I integrate:\n\n• Cognitive Behavioral Therapy (CBT)\n• Emotionally Focused Therapy (EFT)\n• Mindfulness-Based Approaches\n• Attachment-Based Therapy\n• Solution-Focused Therapy\n\nI believe in creating a collaborative therapeutic relationship where we work together to identify patterns, develop coping strategies, and work toward your goals."
+  },
+  "michael": {
+    "id": "michael",
+    "name": "Dr. Michael Chen",
+    "title": "Therapist, LMFT",
+    "license": "LMFT #125789",
+    "image": "/src/assets/woman.jpg",
+    "languages": ["English", "Mandarin"],
+    "featured": false,
+    "shortBio": "Specializing in family dynamics and trauma recovery, helping clients find strength through challenging life transitions.",
+    "education": [
+      "Ph.D. in Clinical Psychology, Stanford University",
+      "Master of Science in Psychology, Columbia University"
+    ],
+    "background": "As a licensed therapist with extensive experience in trauma and family dynamics, I specialize in helping individuals navigate complex life transitions and relationship challenges. My approach combines Eastern and Western therapeutic practices to provide comprehensive care.",
+    "specializations": ["Family Therapy", "Trauma Recovery", "ADHD", "Depression"],
+    "approach": "I utilize an integrative approach that combines:\n\n• Psychodynamic Therapy\n• Cognitive Behavioral Therapy (CBT)\n• Mindfulness Practices\n• Cultural Humility\n• Trauma-Informed Care\n\nMy style is collaborative and warm, focusing on building a strong therapeutic alliance while maintaining professional boundaries and evidence-based practices."
+  }
+}
