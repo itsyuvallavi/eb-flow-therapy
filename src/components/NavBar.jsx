@@ -7,7 +7,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Check if we're on the home page
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
@@ -18,8 +17,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // If we're on home page and not scrolled, use transparent style
-  // Otherwise, use solid style
   const shouldBeTransparent = isHomePage && !scrolled;
 
   return (
@@ -27,7 +24,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         shouldBeTransparent
           ? "bg-transparent backdrop-blur-sm"
-          : "bg-beige-50 shadow-md"
+          : "bg-mountain-peak/40 shadow-md backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,24 +44,24 @@ const Navbar = () => {
                 to={item.path}
                 className={`relative text-sm font-medium transition-colors duration-200 group ${
                   shouldBeTransparent
-                    ? "text-white hover:text-beige-200"
-                    : "text-brown-500 hover:text-brown-700"
+                    ? "text-mountain-forest hover:text-mountain-shadow"
+                    : "text-mountain-forest hover:text-mountain-shadow"
                 }`}
               >
                 {item.name}
                 <span
                   className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full ${
-                    shouldBeTransparent ? "bg-beige-200" : "bg-brown-700"
+                    shouldBeTransparent ? "bg-mountain-forest" : "bg-mountain-shadow"
                   }`}
                 ></span>
               </Link>
             ))}
             <Link
               to="/contact"
-              className={`px-6 py-2 text-sm font-medium border-2 rounded-full transition-colors duration-200 ${
+              className={`px-6 py-2 text-sm font-medium border-2 rounded-full transition-all duration-300 hover:scale-105 ${
                 shouldBeTransparent
-                  ? "text-white border-white hover:bg-white hover:text-brown-700"
-                  : "text-brown-400 border-brown-400 hover:bg-brown-400 hover:text-white"
+                  ? "text-mountain-forest border-mountain-forest hover:bg-mountain-terra/10"
+                  : "text-mountain-shadow border-mountain-shadow hover:bg-mountain-shadow hover:text-mountain-terra"
               }`}
             >
               CONTACT
@@ -74,12 +71,16 @@ const Navbar = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`md:hidden p-2 rounded-lg transition-colors ${
-              shouldBeTransparent ? "hover:bg-white/20" : "hover:bg-beige-100"
+              shouldBeTransparent 
+                ? "hover:bg-mountain-terra/20" 
+                : "hover:bg-mountain-shadow/10"
             }`}
           >
             <svg
               className={`w-6 h-6 ${
-                shouldBeTransparent ? "text-white" : "text-brown-500"
+                shouldBeTransparent 
+                  ? "text-mountain-terra" 
+                  : "text-mountain-shadow"
               }`}
               fill="none"
               strokeLinecap="round"
@@ -113,8 +114,8 @@ const Navbar = () => {
                 to={item.path}
                 className={`block px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                   shouldBeTransparent
-                    ? "text-white hover:bg-white/20"
-                    : "text-brown-500 hover:bg-brown-100 hover:text-brown-700"
+                    ? "text-mountain-terra hover:bg-mountain-terra/20"
+                    : "text-mountain-shadow hover:bg-mountain-shadow/10 hover:text-mountain-peak"
                 }`}
               >
                 {item.name}

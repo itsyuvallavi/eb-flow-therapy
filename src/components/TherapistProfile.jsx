@@ -75,7 +75,7 @@ const TherapistProfile = () => {
     <div className="relative min-h-screen bg-beige-50">
       {/* Main Background Pattern */}
       <div 
-        className="absolute inset-0 opacity-10"
+        className="fixed inset-0 opacity-10"
         style={{
           backgroundImage: `url(${floralPattern})`,
           backgroundSize: 'cover',
@@ -117,7 +117,7 @@ const TherapistProfile = () => {
                 Contact Me
               </Link>
             </div>
-            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
+            <div className="top-12 relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <img
                 src={therapist.image}
                 alt={therapist.name}
@@ -131,7 +131,7 @@ const TherapistProfile = () => {
       {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
         {/* Navigation Tabs */}
-        <div className="flex space-x-8 border-b border-beige-200 mb-12 bg-beige-50/80 backdrop-blur-sm rounded-t-lg p-4">
+        <div className="flex space-x-8 border-b border-beige-200 mb-12 bg-beige-100/80 backdrop-blur-sm rounded-t-lg p-4 ">
           {tabs.map(({ id, icon: Icon, label }) => (
             <button
               key={id}

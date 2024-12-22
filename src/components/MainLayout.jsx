@@ -3,30 +3,28 @@ import { useEffect } from 'react';
 import Navbar from "./NavBar.jsx";
 import Contact from "./Contact.jsx";
 import Services from './Services.jsx';
-import Home from "./Home.jsx";
+import HomePage from "./HomePage/_HomeLayout.jsx";
 import OurTeam from "./OurTeam.jsx";
 import PageLayout from "./modal/PageLayout.jsx";
 import TherapistProfile from './TherapistProfile.jsx';
 
 const ScrollToTop = () => {
   const location = useLocation();
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname]);
-
   return null;
 };
 
 const MainLayout = () => {
   return (
-    <Router>
+    <Router basename="/eb-flow-therapy">
       <ScrollToTop />
       <div className="w-full min-h-screen bg-beige-50">
         <Navbar />
         <PageLayout>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/our-team" element={<OurTeam />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />
