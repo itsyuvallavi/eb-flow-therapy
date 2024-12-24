@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Navbar from "./NavBar.jsx";
 import Contact from "./Contact.jsx";
 import Services from './Services.jsx';
-import HomePage from "./HomePage/_HomeLayout.jsx";
+import Home from "./HomePage/_HomeLayout.jsx";
 import OurTeam from "./OurTeam.jsx";
 import PageLayout from "./modal/PageLayout.jsx";
 import TherapistProfile from './TherapistProfile.jsx';
@@ -20,11 +20,11 @@ const MainLayout = () => {
   return (
     <Router basename="/eb-flow-therapy">
       <ScrollToTop />
-      <div className="w-full min-h-screen bg-beige-50">
+      <div className="min-h-screen">
         <Navbar />
         <PageLayout>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<Home />} />
             <Route path="/our-team" element={<OurTeam />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />

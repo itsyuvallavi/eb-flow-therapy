@@ -7,8 +7,19 @@ export const useIntersectionObserver = (options = {}) => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      setIsVisible(entry.isIntersecting);
-    }, { threshold: 0.1, ...options });
+      // Only set to visible if element is actually entering viewport
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        // Once element is visible, stop observing to prevent re-triggering
+        if (currentElement) {
+          observer.unobserve(currentElement);
+        }
+      }
+    }, { 
+      threshold: 0.2,
+      rootMargin: '50px',
+      ...options 
+    });
 
     const currentElement = elementRef.current;
 

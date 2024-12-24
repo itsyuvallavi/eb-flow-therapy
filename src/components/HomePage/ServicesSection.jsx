@@ -10,12 +10,11 @@ const ServiceCard = ({ title, description, Icon, delay = 0 }) => {
     <div 
       ref={ref}
       className={`group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm p-8 
-        shadow-xl hover:shadow-2xl hover:opacity-100
-        transition-[transform,box-shadow] duration-300
-        ${isVisible ? 'translate-y-0 opacity-90' : 'translate-y-20 opacity-0'}`}
+        shadow-xl hover:shadow-2xl
+        transition-all duration-700 ease-out will-change-transform
+        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
       style={{ 
-        transitionDelay: isVisible ? '0ms' : `${delay}ms`,
-        transitionDuration: isVisible ? '300ms' : '700ms'
+        transitionDelay: `${delay}ms`,
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-mountain-terra/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-10" />

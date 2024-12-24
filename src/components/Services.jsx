@@ -1,10 +1,84 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Mail } from 'lucide-react';
+import { ChevronDown, ChevronUp, Mail, Brain, Leaf } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import floralPattern from '../assets/floral-pattern.jpg'; // You'll need to add the image to your assets
+import { useIntersectionObserver } from '../components/modal/useIntersectionObserver';
+import background from '../assets/tree.png';
+
+const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
+  const [ref, isVisible] = useIntersectionObserver();
+  
+  return (
+    <div 
+      ref={ref}
+      className={`transform transition-all duration-700 ease-out h-[320px]
+        ${isExpanded ? 'h-auto' : ''}
+        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div className="h-full group bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl 
+        hover:shadow-2xl transition-all duration-300">
+        <div className="h-full p-8">
+          <button 
+            onClick={onToggle}
+            className="w-full text-left"
+          >
+            <div className="flex justify-between items-center group-hover:text-mountain-terra transition-colors">
+              <div className="flex items-center space-x-4">
+                <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors">
+                  <Brain className="w-6 h-6 text-mountain-terra" />
+                </div>
+                <h3 className="text-2xl font-light text-mountain-shadow group-hover:text-mountain-terra transition-colors">
+                  {service.title}
+                </h3>
+              </div>
+              <div className="transform transition-transform duration-300">
+                {isExpanded ? (
+                  <ChevronUp className="w-6 h-6 flex-shrink-0" />
+                ) : (
+                  <ChevronDown className="w-6 h-6 flex-shrink-0" />
+                )}
+              </div>
+            </div>
+            
+            <p className="mt-4 text-mountain-shadow/80 leading-relaxed pl-16 pr-8">
+              {service.description}
+            </p>
+          </button>
+
+          <div 
+            className={`transition-all duration-300 ease-in-out
+              ${isExpanded ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0'}`}
+          >
+            <div className="mt-6">
+              <div className="border-t border-mountain-shadow/10 pt-6">
+                <div className="pl-16 pr-8">
+                  <h4 className="text-lg font-medium text-mountain-terra mb-4">
+                    What's Included
+                  </h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {service.details.map((detail, i) => (
+                      <div 
+                        key={i}
+                        className="flex items-center space-x-3 text-mountain-shadow"
+                      >
+                        <Leaf className="w-4 h-4 text-mountain-terra flex-shrink-0" />
+                        <span>{detail}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Services = () => {
   const [expandedService, setExpandedService] = useState(null);
+  const [titleRef, isTitleVisible] = useIntersectionObserver();
 
   const services = [
     {
@@ -68,100 +142,93 @@ const Services = () => {
       ]
     },
     {
-      title: "Personality Disorders",
-      description: "Personality disorders are highly stigmatized, though frequently misunderstood disorders. You may be struggling with managing relationships in your life, told you are 'too sensitive', struggle with regulating emotions, or have struggled with thoughts of suicide or self-harm. I can provide a non-judgmental, validating environment for those ready to build alternative coping skills and ways of interacting in the world to reach your life best lived.",
+      title: "Trauma-Informed Care",
+      description: "A specialized approach for individuals seeking to heal from past trauma and build resilience. Using evidence-based techniques, we create a safe environment for processing experiences and developing healthy coping mechanisms to support your healing journey.",
       details: [
+        "PTSD Treatment",
+        "Complex Trauma Support",
         "Emotional Regulation",
-        "Relationship Management",
-        "Coping Skills Development",
-        "Self-awareness Building",
-        "Support System Development",
-        "Life Skills Enhancement"
+        "Somatic Experiencing",
+        "Resilience Building",
+        "Safety Planning"
       ]
     }
   ];
 
   return (
-    <div className="min-h-screen bg-beige-50">
-      {/* Hero Section with Floral Pattern */}
-      <div className="relative bg-brown-400/10 py-20">
-        <div 
-          className="absolute inset-0 opacity-15"
-          style={{
-            backgroundImage: `url(${floralPattern})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            mixBlendMode: 'multiply'
-          }}
-        />
-        <div className="relative max-w-6xl mx-auto px-4 z-10">
-          <h1 className="text-4xl md:text-5xl font-light text-brown-700 mb-6 text-center">
-            Our Services
-          </h1>
-          <p className="text-lg text-brown-500 max-w-2xl mx-auto text-center">
-            Specialized therapeutic support tailored to your unique journey of growth and healing
-          </p>
+    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40">
+      {/* Background Image */}
+      <div
+        className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "1200px",
+          opacity: 0.1,
+          zIndex: 0,
+        }}
+      />
+
+      {/* Hero Section */}
+      <div className="relative py-20 z-10">
+        <div className="max-w-6xl mx-auto px-4">
+          <div 
+            ref={titleRef}
+            className={`text-center mb-16 transform transition-all duration-700
+              ${isTitleVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+          >
+            <div className="relative inline-block">
+              <h1 className="relative text-5xl font-light text-mountain-shadow">
+                <span className="block text-sm uppercase tracking-wider text-mountain-terra/80 mb-2">
+                  Welcome to Our Practice
+                </span>
+                Our Services
+              </h1>
+            </div>
+
+            <div className="relative max-w-2xl mx-auto">
+              <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
+              <p className="text-lg text-mountain-shadow/80 py-6">
+                Discover our comprehensive range of therapeutic services, each tailored to support
+                your unique journey to wellness and personal growth.
+              </p>
+              <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Services Section */}
-      <div className="max-w-6xl mx-auto px-4 py-16">
-        <div className="space-y-8">
+      <div className="relative z-10 max-w-6xl mx-auto bottom-20 px-4">
+        <div className="grid md:grid-cols-2 gap-6">
           {services.map((service, index) => (
-            <div 
+            <ServiceCard
               key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
-            >
-              <div 
-                className="p-6 cursor-pointer"
-                onClick={() => setExpandedService(expandedService === index ? null : index)}
-              >
-                <div className="flex justify-between items-center">
-                  <h2 className="text-2xl font-light text-brown-700">
-                    {service.title}
-                  </h2>
-                  {expandedService === index ? (
-                    <ChevronUp className="w-6 h-6 text-brown-400" />
-                  ) : (
-                    <ChevronDown className="w-6 h-6 text-brown-400" />
-                  )}
-                </div>
-                <p className="mt-2 text-brown-500">
-                  {service.description}
-                </p>
-              </div>
-
-              {expandedService === index && (
-                <div className="px-6 pb-6 space-y-4">
-                  <div className="border-t border-beige-200 pt-4">
-                    <h3 className="text-lg font-medium text-brown-600 mb-3">
-                      What's Included
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {service.details.map((detail, i) => (
-                        <div 
-                          key={i}
-                          className="flex items-center space-x-2"
-                        >
-                          <div className="w-2 h-2 rounded-full bg-brown-400"></div>
-                          <span className="text-brown-500">{detail}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="border-t border-beige-200 pt-4">
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center px-6 py-2 bg-brown-500 text-white rounded-full hover:bg-brown-600 transition-colors duration-300"
-                    >
-                      <Mail className="w-4 h-4 mr-2" />
-                      Inquire About This Service
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
+              service={service}
+              isExpanded={expandedService === index}
+              onToggle={() => setExpandedService(expandedService === index ? null : index)}
+              delay={index * 100}
+            />
           ))}
+        </div>
+      </div>
+
+      {/* Contact Section */}
+      <div className="relative z-10 py-20 mt-12 bg-gradient-to-b from-mountain-forest/20 to-mountain-peak/20">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 shadow-xl">
+            <h2 className="text-3xl font-light text-mountain-shadow mb-6">Ready to Begin Your Journey?</h2>
+            <p className="text-lg text-mountain-shadow/80 mb-8">
+              Schedule a complimentary 15-minute consultation to discuss which service best fits your needs.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center px-8 py-4 bg-mountain-terra text-white 
+                rounded-full hover:bg-mountain-terra/90 transition-all duration-300 transform hover:scale-105"
+            >
+              <Mail className="w-5 h-5 mr-2" />
+              Schedule Consultation
+            </Link>
+          </div>
         </div>
       </div>
     </div>
