@@ -11,8 +11,8 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
   return (
     <div
       ref={ref}
-      className={`transform transition-all duration-700 ease-out h-[320px]
-        ${isExpanded ? "h-auto" : ""}
+      className={`transform transition-all duration-700 ease-out
+        ${isExpanded ? "h-auto" : "min-h-[320px]"}
         ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
         }`}
@@ -169,7 +169,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40">
+    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
       {/* Background Image */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
@@ -182,8 +182,8 @@ const Services = () => {
       />
 
       {/* Hero Section */}
-      <div className="relative py-20 z-10">
-        <div className="max-w-6xl mx-auto px-4">
+      <div className="relative" style={{ paddingTop: '14rem', paddingBottom: '7rem' }}>
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div
             ref={titleRef}
             className={`text-center transform transition-all duration-700

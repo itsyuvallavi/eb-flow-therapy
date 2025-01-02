@@ -5,9 +5,9 @@ const PageLayout = ({ children }) => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <div className={`${!isHomePage ? 'pt-28' : ''} bg-beige-50`}>
+    <main className="min-h-screen">
       {children}
-    </div>
+    </main>
   );
 };
 

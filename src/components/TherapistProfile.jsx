@@ -1,41 +1,37 @@
 import { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import {
-  Languages,
   Mail,
   CalendarCheck,
   GraduationCap,
-  Heart,
   BookOpen,
   Brain,
   Globe,
   MessageSquare,
   UserCheck,
   Flower,
-  Star
+  Star,
 } from "lucide-react";
 import therapistsData from "../data/therapists.json";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
-
-// Import all static assets
 import background from "../assets/tree.png";
 import portrait from "../assets/portrait.png";
 import woman from "../assets/woman.jpg";
 
-// Create an image map
 const imageMap = {
   "/portrait.png": portrait,
-  "/woman.jpg": woman
+  "/woman.jpg": woman,
 };
 
 const AnimatedSection = ({ children, delay = 0 }) => {
   const [ref, isVisible] = useIntersectionObserver();
-  
   return (
-    <div 
+    <div
       ref={ref}
       className={`transform transition-all duration-700
-        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -44,8 +40,10 @@ const AnimatedSection = ({ children, delay = 0 }) => {
 };
 
 const Specialization = ({ title }) => (
-  <div className="group p-6 bg-white/10 backdrop-blur-sm rounded-2xl shadow-sm 
-    hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+  <div
+    className="group p-6 bg-white/10 backdrop-blur-sm rounded-2xl shadow-sm 
+    hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+  >
     <div className="flex items-center space-x-3">
       <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors">
         <Star className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
@@ -75,7 +73,7 @@ const TherapistProfile = () => {
   const [backgroundOpacity, setBackgroundOpacity] = useState(0.1);
 
   const [sectionRef, isSectionVisible] = useIntersectionObserver({
-    threshold: 0.1
+    threshold: 0.1,
   });
 
   useEffect(() => {
@@ -106,15 +104,14 @@ const TherapistProfile = () => {
   const tabs = [
     { id: "background", label: "Background", Icon: BookOpen },
     { id: "specializations", label: "Specializations", Icon: Star },
-    { id: "approach", label: "Approach", Icon: Brain }
+    { id: "approach", label: "Approach", Icon: Brain },
   ];
 
   return (
-    <div 
+    <div
       ref={sectionRef}
-      className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40"
+      className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25"
     >
-      {/* Background Image */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
         style={{
@@ -125,13 +122,14 @@ const TherapistProfile = () => {
         }}
       />
 
-      {/* Hero Section */}
-      <div className="relative py-20">
+      <div
+        className="relative"
+        style={{ paddingTop: "14rem", paddingBottom: "7rem" }}
+      >
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <AnimatedSection>
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* Image Section */}
-              <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-xl group">
+              <div className="relative h-[300px] md:h-[600px] rounded-2xl overflow-hidden shadow-xl group">
                 <img
                   src={imageSource}
                   alt={therapist.name}
@@ -140,15 +138,14 @@ const TherapistProfile = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/20 to-transparent" />
               </div>
 
-              {/* Content Section */}
               <div className="space-y-8">
                 <div className="relative">
-                  <h1 className="text-5xl font-light text-mountain-shadow mb-3">
+                  <h1 className="text-4xl md:text-5xl font-light text-mountain-shadow mb-3">
                     {therapist.name}
                   </h1>
                   <div className="flex items-center space-x-2 text-mountain-terra">
                     <UserCheck className="w-5 h-5" />
-                    <p className="text-2xl">{therapist.title}</p>
+                    <p className="text-xl md:text-2xl">{therapist.title}</p>
                   </div>
                   <div className="flex items-center space-x-2 text-mountain-shadow mt-2">
                     <BookOpen className="w-5 h-5" />
@@ -163,14 +160,14 @@ const TherapistProfile = () => {
                 <div className="space-y-6">
                   <div className="flex items-start space-x-3">
                     <MessageSquare className="w-5 h-5 text-mountain-terra mt-1.5" />
-                    <p className="text-lg text-mountain-shadow leading-relaxed">
+                    <p className="text-base md:text-lg text-mountain-shadow leading-relaxed">
                       {therapist.shortBio}
                     </p>
                   </div>
 
                   <Link
                     to="/contact"
-                    className="inline-flex items-center px-8 py-3 bg-mountain-terra text-white 
+                    className="inline-flex items-center px-6 md:px-8 py-3 bg-mountain-terra text-white 
                       rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
                       transform hover:scale-105 hover:shadow-lg"
                   >
@@ -184,24 +181,32 @@ const TherapistProfile = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="relative max-w-6xl mx-auto px-4 py-16">
-        {/* Navigation Tabs */}
         <AnimatedSection delay={200}>
-          <div className="flex space-x-8 border-b border-mountain-shadow/10 mb-12">
+          <div
+            className="flex flex-nowrap overflow-x-auto sm:flex-wrap border-b border-mountain-shadow/10 mb-12 
+            gap-2 sm:gap-8 pb-2 sm:pb-0 px-4 sm:px-0"
+          >
             {tabs.map(({ id, label, Icon }) => (
               <button
                 key={id}
                 onClick={() => setActiveTab(id)}
-                className={`group pb-4 text-lg font-medium transition-all relative
-                  ${activeTab === id 
-                    ? "text-mountain-shadow" 
-                    : "text-mountain-shadow/60 hover:text-mountain-shadow"
+                className={`group flex-shrink-0 pb-2 sm:pb-4 text-base sm:text-lg font-medium 
+                  transition-all relative whitespace-nowrap
+                  ${
+                    activeTab === id
+                      ? "text-mountain-shadow"
+                      : "text-mountain-shadow/60 hover:text-mountain-shadow"
                   }`}
               >
                 <div className="flex items-center space-x-2">
-                  <Icon className={`w-5 h-5 transition-transform group-hover:scale-110
-                    ${activeTab === id ? "text-mountain-terra" : "text-mountain-shadow/60"}`} 
+                  <Icon
+                    className={`w-5 h-5 transition-transform group-hover:scale-110
+                    ${
+                      activeTab === id
+                        ? "text-mountain-terra"
+                        : "text-mountain-shadow/60"
+                    }`}
                   />
                   <span>{label}</span>
                 </div>
@@ -213,7 +218,6 @@ const TherapistProfile = () => {
           </div>
         </AnimatedSection>
 
-        {/* Tab Content */}
         <AnimatedSection delay={400}>
           <div className="space-y-12">
             {activeTab === "background" && (
@@ -221,6 +225,17 @@ const TherapistProfile = () => {
                 <div>
                   <div className="flex items-center space-x-3 mb-6">
                     <Brain className="w-6 h-6 text-mountain-terra" />
+                    <h3 className="text-xl md:text-2xl font-light text-mountain-shadow">
+                      Background
+                    </h3>
+                  </div>
+                  <p className="text-mountain-shadow leading-relaxed whitespace-pre-line">
+                    {therapist.background}
+                  </p>
+                </div>
+                <div>
+                  <div className="flex items-center space-x-3 mb-6">
+                    <GraduationCap className="w-6 h-6 text-mountain-terra" />
                     <h3 className="text-2xl font-light text-mountain-shadow">
                       Background
                     </h3>
@@ -279,8 +294,8 @@ const TherapistProfile = () => {
                 Ready to Start Your Journey?
               </h2>
               <p className="text-lg text-mountain-shadow mb-8">
-                Schedule a complimentary 15-minute consultation to see if we're a
-                good fit.
+                Schedule a complimentary 15-minute consultation to see if we're
+                a good fit.
               </p>
               <Link
                 to="/contact"

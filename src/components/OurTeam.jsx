@@ -3,8 +3,6 @@ import { useIntersectionObserver } from "../components/modal/useIntersectionObse
 import portrait from "../assets/portrait.png";
 import woman from "../assets/woman.jpg";
 import floralPattern2 from "../assets/floral-pattern2.png";
-import therapistsData from "../data/therapists.json";
-
 
 const TeamMemberCard = ({ therapist, isFeatured }) => {
   const [ref, isVisible] = useIntersectionObserver();
@@ -13,9 +11,7 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
     <div
       ref={ref}
       className={`transform transition-all duration-700 ease-out
-        ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        }`}
+        ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
     >
       {isFeatured ? (
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
@@ -73,7 +69,7 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
       ) : (
         <div
           className="group bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden 
-          hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+            hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
         >
           <div className="h-[300px] overflow-hidden">
             <img
@@ -162,56 +158,58 @@ const OurTeam = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-        {/* Header */}
-        <div 
-          ref={titleRef}
-          className={`text-center mb-16 transform transition-all duration-700
-            ${isTitleVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-        >
-          <div className="relative inline-block">
-            <h2 className="relative text-5xl font-light text-mountain-shadow">
-              <span className="block text-sm uppercase tracking-wider text-mountain-terra/80 mb-2">
-                Welcome to Our Practice
-              </span>
-              Our Team
-            </h2>
+      <div className="relative" style={{ paddingTop: '14rem', paddingBottom: '7rem' }}>
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
+          {/* Header */}
+          <div 
+            ref={titleRef}
+            className={`text-center mb-16 transform transition-all duration-700
+              ${isTitleVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+          >
+            <div className="relative inline-block">
+              <h1 className="relative text-5xl font-light text-mountain-shadow">
+                <span className="block text-sm uppercase tracking-wider text-mountain-terra/80 mb-2">
+                  Welcome to Our Practice
+                </span>
+                Our Team
+              </h1>
+            </div>
+
+            <div className="relative max-w-2xl mx-auto">
+              <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
+              <p className="text-lg text-mountain-shadow/80 py-6">
+                Meet our dedicated team of experienced therapists, each bringing
+                unique expertise to support your journey to wellness.
+              </p>
+              <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
+            </div>
           </div>
 
-          <div className="relative max-w-2xl mx-auto">
-            <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-            <p className="text-lg text-mountain-shadow/80 py-6">
-              Meet our dedicated team of experienced therapists, each bringing
-              unique expertise to support your journey to wellness.
-            </p>
-            <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
+          {/* Featured Therapist */}
+          <div className="mb-20">
+            {teamMembers
+              .filter((member) => member.featured)
+              .map((therapist) => (
+                <TeamMemberCard 
+                  key={therapist.id} 
+                  therapist={therapist} 
+                  isFeatured={true}
+                />
+              ))}
           </div>
-        </div>
 
-        {/* Featured Therapist */}
-        <div className="mb-20">
-          {teamMembers
-            .filter((member) => member.featured)
-            .map((therapist) => (
-              <TeamMemberCard 
-                key={therapist.id} 
-                therapist={therapist} 
-                isFeatured={true}
-              />
-            ))}
-        </div>
-
-        {/* Other Team Members */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers
-            .filter((member) => !member.featured)
-            .map((therapist) => (
-              <TeamMemberCard 
-                key={therapist.id} 
-                therapist={therapist} 
-                isFeatured={false}
-              />
-            ))}
+          {/* Other Team Members */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {teamMembers
+              .filter((member) => !member.featured)
+              .map((therapist) => (
+                <TeamMemberCard 
+                  key={therapist.id} 
+                  therapist={therapist} 
+                  isFeatured={false}
+                />
+              ))}
+          </div>
         </div>
       </div>
     </div>
