@@ -20,12 +20,24 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }, [location]);
 
+  // Handle background classes based on conditions
+  const getNavBackground = () => {
+    if (isMenuOpen) {
+      // Mobile: background only when menu is open
+      return "bg-mountain-shadow/20 backdrop-blur-md md:bg-transparent md:backdrop-blur-none";
+    }
+    
+    // Desktop: show background when scrolled or on non-home pages
+    if (scrolled || !isHomePage) {
+      return "md:bg-mountain-peak/40 md:backdrop-blur-sm";
+    }
+    
+    return "";
+  };
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 
-        ${isMenuOpen ? "bg-mountain-shadow/20 backdrop-blur-md" : ""} 
-        md:${isHomePage ? "" : "bg-mountain-peak/40 backdrop-blur-sm"}`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${getNavBackground()}`}>
+      {/* Rest of the navbar code stays the same */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-end md:justify-between items-center h-28">
           {/* Logo - Hidden on mobile */}
@@ -65,7 +77,7 @@ const Navbar = () => {
             aria-label="Toggle menu"
           >
             <svg
-              className="w-6 h-6 text-mountain-shadow"
+              className="w-10 h-10 text-mountain-shadow"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"

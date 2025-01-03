@@ -118,7 +118,7 @@ const ServicesSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-20 overflow-hidden bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40"
+      className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40"
     >
       {/* Decorative overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-mountain-shadow/0 to-transparent" />
@@ -156,7 +156,7 @@ const ServicesSection = () => {
           </AnimatedTitle>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {services.map((service, index) => (
             <ServiceCard 
               key={index} 

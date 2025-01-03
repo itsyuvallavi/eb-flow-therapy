@@ -1,9 +1,21 @@
-import { useState } from 'react';
-import { ChevronDown, ChevronUp, Mail, Brain, Leaf, Heart, Shield, Globe, Flower, Users, CalendarCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useIntersectionObserver } from '../components/modal/useIntersectionObserver';
-import background from '../assets/tree.png';
-import floralPattern from '../assets/floral-pattern.jpg';
+import { useState } from "react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Mail,
+  Brain,
+  Leaf,
+  Heart,
+  Shield,
+  Globe,
+  Flower,
+  Users,
+  CalendarCheck,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
+import background from "../assets/tree.png";
+import floralPattern from "../assets/floral-pattern.jpg";
 
 const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
   const [ref, isVisible] = useIntersectionObserver();
@@ -12,7 +24,7 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
     <div
       ref={ref}
       className={`transform transition-all duration-700 ease-out
-        ${isExpanded ? "h-auto" : "min-h-[320px]"}
+        ${isExpanded ? "h-auto" : "min-h-[200px]"}
         ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
         }`}
@@ -22,7 +34,7 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
         className="h-full group bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl 
         hover:shadow-2xl transition-all duration-300"
       >
-        <div className="h-full p-8">
+        <div className="h-full p-6 md:p-8">
           <button onClick={onToggle} className="w-full text-left">
             <div className="flex justify-between items-center group-hover:text-mountain-terra transition-colors">
               <div className="flex items-center space-x-4">
@@ -182,7 +194,13 @@ const Services = () => {
       />
 
       {/* Hero Section */}
-      <div className="relative" style={{ paddingTop: '14rem', paddingBottom: '7rem' }}>
+      <div
+        className="relative"
+        style={{
+          paddingTop: "var(--page-padding-top)",
+          paddingBottom: "var(--page-padding-bottom)",
+        }}
+      >
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div
             ref={titleRef}
@@ -216,8 +234,8 @@ const Services = () => {
       </div>
 
       {/* Services Section */}
-      <div className="relative z-10 max-w-6xl mx-auto ">
-        <div className="grid md:grid-cols-2 gap-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
@@ -233,77 +251,91 @@ const Services = () => {
       </div>
 
       {/* Contact Section */}
-       {/* Updated CTA Section */}
-  <section className="relative py-12 ">
-    <div className="relative z-10 max-w-4xl mx-auto px-4">
-      <div 
-        className="relative bg-mountain-terra/20 backdrop-blur-sm rounded-2xl p-12 shadow-xl
+      {/* Updated CTA Section */}
+      <section className="relative py-12 ">
+        <div className="relative z-10 max-w-4xl mx-auto px-4">
+          <div
+            className="relative bg-mountain-terra/20 backdrop-blur-sm rounded-2xl p-12 shadow-xl
           transform transition-all duration-700 
           hover:bg-opacity-80 
           group"
-      >
-        {/* Background image that appears on hover */}
-        <div 
-          className="absolute inset-0 z-[-1] opacity-0 group-hover:opacity-20 
+          >
+            {/* Background image that appears on hover */}
+            <div
+              className="absolute inset-0 z-[-1] opacity-0 group-hover:opacity-20 
                      transition-opacity duration-700 
                      bg-cover bg-center bg-no-repeat rounded-2xl"
-          style={{
-              backgroundImage: `url(${floralPattern})`,
-          }}
-        />
+              style={{
+                backgroundImage: `url(${floralPattern})`,
+              }}
+            />
 
-        <div className="text-center space-y-6">
-          {/* Animated Title */}
-          <div
-            ref={ctaTitleRef}
-            className={`transform transition-all duration-700
-              ${isCTATitleVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-          >
-            <h2 className="text-4xl font-light text-mountain-shadow mb-2">
-              Begin Your Journey Today
-            </h2>
-            <div className="w-24 h-1 bg-mountain-terra mx-auto mt-4" />
-          </div>
-          
-          {/* Animated Content */}
-          <div
-            ref={contentRef}
-            className={`transform transition-all duration-700 delay-200
-              ${isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-            style={{ transitionDelay: '200ms' }}
-          >
-            <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
-              Schedule a complimentary 15-minute consultation to find the right
-              therapist for you.
-            </p>
-          </div>
-          
-          {/* Animated Button */}
-          <div
-            ref={buttonRef}
-            className={`pt-6 transform transition-all duration-700 delay-400
-              ${isButtonVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-            style={{ transitionDelay: '400ms' }}
-          >
-            <Link
-              to="/contact"
-              className="group inline-flex items-center px-8 py-4 bg-mountain-terra/70 hover:bg-mountain-terra 
+            <div className="text-center space-y-6">
+              {/* Animated Title */}
+              <div
+                ref={ctaTitleRef}
+                className={`transform transition-all duration-700
+              ${
+                isCTATitleVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
+              >
+                <h2 className="text-4xl font-light text-mountain-shadow mb-2">
+                  Begin Your Journey Today
+                </h2>
+                <div className="w-24 h-1 bg-mountain-terra mx-auto mt-4" />
+              </div>
+
+              {/* Animated Content */}
+              <div
+                ref={contentRef}
+                className={`transform transition-all duration-700 delay-200
+              ${
+                isContentVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
+                style={{ transitionDelay: "200ms" }}
+              >
+                <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
+                  Schedule a complimentary 15-minute consultation to find the
+                  right therapist for you.
+                </p>
+              </div>
+
+              {/* Animated Button */}
+              <div
+                ref={buttonRef}
+                className={`pt-6 transform transition-all duration-700 delay-400
+              ${
+                isButtonVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
+                style={{ transitionDelay: "400ms" }}
+              >
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center px-8 py-4 bg-mountain-terra/70 hover:bg-mountain-terra 
                 text-white rounded-full transition-all duration-300 transform hover:scale-105 
                 hover:shadow-lg backdrop-blur-sm"
-            >
-              <CalendarCheck className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
-              <span className="font-medium">Schedule Consultation</span>
-              <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
-            </Link>
+                >
+                  <CalendarCheck className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
+                  <span className="font-medium">Schedule Consultation</span>
+                  <span className="ml-2 transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
 
-            <p className="text-mountain-shadow/70 text-sm mt-6 animate-pulse">
-              *Currently accepting new clients for online therapy sessions
-            </p>
+                <p className="text-mountain-shadow/70 text-sm mt-6 animate-pulse">
+                  *Currently accepting new clients for online therapy sessions
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
     </div>
   );
 };

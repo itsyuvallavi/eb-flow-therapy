@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --page-padding-top: 10rem;
+  --page-padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-padding-top: 14rem;
+    --page-padding-bottom: 7rem;
+  }
+}
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }

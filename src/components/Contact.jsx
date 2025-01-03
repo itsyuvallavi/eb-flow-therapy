@@ -28,7 +28,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-mountain-peak/20 to-mountain-shadow/50">
+    <section className="relative overflow-hidden bg-gradient-to-b from-mountain-peak/20 to-mountain-shadow/50">
       {/* Background Image */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
@@ -42,7 +42,10 @@ const Contact = () => {
 
       <div
         className="relative"
-        style={{ paddingTop: "14rem", paddingBottom: "7rem" }}
+        style={{
+          paddingTop: "var(--page-padding-top)",
+          paddingBottom: "var(--page-padding-bottom)",
+        }}
       >
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           {/* Header */}

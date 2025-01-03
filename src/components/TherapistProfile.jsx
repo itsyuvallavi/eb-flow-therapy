@@ -124,7 +124,10 @@ const TherapistProfile = () => {
 
       <div
         className="relative"
-        style={{ paddingTop: "14rem", paddingBottom: "7rem" }}
+        style={{
+          paddingTop: "var(--page-padding-top)",
+          paddingBottom: "var(--page-padding-bottom)",
+        }}
       >
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <AnimatedSection>
