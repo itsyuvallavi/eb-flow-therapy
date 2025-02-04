@@ -5,7 +5,7 @@ import { sendContactEmails } from "../services/emailService";
 import background from "../assets/tree.png";
 import Popup from "./Popup";
 import { useEffect } from "react";
-import lmft from "../assets/lmft.png"
+import lmft from "../assets/lmft.png";
 
 const therapists = [
   { id: "general", name: "General Inquiry" },
@@ -332,11 +332,11 @@ const Contact = () => {
               </div>
 
               {/* LMFT Logo */}
-              <div className="bg-white/10 rounded-2xl p-6">
+              <div className="bg-white/10 rounded-2xl p-4">
                 <img
                   src={lmft}
                   alt="Decorative left image"
-                  className="w-full h-auto rounded-lg object-cover"
+                  className="w-80  mx-auto rounded-lg object-contain"
                 />
               </div>
             </div>

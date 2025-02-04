@@ -291,7 +291,7 @@ const ContactSection = () => {
               <img
                 src={lmft}
                 alt="Decorative left image"
-                className="w-full h-auto rounded-lg object-cover"
+                className="w-80  mx-auto rounded-lg object-contain"
               />
             </div>
           </div>
