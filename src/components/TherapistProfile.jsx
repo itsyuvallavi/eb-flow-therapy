@@ -29,9 +29,7 @@ const AnimatedSection = ({ children, delay = 0 }) => {
     <div
       ref={ref}
       className={`transform transition-all duration-700
-        ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}
+        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -41,14 +39,14 @@ const AnimatedSection = ({ children, delay = 0 }) => {
 
 const Specialization = ({ title }) => (
   <div
-    className="group p-6 bg-mountain-shadow backdrop-blur-sm rounded-2xl shadow-sm 
-    hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+    className="group bg-mountain-forest/80 rounded-2xl shadow-xl 
+    hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
   >
-    <div className="flex items-center space-x-3">
-      <div className="p-2 rounded-lg bg-black/0 group-hover:bg-white/0 transition-colors">
+    <div className="flex items-center space-x-3 p-6">
+      <div className="p-2 rounded-lg transition-colors">
         <Star className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
       </div>
-      <h3 className="text-xl text-mountain-shadow group-hover:text-mountain-terra transition-colors">
+      <h3 className="text-xl text-white/90 group-hover:text-mountain-terra transition-colors">
         {title}
       </h3>
     </div>
@@ -57,13 +55,33 @@ const Specialization = ({ title }) => (
 
 const EducationItem = ({ education }) => (
   <div className="flex items-start space-x-3 group">
-    <div className="p-2 rounded-lg bg-mountain-shadow/10 group-hover:bg-white/20 transition-colors mt-1">
+    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors mt-1">
       <GraduationCap className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
     </div>
     <span className="text-mountain-shadow group-hover:text-mountain-terra transition-colors">
       {education}
     </span>
   </div>
+);
+
+const TabButton = ({ id, label, Icon, isActive, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`group flex-shrink-0 pb-2 sm:pb-4 text-base sm:text-lg font-medium 
+      transition-all relative whitespace-nowrap
+      ${isActive ? "text-mountain-terra" : "text-mountain-shadow/80 hover:text-mountain-terra"}`}
+  >
+    <div className="flex items-center space-x-2">
+      <Icon
+        className={`w-5 h-5 transition-transform group-hover:scale-110
+        ${isActive ? "text-mountain-terra" : "text-mountain-shadow/60"}`}
+      />
+      <span>{label}</span>
+    </div>
+    {isActive && (
+      <div className="absolute bottom-0 left-0 w-full h-0.5 bg-mountain-terra" />
+    )}
+  </button>
 );
 
 const TherapistProfile = () => {
@@ -188,32 +206,14 @@ const TherapistProfile = () => {
             gap-2 sm:gap-8 pb-2 sm:pb-0 px-4 sm:px-0"
           >
             {tabs.map(({ id, label, Icon }) => (
-              <button
+              <TabButton
                 key={id}
+                id={id}
+                label={label}
+                Icon={Icon}
+                isActive={activeTab === id}
                 onClick={() => setActiveTab(id)}
-                className={`group flex-shrink-0 pb-2 sm:pb-4 text-base sm:text-lg font-medium 
-                  transition-all relative whitespace-nowrap
-                  ${
-                    activeTab === id
-                      ? "text-mountain-shadow"
-                      : "text-mountain-shadow/60 hover:text-mountain-shadow"
-                  }`}
-              >
-                <div className="flex items-center space-x-2">
-                  <Icon
-                    className={`w-5 h-5 transition-transform group-hover:scale-110
-                    ${
-                      activeTab === id
-                        ? "text-mountain-terra"
-                        : "text-mountain-shadow/60"
-                    }`}
-                  />
-                  <span>{label}</span>
-                </div>
-                {activeTab === id && (
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-mountain-terra" />
-                )}
-              </button>
+              />
             ))}
           </div>
         </AnimatedSection>
@@ -226,17 +226,6 @@ const TherapistProfile = () => {
                   <div className="flex items-center space-x-3 mb-6">
                     <Brain className="w-6 h-6 text-mountain-terra" />
                     <h3 className="text-xl md:text-2xl font-light text-mountain-shadow">
-                      Background
-                    </h3>
-                  </div>
-                  <p className="text-mountain-shadow leading-relaxed whitespace-pre-line">
-                    {therapist.background}
-                  </p>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-3 mb-6">
-                    <GraduationCap className="w-6 h-6 text-mountain-terra" />
-                    <h3 className="text-2xl font-light text-mountain-shadow">
                       Background
                     </h3>
                   </div>
@@ -286,7 +275,7 @@ const TherapistProfile = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="relative py-16 bg-gradient-to-t from-mountain-forest/20 to-transparent">
+      <div className="relative py-16">
         <AnimatedSection delay={600}>
           <div className="max-w-4xl mx-auto px-4 text-center">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 shadow-xl">
