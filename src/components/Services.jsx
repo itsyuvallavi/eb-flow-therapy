@@ -213,7 +213,7 @@ const Services = () => {
           >
             <div className="relative inline-block">
               <h1 className="relative text-5xl font-light text-mountain-shadow">
-                <span className="block text-sm uppercase tracking-wider text-mountain-terra/80 mb-2">
+                <span className="block text-sm uppercase tracking-wider text-mountain-shadow/80 mb-2">
                   Welcome to Our Practice
                 </span>
                 Our Services

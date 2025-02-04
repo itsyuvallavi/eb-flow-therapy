@@ -41,7 +41,7 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
                   {therapist.specialties.map((specialty, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-white/10 backdrop-blur-sm text-mountain-shadow/90 rounded-full text-sm"
+                      className="px-2 py-1 bg-white/20 text-mountain-shadow/90 rounded-full text-sm"
                     >
                       {specialty}
                     </span>
@@ -91,7 +91,7 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
                 {therapist.specialties.slice(0, 3).map((specialty, index) => (
                   <span
                     key={index}
-                    className="px-2 py-1 bg-white/10 backdrop-blur-sm text-mountain-shadow/90 rounded-full text-sm"
+                    className="px-2 py-1 bg-white/20 text-mountain-shadow/90 rounded-full text-sm"
                   >
                     {specialty}
                   </span>
@@ -158,7 +158,7 @@ const OurTeam = () => {
         }}
       />
 
-<div
+      <div
         className="relative"
         style={{
           paddingTop: "var(--page-padding-top)",
@@ -174,7 +174,7 @@ const OurTeam = () => {
           >
             <div className="relative inline-block">
               <h1 className="relative text-5xl font-light text-mountain-shadow">
-                <span className="block text-sm uppercase tracking-wider text-mountain-terra/80 mb-2">
+                <span className="block text-sm uppercase tracking-wider text-mountain-shadow/80 mb-2">
                   Welcome to Our Practice
                 </span>
                 Our Team

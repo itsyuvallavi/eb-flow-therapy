@@ -32,7 +32,7 @@ const WelcomeSection = () => {
     {
       icon: <Heart className="w-8 h-8" />,
       title: "Compassionate Care",
-      text: "Empathetic support in a safe space",
+      text: "Empathetic support from caring professionals",
     },
     {
       icon: <Users className="w-8 h-8" />,
@@ -60,10 +60,6 @@ const WelcomeSection = () => {
       <div className="absolute inset-0" />
       
       {/* Floating background elements */}
-      <FloatingIcon Icon={Leaf} className="top-1/4 left-[15%]" delay={200} />
-      <FloatingIcon Icon={Heart} className="top-1/2 right-[15%]" delay={400} />
-      <FloatingIcon Icon={Stars} className="bottom-1/4 left-[20%]" delay={600} />
-      <FloatingIcon Icon={Leaf} className="top-1/3 right-[20%]" delay={800} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -76,7 +72,7 @@ const WelcomeSection = () => {
               <h2 className="text-4xl text-light text-mountain-shadow">
                 Welcome to{" "}
                 <span className="text-mountain-terra font-medium">EB & Flow</span>{" "}
-                Marriage Therapy
+                Marriage Therapy, Inc.
               </h2>
               <div className="w-20 h-1 bg-mountain-shadow/30 mt-4" />
             </div>

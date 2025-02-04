@@ -21,8 +21,8 @@ const ServiceCard = ({ title, description, Icon, delay = 0 }) => {
       
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors duration-300">
-            <Icon className="w-5 h-5 md:w-6 md:h-6 text-mountain-terra group-hover:text-mountain-terra transition-colors duration-300" />
+          <div className="p-2 rounded-lg bg-white/30 group-hover:bg-white/40 transition-colors duration-300">
+            <Icon className="w-5 h-5 md:w-6 md:h-6 text-mountain-terra/60 group-hover:text-mountain-terra transition-colors duration-300" />
           </div>
           <h3 className="text-base md:text-xl font-medium text-mountain-shadow group-hover:text-mountain-forest transition-colors duration-300">
             {title}
@@ -60,7 +60,7 @@ const ServicesSection = () => {
   const services = [
     {
       title: "Individual Therapy",
-      description: "Personalized support for personal growth, anxiety, depression, and life transitions.",
+      description: "Personal support in addressing ongoing life stressors and symptoms.",
       Icon: User
     },
     {
@@ -69,24 +69,24 @@ const ServicesSection = () => {
       Icon: Heart
     },
     {
-      title: "Family Therapy",
-      description: "Build stronger family bonds and navigate challenges together.",
-      Icon: Users
+      title: "Cultural Competence",
+      description: "Navigating systemic challenges through a cultural lens.",
+      Icon: Globe
     },
     {
-      title: "Anxiety Treatment",
+      title: "Personality Disorders",
+      description: "Build coping skills to address intense emotion and reactivity through a non-judgmental lens",
+      Icon: Flower
+    },
+    {
+      title: "Anxiety & Related Disorders",
       description: "Evidence-based approaches to managing anxiety and building resilience.",
       Icon: Shield
     },
     {
-      title: "Cultural Transition",
-      description: "Support for navigating cultural identity and adjustment challenges.",
-      Icon: Globe
-    },
-    {
-      title: "Trauma Recovery",
-      description: "Gentle, trauma-informed care for healing and growth.",
-      Icon: Flower
+      title: "Interpersonal Connections",
+      description: "Build stronger bonds and navigate challenges more effectively in your relationships",
+      Icon: Users
     },
   ];
 
@@ -146,7 +146,7 @@ const ServicesSection = () => {
               <div className="w-24 md:w-36 h-1 bg-mountain-shadow/30" />
               <div className="space-y-2">
                 <h3 className="text-2xl md:text-3xl text-mountain-shadow/90 font-light">
-                  Your Path to Growth & Healing
+                  Your Path Towards Growth & Healing
                 </h3>
                 <p className="text-base md:text-lg text-mountain-shadow/80 font-normal">
                   Comprehensive therapeutic support tailored to your unique journey

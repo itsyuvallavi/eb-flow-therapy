@@ -1,7 +1,11 @@
 import { Mail, Phone, MapPin, Users } from "lucide-react";
 import { useState, useRef } from "react";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
+import { sendContactEmails } from "../services/emailService";
 import background from "../assets/tree.png";
+import Popup from "./Popup";
+import { useEffect } from "react";
+import lmft from "../assets/lmft.png"
 
 const therapists = [
   { id: "general", name: "General Inquiry" },
@@ -17,18 +21,101 @@ const therapists = [
 
 const Contact = () => {
   const [selectedTherapist, setSelectedTherapist] = useState("general");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [popup, setPopup] = useState(null);
+
+  // Add useEffect here, outside of handleSubmit
+  useEffect(() => {
+    console.log("Popup state changed:", popup);
+  }, [popup]);
+
   const formRef = useRef(null);
   const [titleRef, isTitleVisible] = useIntersectionObserver();
   const [formRef2, isFormVisible] = useIntersectionObserver();
   const [infoRef, isInfoVisible] = useIntersectionObserver();
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
+    setSelectedTherapist("general");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted", selectedTherapist);
+    setIsSubmitting(true);
+
+    console.log("Form submission started:", {
+      selectedTherapist,
+      formData,
+    });
+
+    try {
+      const selectedTherapistData = therapists.find(
+        (t) => t.id === selectedTherapist
+      );
+      const result = await sendContactEmails({
+        ...formData,
+        selectedTherapist: selectedTherapistData?.name || "General Inquiry",
+      });
+
+      console.log("Email service response:", result);
+
+      if (result.success) {
+        setPopup({
+          type: "success",
+          message:
+            "Thank you for reaching out! Your message has been sent successfully. We will get back to you within 24 hours.",
+        });
+        resetForm();
+      } else {
+        setPopup({
+          type: "error",
+          message:
+            result.message ||
+            "There was an error sending your message. Please try again or contact us directly at (424) 431-1122.",
+        });
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setPopup({
+        type: "error",
+        message:
+          "There was an error sending your message. Please try again or contact us directly at (424) 431-1122.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-mountain-peak/20 to-mountain-shadow/50">
+      {/* Show popup if exists */}
+      {popup && (
+        <Popup
+          message={popup.message}
+          type={popup.type}
+          onClose={() => setPopup(null)}
+        />
+      )}
+
       {/* Background Image */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
@@ -52,15 +139,15 @@ const Contact = () => {
           <div
             ref={titleRef}
             className={`text-center mb-16 transform transition-all duration-700
-            ${
-              isTitleVisible
-                ? "translate-y-0 opacity-100"
-                : "translate-y-10 opacity-0"
-            }`}
+              ${
+                isTitleVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
+              }`}
           >
             <div className="relative inline-block">
               <h1 className="relative text-5xl font-light text-mountain-shadow">
-                <span className="block text-sm uppercase tracking-wider text-mountain-terra/80 mb-2">
+                <span className="block text-sm uppercase tracking-wider text-mountain-shadow/80 mb-2">
                   Welcome to Our Practice
                 </span>
                 Get in Touch
@@ -82,11 +169,11 @@ const Contact = () => {
             <div
               ref={formRef2}
               className={`transform transition-all duration-700 delay-200
-              ${
-                isFormVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
+                ${
+                  isFormVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                }`}
             >
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                 <div className="mb-8">
@@ -104,7 +191,7 @@ const Contact = () => {
                   onSubmit={handleSubmit}
                   className="space-y-5"
                 >
-                  {/* Therapist Selection Dropdown */}
+                  {/* Therapist Selection */}
                   <div className="group">
                     <label
                       htmlFor="therapist"
@@ -117,10 +204,11 @@ const Contact = () => {
                         id="therapist"
                         value={selectedTherapist}
                         onChange={(e) => setSelectedTherapist(e.target.value)}
+                        required
                         className="w-full px-4 py-3 rounded-lg bg-white/10 border border-mountain-shadow/20 
-                        text-mountain-shadow placeholder-mountain-shadow/40
-                        focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
-                        transition-all group-hover:border-mountain-shadow/40 appearance-none"
+                          text-mountain-shadow placeholder-mountain-shadow/40
+                          focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
+                          transition-all group-hover:border-mountain-shadow/40 appearance-none"
                       >
                         {therapists.map((therapist) => (
                           <option
@@ -148,11 +236,14 @@ const Contact = () => {
                       <input
                         type={field === "email" ? "email" : "text"}
                         id={field}
+                        value={formData[field]}
+                        onChange={handleInputChange}
+                        required
                         placeholder={field === "phone" ? "(123) 456-7890" : ""}
                         className="w-full px-4 py-3 rounded-lg bg-white/10 border border-mountain-shadow/20 
-                        text-mountain-shadow placeholder-mountain-shadow/40
-                        focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
-                        transition-all group-hover:border-mountain-shadow/40"
+                          text-mountain-shadow placeholder-mountain-shadow/40
+                          focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
+                          transition-all group-hover:border-mountain-shadow/40"
                       />
                     </div>
                   ))}
@@ -167,23 +258,27 @@ const Contact = () => {
                     </label>
                     <textarea
                       id="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      required
                       placeholder="Tell us a bit about what brings you here..."
                       rows={6}
                       className="w-full px-4 py-3 rounded-lg bg-white/10 border border-mountain-shadow/20 
-                      text-mountain-shadow placeholder-mountain-shadow/40
-                      focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
-                      transition-all group-hover:border-mountain-shadow/40"
+                        text-mountain-shadow placeholder-mountain-shadow/40
+                        focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
+                        transition-all group-hover:border-mountain-shadow/40"
                     />
                   </div>
 
                   {/* Submit Button */}
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full py-4 bg-mountain-terra text-white rounded-lg 
-                    hover:bg-mountain-terra/90 transition-all duration-300 transform hover:scale-[1.02] 
-                    hover:shadow-lg font-medium"
+                      hover:bg-mountain-terra/90 transition-all duration-300 transform hover:scale-[1.02] 
+                      hover:shadow-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               </div>
@@ -193,11 +288,11 @@ const Contact = () => {
             <div
               ref={infoRef}
               className={`space-y-6 transform transition-all duration-700 delay-400
-              ${
-                isInfoVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
+                ${
+                  isInfoVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                }`}
             >
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                 <div className="space-y-8">
@@ -236,16 +331,13 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Office Hours */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-                <h3 className="text-lg font-medium text-mountain-shadow mb-3">
-                  Office Hours
-                </h3>
-                <div className="space-y-2 text-mountain-shadow/80">
-                  <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
-                  <p>Saturday: 10:00 AM - 4:00 PM</p>
-                  <p>Sunday: Closed</p>
-                </div>
+              {/* LMFT Logo */}
+              <div className="bg-white/10 rounded-2xl p-6">
+                <img
+                  src={lmft}
+                  alt="Decorative left image"
+                  className="w-full h-auto rounded-lg object-cover"
+                />
               </div>
             </div>
           </div>

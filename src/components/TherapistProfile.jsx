@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams, Navigate, Link } from 'react-router-dom';
 import {
   Mail,
   CalendarCheck,
@@ -11,16 +11,16 @@ import {
   UserCheck,
   Flower,
   Star,
-} from "lucide-react";
-import therapistsData from "../data/therapists.json";
-import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
-import background from "../assets/tree.png";
-import portrait from "../assets/portrait.png";
-import woman from "../assets/woman.jpg";
+} from 'lucide-react';
+import therapistsData from '../data/therapists.json';
+import { useIntersectionObserver } from '../components/modal/useIntersectionObserver';
+import background from '../assets/tree.png';
+import portrait from '../assets/portrait.png';
+import woman from '../assets/woman.jpg';
 
 const imageMap = {
-  "/portrait.png": portrait,
-  "/woman.jpg": woman,
+  '/portrait.png': portrait,
+  '/woman.jpg': woman,
 };
 
 const AnimatedSection = ({ children, delay = 0 }) => {
@@ -30,7 +30,7 @@ const AnimatedSection = ({ children, delay = 0 }) => {
       ref={ref}
       className={`transform transition-all duration-700
         ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -41,11 +41,11 @@ const AnimatedSection = ({ children, delay = 0 }) => {
 
 const Specialization = ({ title }) => (
   <div
-    className="group p-6 bg-white/10 backdrop-blur-sm rounded-2xl shadow-sm 
+    className="group p-6 bg-mountain-shadow backdrop-blur-sm rounded-2xl shadow-sm 
     hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
   >
     <div className="flex items-center space-x-3">
-      <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors">
+      <div className="p-2 rounded-lg bg-black/0 group-hover:bg-white/0 transition-colors">
         <Star className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
       </div>
       <h3 className="text-xl text-mountain-shadow group-hover:text-mountain-terra transition-colors">
@@ -57,7 +57,7 @@ const Specialization = ({ title }) => (
 
 const EducationItem = ({ education }) => (
   <div className="flex items-start space-x-3 group">
-    <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors mt-1">
+    <div className="p-2 rounded-lg bg-mountain-shadow/10 group-hover:bg-white/20 transition-colors mt-1">
       <GraduationCap className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
     </div>
     <span className="text-mountain-shadow group-hover:text-mountain-terra transition-colors">
@@ -113,12 +113,9 @@ const TherapistProfile = () => {
       className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25"
     >
       <div
-        className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
+        className="fixed inset-0 bg-center bg-no-repeat bg-cover opacity-10"
         style={{
           backgroundImage: `url(${background})`,
-          backgroundSize: "1200px",
-          opacity: backgroundOpacity,
-          zIndex: 0,
         }}
       />
 
