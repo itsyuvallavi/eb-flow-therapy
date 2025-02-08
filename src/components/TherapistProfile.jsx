@@ -224,7 +224,7 @@ const TherapistProfile = () => {
               <div className="grid md:grid-cols-2 gap-12">
                 <div>
                   <div className="flex items-center space-x-3 mb-6">
-                    <Brain className="w-6 h-6 text-mountain-terra" />
+                    <BookOpen className="w-6 h-6 text-mountain-terra" />
                     <h3 className="text-xl md:text-2xl font-light text-mountain-shadow">
                       Background
                     </h3>
@@ -260,7 +260,7 @@ const TherapistProfile = () => {
             {activeTab === "approach" && (
               <div className="max-w-3xl">
                 <div className="flex items-center space-x-3 mb-6">
-                  <Flower className="w-6 h-6 text-mountain-terra" />
+                  <Brain className="w-6 h-6 text-mountain-terra" />
                   <h3 className="text-2xl font-light text-mountain-shadow">
                     My Approach
                   </h3>

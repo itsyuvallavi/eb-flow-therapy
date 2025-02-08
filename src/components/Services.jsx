@@ -24,28 +24,28 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
     <div
       ref={ref}
       className={`transform transition-all duration-700 ease-out
-        ${isExpanded ? "h-auto" : "min-h-[200px]"}
         ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
         }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <div
-        className="h-full group bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl 
-        hover:shadow-2xl transition-all duration-300"
+        className="relative bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl 
+        hover:shadow-2xl transition-all duration-300 min-h-[240px]"
       >
-        <div className="h-full p-6 md:p-8">
+        <div className="p-6 md:p-8">
+          {/* Main content that's always visible */}
           <button onClick={onToggle} className="w-full text-left">
             <div className="flex justify-between items-center group-hover:text-mountain-terra transition-colors">
               <div className="flex items-center space-x-4">
                 <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors">
-                  <Brain className="w-6 h-6 text-mountain-terra" />
+                  <Flower className="w-6 h-6 text-mountain-terra" />
                 </div>
                 <h3 className="text-2xl font-light text-mountain-shadow group-hover:text-mountain-terra transition-colors">
                   {service.title}
                 </h3>
               </div>
-              <div className="transform transition-transform duration-300">
+              <div className="transform transition-transform duration-700">
                 {isExpanded ? (
                   <ChevronUp className="w-6 h-6 flex-shrink-0" />
                 ) : (
@@ -54,34 +54,39 @@ const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
               </div>
             </div>
 
-            <p className="mt-4 text-mountain-shadow/80 leading-relaxed pl-16 pr-8">
+            <p className="mt-4 text-mountain-shadow/80 leading-relaxed pl-16 pr-8 min-h-[96px]">
               {service.description}
             </p>
           </button>
 
+          {/* Expandable content */}
           <div
-            className={`transition-all duration-300 ease-in-out
+            className={`transition-all duration-700 ease-in-out
               ${
-                isExpanded ? "opacity-100 max-h-[500px]" : "opacity-0 max-h-0"
+                isExpanded
+                  ? "opacity-100 max-h-[800px] mt-6"
+                  : "opacity-0 max-h-0 mt-0"
               }`}
           >
-            <div className="mt-6">
-              <div className="border-t border-mountain-shadow/10 pt-6">
-                <div className="pl-16 pr-8">
-                  <h4 className="text-lg font-medium text-mountain-terra mb-4">
-                    What's Included
-                  </h4>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {service.details.map((detail, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center space-x-3 text-mountain-shadow"
-                      >
-                        <Leaf className="w-4 h-4 text-mountain-terra flex-shrink-0" />
-                        <span>{detail}</span>
-                      </div>
-                    ))}
-                  </div>
+            <div
+              className={`border-t border-mountain-shadow/10 pt-6 transition-opacity duration-700 ${
+                isExpanded ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <div className="pl-16 pr-8">
+                <h4 className="text-lg font-medium text-mountain-terra mb-4">
+                  What's Included
+                </h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {service.details.map((detail, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center space-x-3 text-mountain-shadow"
+                    >
+                      <Leaf className="w-4 h-4 text-mountain-terra flex-shrink-0" />
+                      <span>{detail}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -101,81 +106,81 @@ const Services = () => {
 
   const services = [
     {
-      title: "Adult Therapy",
+      title: "Individual Therapy",
       description:
-        "Individual sessions are available for those seeking to learn more about themselves, work towards change and improvement, learn coping skills, understand patterns of behavior, and just have a private space to focus on your needs. We will collaborate in working towards your life best lived.",
+        "Individual sessions are available for those looking to gain deeper self-awareness, foster personal growth, develop coping skills, understand behavioral patterns, and create a private space to focus on their unique needs. Together, we will work toward the life you desire.",
       details: [
-        "Personal Growth & Self-Discovery",
-        "Coping Skills Development",
-        "Behavioral Pattern Analysis",
-        "Individual Goal Setting",
-        "Life Transitions",
-        "Mental Health Support",
+        "Self-Discovery and Growth",
+        "Coping and Stress Management",
+        "Understanding Behaviors and Thoughts",
+        "Personalized Goal Setting",
+        "Managing Life Changes",
+        "Ongoing Emotional Support",
+      ],
+    },
+    {
+      title: "Couples Therapy",
+      description:
+        "Couples therapy provides a space for partners to improve communication, rebuild trust, and deepen emotional connection. Together, we will explore relationship dynamics, set shared goals, and navigate life’s challenges as a team, fostering understanding and growth along the way.",
+      details: [
+        "Improving Communication",
+        "Conflict Resolution",
+        "Understanding Relationship Patterns",
+        "Exploring Emotional Needs",
+        "Setting Shared Goals",
+        "Navigating Life Transitions",
       ],
     },
     {
       title: "Family Therapy",
       description:
-        "Family relationships become complex as maladaptive patterns and roles create obstacles in connection. I provide a safe space for family members to recreate, break down and rebuild patterns of communication as you work towards a cohesive family unit.",
+        "Family therapy offers a space for family members to improve communication, strengthen bonds, and address underlying issues. Together, we will explore each member’s perspective, and develop strategies to navigate challenges and conflicts. Through collaboration, we’ll work toward fostering understanding and growth within the family unit.",
       details: [
         "Family Communication",
         "Role Pattern Analysis",
-        "Relationship Building",
+        "Establishing Boundaries ",
         "Conflict Resolution",
-        "Family Unity Development",
+        "Strengthening Emotional Bonds",
         "Inter-generational Healing",
       ],
     },
     {
-      title: "Couples/Partners Therapy",
+      title: "Personality Disorders",
       description:
-        "Being in a relationship is a difficult process of ongoing hard work in uniting, connecting and repairing. I hope to join you and you partner(s) in learning more effective tools for communication, recreating trust, and understanding each other to continue growing together.",
+        "Therapy for personality disorders provides a supportive space to navigate intense emotions, relationship difficulties, and overwhelming thought patterns. Together, we will explore identity, emotional regulation, and interpersonal dynamics while developing strategies to manage distress and improve daily functioning.",
       details: [
-        "Communication Enhancement",
-        "Trust Building",
-        "Mutual Understanding",
-        "Conflict Resolution",
-        "Relationship Growth",
-        "Partnership Skills",
-      ],
-    },
-    {
-      title: "Relationships",
-      description:
-        "Managing the relationships in our life is a challenging and demanding skill. If you are identifying patterns of impairments in important relationships in your life, struggling with professional or casual relationships, or experiencing distress and anxiety in relationships, I can provide interpersonal and mindfulness skills practice.",
-      details: [
-        "Interpersonal Skills",
-        "Relationship Pattern Analysis",
-        "Professional Relations",
-        "Social Anxiety Management",
-        "Mindfulness Practice",
-        "Communication Skills",
+        "Distress Tolerance",
+        "Emotion Regulation",
+        "Interpersonal Effectiveness",
+        "Mindfulness",
+        "Develop Sense of Self",
+        "Reduce Reactivity",
       ],
     },
     {
       title: "Anxiety and Related Disorders",
       description:
-        "Anxiety has become a prominent concept in popular culture, though we lack the skills to cope with high levels of anxiety. If you experience anxiety, life impairments to relationships/work because of anxiety, or if you have been diagnosed with an anxiety-related disorder, I can provide services to learn how to live with anxiety and reclaim your life best lived.",
+        "Therapy providing a supportive space to navigate intrusive thoughts, overwhelming anxiety, and behavioral patterns that impact daily life. Together, we will explore triggers, emotional responses, and coping strategies while developing tools to manage distress and lack of control.",
       details: [
+        "Identifying Triggers",
+        "Exposure and Response Prevention",
+        "Mindfulness Techniques",
         "Anxiety Management",
-        "Coping Strategies",
-        "Work-Life Balance",
-        "Stress Reduction",
-        "Behavioral Techniques",
-        "Life Skills Development",
+        "Cognitive Reframing",
+        "Building Resilience",
       ],
     },
     {
       title: "Trauma-Informed Care",
       description:
-        "A specialized approach for individuals seeking to heal from past trauma and build resilience. Using evidence-based techniques, we create a safe environment for processing experiences and developing healthy coping mechanisms to support your healing journey.",
+        "A tailored approach for those seeking to heal from past trauma and build resilience. Through evidence-based techniques, we cultivate a safe, compassionate space to process experiences and develop healthy coping strategies that support your path to healing.",
       details: [
-        "PTSD Treatment",
-        "Complex Trauma Support",
-        "Emotional Regulation",
-        "Somatic Experiencing",
-        "Resilience Building",
-        "Safety Planning",
+        "Developing Sense of Safety",
+        "Processing Trauma",
+        "Body-Mind Connection",
+        "Learning Coping Skills",
+        "Addressing Triggers",
+        "Building Support System"
       ],
     },
   ];
@@ -237,28 +242,28 @@ const Services = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              service={service}
-              isExpanded={expandedService === index}
-              onToggle={() =>
-                setExpandedService(expandedService === index ? null : index)
-              }
-              delay={index * 100}
-            />
+            <div key={index} className="grid-item">
+              <ServiceCard
+                service={service}
+                isExpanded={expandedService === index}
+                onToggle={() =>
+                  setExpandedService(expandedService === index ? null : index)
+                }
+                delay={index * 100}
+              />
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Contact Section */}
-      {/* Updated CTA Section */}
-      <section className="relative py-12 ">
+      {/* CTA Section */}
+      <section className="relative py-12">
         <div className="relative z-10 max-w-4xl mx-auto px-4">
           <div
             className="relative bg-mountain-terra/20 backdrop-blur-sm rounded-2xl p-12 shadow-xl
-          transform transition-all duration-700 
-          hover:bg-opacity-80 
-          group"
+            transform transition-all duration-700 
+            hover:bg-opacity-80 
+            group"
           >
             {/* Background image that appears on hover */}
             <div
@@ -275,11 +280,11 @@ const Services = () => {
               <div
                 ref={ctaTitleRef}
                 className={`transform transition-all duration-700
-              ${
-                isCTATitleVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
+                  ${
+                    isCTATitleVisible
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-10 opacity-0"
+                  }`}
               >
                 <h2 className="text-4xl font-light text-mountain-shadow mb-2">
                   Begin Your Journey Today
@@ -291,11 +296,11 @@ const Services = () => {
               <div
                 ref={contentRef}
                 className={`transform transition-all duration-700 delay-200
-              ${
-                isContentVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
+                  ${
+                    isContentVisible
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-10 opacity-0"
+                  }`}
                 style={{ transitionDelay: "200ms" }}
               >
                 <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
@@ -308,18 +313,18 @@ const Services = () => {
               <div
                 ref={buttonRef}
                 className={`pt-6 transform transition-all duration-700 delay-400
-              ${
-                isButtonVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
+                  ${
+                    isButtonVisible
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-10 opacity-0"
+                  }`}
                 style={{ transitionDelay: "400ms" }}
               >
                 <Link
                   to="/contact"
                   className="group inline-flex items-center px-8 py-4 bg-mountain-terra/70 hover:bg-mountain-terra 
-                text-white rounded-full transition-all duration-300 transform hover:scale-105 
-                hover:shadow-lg backdrop-blur-sm"
+                    text-white rounded-full transition-all duration-300 transform hover:scale-105 
+                    hover:shadow-lg backdrop-blur-sm"
                 >
                   <CalendarCheck className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
                   <span className="font-medium">Schedule Consultation</span>

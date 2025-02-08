@@ -10,13 +10,6 @@ import lmft from "../assets/lmft.png";
 const therapists = [
   { id: "general", name: "General Inquiry" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
-  { id: "sarah", name: "Dr. Sarah Chen", email: "sarah.chen@example.com" },
-  {
-    id: "michael",
-    name: "Michael Rodriguez, LMFT",
-    email: "michael.r@example.com",
-  },
-  { id: "emma", name: "Emma Wilson, PhD", email: "emma.w@example.com" },
 ];
 
 const Contact = () => {

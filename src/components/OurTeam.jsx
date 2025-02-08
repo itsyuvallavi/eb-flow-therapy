@@ -124,24 +124,15 @@ const OurTeam = () => {
       specialties: [
         "Individual Therapy",
         "Couples Counseling",
-        "Anxiety & OCD",
+        "OCD & Anxiety Disorders",
+        "Personality Disorders",
         "Cultural Transitions",
+        "Sex-Positivity & Kink-Friendly"
       ],
       languages: ["English", "Hebrew"],
       featured: true,
       shortBio:
-        "With years of experience in individual and couples therapy, I create a safe space for growth and healing through evidence-based practices and genuine human connection.",
-    },
-    {
-      id: "michael",
-      name: "Dr. Michael Chen",
-      title: "Therapist, LMFT",
-      image: woman,
-      specialties: ["Family Therapy", "Trauma Recovery", "ADHD", "Depression"],
-      languages: ["English", "Mandarin"],
-      featured: false,
-      shortBio:
-        "Specializing in family dynamics and trauma recovery, helping clients find strength through challenging life transitions.",
+        "With extensive experience in individual and couples therapy, I am dedicated to fostering a supportive and safe space where growth and healing can thrive. By integrating evidence-based practices with a deep commitment to authentic human connection, I help clients navigate challenges and uncover their full potential.",
     },
   ];
 

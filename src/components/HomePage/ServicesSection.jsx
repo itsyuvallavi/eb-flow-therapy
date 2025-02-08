@@ -60,32 +60,32 @@ const ServicesSection = () => {
   const services = [
     {
       title: "Individual Therapy",
-      description: "Personal support in addressing ongoing life stressors and symptoms.",
+      description: "Personalized support to navigate life’s challenges, enhance self-awareness, and develop effective coping strategies.",
       Icon: User
     },
     {
-      title: "Couples Counseling",
-      description: "Strengthen your relationship through improved communication and understanding.",
+      title: "Relationship Therapies",
+      description: "Family and couple therapies to foster deeper communication, understanding, and connection.",
       Icon: Heart
     },
     {
       title: "Cultural Competence",
-      description: "Navigating systemic challenges through a cultural lens.",
+      description: "Navigating systemic challenges with a culturally informed perspective.",
       Icon: Globe
     },
     {
       title: "Personality Disorders",
-      description: "Build coping skills to address intense emotion and reactivity through a non-judgmental lens",
+      description: "Develop coping skills to manage intense emotions and reactivity with a compassionate, non-judgmental approach.",
       Icon: Flower
     },
     {
       title: "Anxiety & Related Disorders",
-      description: "Evidence-based approaches to managing anxiety and building resilience.",
+      description: "Evidence-based therapies to manage anxiety, reduce stress, and build long-term resilience.",
       Icon: Shield
     },
     {
-      title: "Interpersonal Connections",
-      description: "Build stronger bonds and navigate challenges more effectively in your relationships",
+      title: "Trauma-Informed Care",
+      description: "Create a safe space to explore the impact of past experiences, fostering healing, resilience, and emotional growth.",
       Icon: Users
     },
   ];
