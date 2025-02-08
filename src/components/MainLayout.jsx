@@ -18,7 +18,7 @@ const ScrollToTop = () => {
 
 const MainLayout = () => {
   return (
-    <Router basename="/eb-flow-therapy">
+    <Router>
       <ScrollToTop />
       <div className="min-h-screen">
         <Navbar />
