@@ -123,7 +123,7 @@ const OurTeam = () => {
       image: portrait,
       specialties: [
         "Individual Therapy",
-        "Couples Counseling",
+        "Couples Therapy",
         "OCD & Anxiety Disorders",
         "Personality Disorders",
         "Cultural Transitions",

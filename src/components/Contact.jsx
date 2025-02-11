@@ -8,8 +8,9 @@ import { useEffect } from "react";
 import lmft from "../assets/lmft.png";
 
 const therapists = [
-  { id: "general", name: "General Inquiry" },
+  { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
+  // Add more therapists here in the future if needed
 ];
 
 const Contact = () => {

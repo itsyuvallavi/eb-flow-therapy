@@ -8,9 +8,10 @@ export const sendContactEmails = async (formData) => {
   const { name, email, phone, message, selectedTherapist } = formData;
   
   try {
-    // Make sure these parameter names exactly match your template variables
+    // Updated template parameters to include all necessary information
     const templateParams = {
-      to_name: "Admin", // The recipient's name
+      to_email: "elinorlmft@gmail.com", // Set the fixed recipient email
+      to_name: "Elinor Bawnik", // Set the fixed recipient name
       from_name: name,
       from_email: email,
       phone_number: phone,
@@ -20,15 +21,19 @@ export const sendContactEmails = async (formData) => {
     };
 
     const result = await emailjs.send(
-      'service_pja43ca',     // Your service ID
-      'template_ab98faq',    // Your template ID
+      'service_6ctc9at',     // Your service ID
+      'template_329fpke',    // Your template ID
       templateParams
     );
 
-    console.log('Email sent:', result);
+    console.log('Email sent successfully:', result);
     return { success: true };
   } catch (error) {
     console.error('Failed to send email:', error);
-    return { success: false, error: error.text };
+    return { 
+      success: false, 
+      message: 'Failed to send message. Please try again or contact us directly.',
+      error: error.text 
+    };
   }
 };
