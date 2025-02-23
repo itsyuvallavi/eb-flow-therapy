@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, Navigate, Link } from "react-router-dom";
 import {
   Mail,
   CalendarCheck,
@@ -11,16 +11,20 @@ import {
   UserCheck,
   Flower,
   Star,
-} from 'lucide-react';
-import therapistsData from '../data/therapists.json';
-import { useIntersectionObserver } from '../components/modal/useIntersectionObserver';
-import background from '../assets/tree.png';
-import portrait from '../assets/portrait.png';
-import woman from '../assets/woman.jpg';
+  CheckCircle,
+  Award,
+} from "lucide-react";
+import therapistsData from "../data/therapists.json";
+import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
+import background from "../assets/tree.png";
+import portrait from "../assets/portrait.png";
+import woman from "../assets/woman.jpg";
+import iocdfLogo from "../assets/IOCDF-Logo.png";
 
 const imageMap = {
-  '/portrait.png': portrait,
-  '/woman.jpg': woman,
+  "/portrait.png": portrait,
+  "/woman.jpg": woman,
+  "/IOCDF-Logo.png": iocdfLogo,
 };
 
 const AnimatedSection = ({ children, delay = 0 }) => {
@@ -29,7 +33,9 @@ const AnimatedSection = ({ children, delay = 0 }) => {
     <div
       ref={ref}
       className={`transform transition-all duration-700
-        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -53,23 +59,51 @@ const Specialization = ({ title }) => (
   </div>
 );
 
-const EducationItem = ({ education }) => (
-  <div className="flex items-start space-x-3 group">
-    <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors mt-1">
-      <GraduationCap className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
-    </div>
-    <span className="text-mountain-shadow group-hover:text-mountain-terra transition-colors">
-      {education}
-    </span>
-  </div>
-);
+const EducationItem = ({ education }) => {
+  if (typeof education === 'string') {
+    return (
+      <div className="flex items-start space-x-3 group">
+        <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors mt-1">
+          <GraduationCap className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
+        </div>
+        <span className="text-mountain-shadow group-hover:text-mountain-terra transition-colors">
+          {education}
+        </span>
+      </div>
+    );
+  } else {
+    return (
+      <div className="flex items-start space-x-3 group">
+        <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors mt-1">
+          <GraduationCap className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-mountain-shadow group-hover:text-mountain-terra transition-colors">
+            {education.text}
+          </span>
+          {education.logo && (
+            <img 
+              src={imageMap[education.logo] || education.logo}
+              alt="Organization Logo" 
+              className="h-5 object-contain" 
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+};
 
 const TabButton = ({ id, label, Icon, isActive, onClick }) => (
   <button
     onClick={onClick}
     className={`group flex-shrink-0 pb-2 sm:pb-4 text-base sm:text-lg font-medium 
       transition-all relative whitespace-nowrap
-      ${isActive ? "text-mountain-terra" : "text-mountain-shadow/80 hover:text-mountain-terra"}`}
+      ${
+        isActive
+          ? "text-mountain-terra"
+          : "text-mountain-shadow/80 hover:text-mountain-terra"
+      }`}
   >
     <div className="flex items-center space-x-2">
       <Icon
@@ -112,6 +146,26 @@ const TherapistProfile = () => {
       }
     };
   }, [isSectionVisible]);
+
+  useEffect(() => {
+    if (id === "elinor") {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://member.psychologytoday.com/verified-seal.js";
+      script.dataset.badge = "10";
+      script.dataset.id = "1015567";
+      script.dataset.code =
+        "aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMC9wcm9maWxlLzEwMTU1Njc/Y2FsbGJhY2s9c3hjYWxsYmFjaw==";
+
+      document.body.appendChild(script);
+
+      return () => {
+        if (document.body.contains(script)) {
+          document.body.removeChild(script);
+        }
+      };
+    }
+  }, [id]);
 
   if (!therapist) {
     return <Navigate to="/our-team" replace />;
@@ -183,15 +237,43 @@ const TherapistProfile = () => {
                     </p>
                   </div>
 
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center px-6 md:px-8 py-3 bg-mountain-terra text-white 
-                      rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
-                      transform hover:scale-105 hover:shadow-lg"
-                  >
-                    <Mail className="w-5 h-5 mr-2" />
-                    Schedule Consultation
-                  </Link>
+                  <div className="flex flex-row items-center justify-start space-x-4 mt-8">
+                    {/* Schedule Button */}
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center px-5 py-3
+                        bg-mountain-terra text-white 
+                        rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
+                        transform hover:scale-105 hover:shadow-lg whitespace-nowrap flex-shrink-0"
+                    >
+                      <Mail className="w-5 h-5 mr-2 flex-shrink-0" />
+                      <span className="whitespace-nowrap">
+                        Schedule Consultation
+                      </span>
+                    </Link>
+
+                    {/* Psychology Today Verification Badge */}
+                    {id === "elinor" && (
+                      <a
+                        href="https://www.psychologytoday.com/profile/1015567"
+                        className="sx-verified-seal flex-shrink-0 hover:opacity-90 transition-opacity"
+                        rel="noopener noreferrer"
+                      >
+                        <div className="bg-white rounded-full px-4 py-1.5 flex items-center border border-gray-200 shadow-sm">
+                          <div className="flex-shrink-0 mr-1.5">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="12" cy="12" r="11" stroke="#D8D8D8" strokeWidth="1" fill="white"/>
+                              <path d="M19 8L10 17L5 12" stroke="#FF5252" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-[10px] text-gray-500 uppercase leading-tight tracking-wide">VERIFIED BY</span>
+                            <span className="text-sm font-bold text-blue-600 leading-tight" style={{fontFamily: 'sans-serif'}}>Psychology Today</span>
+                          </div>
+                        </div>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -245,6 +327,24 @@ const TherapistProfile = () => {
                       <EducationItem key={index} education={edu} />
                     ))}
                   </div>
+
+                  {/* IOCDF Logo - Only for Elinor */}
+                  {id === "elinor" && (
+                    <div className="mt-8 flex ml-12">
+                      <a
+                        href="https://iocdf.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="International OCD Foundation"
+                      >
+                        <img
+                          src={iocdfLogo}
+                          alt="International OCD Foundation (IOCDF) Logo"
+                          className="max-w-[160px] object-contain"
+                        />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

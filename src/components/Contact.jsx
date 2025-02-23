@@ -6,6 +6,7 @@ import background from "../assets/tree.png";
 import Popup from "./Popup";
 import { useEffect } from "react";
 import lmft from "../assets/lmft.png";
+import floralPattern from "../assets/floral-pattern.jpg";
 
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
@@ -100,7 +101,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-mountain-peak/20 to-mountain-shadow/50">
+    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
       {/* Show popup if exists */}
       {popup && (
         <Popup
@@ -110,7 +111,7 @@ const Contact = () => {
         />
       )}
 
-      {/* Background Image */}
+      {/* Background Image - matching Services page */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
         style={{
@@ -295,7 +296,7 @@ const Contact = () => {
                     {
                       Icon: MapPin,
                       title: "Location",
-                      text: "Los Angeles, CA 90016",
+                      text: "Los Angeles, CA",
                       subtext: "*Telehealth only at this time",
                     },
                     {
@@ -337,7 +338,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

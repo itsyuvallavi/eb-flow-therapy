@@ -5,7 +5,7 @@ const PageLayout = ({ children }) => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <main className="min-h-screen">
+    <main className="flex-grow">
       {children}
     </main>
   );

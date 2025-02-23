@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from "./NavBar.jsx";
+import Footer from "./Footer.jsx";
 import Contact from "./Contact.jsx";
 import Services from './Services.jsx';
 import Home from "./HomePage/_HomeLayout.jsx";
@@ -20,7 +21,7 @@ const MainLayout = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen">
+      <div className="min-h-screen flex flex-col">
         <Navbar />
         <PageLayout>
           <Routes>
@@ -31,6 +32,7 @@ const MainLayout = () => {
             <Route path="/therapists/:id" element={<TherapistProfile />} />
           </Routes>
         </PageLayout>
+        <Footer />
       </div>
     </Router>
   );

@@ -254,7 +254,7 @@ const ContactSection = () => {
                   {
                     Icon: MapPin,
                     title: "Location",
-                    text: "Los Angeles, CA 90016",
+                    text: "Los Angeles, CA",
                     subtext: "*Telehealth only at this time",
                   },
                   { Icon: Mail, title: "Email", text: "elinorlmft@gmail.com" },
