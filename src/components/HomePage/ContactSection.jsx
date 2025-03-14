@@ -11,7 +11,9 @@ import lmft from "../../assets/lmft.png";
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
-  // Add more therapists here in the future if needed
+  { id: "taylor", name: "Taylor Lewis, AMFT", email: "elinorlmft@gmail.com" },
+  { id: "megan", name: "Megan Adamson, AMFT", email: "elinorlmft@gmail.com" },
+  { id: "daniah", name: "Daniah Hamouda, AMFT", email: "elinorlmft@gmail.com" }
 ];
 
 const ContactSection = () => {

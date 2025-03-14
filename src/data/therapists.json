@@ -7,7 +7,7 @@
     "image": "/portrait.png",
     "languages": ["English", "Hebrew"],
     "featured": true,
-    "shortBio": "I am a Licensed Marriage and Family Therapist dedicated to providing a safe and nurturing space for individuals and couples on their journey toward healing and growth. With a multicultural background and extensive experience in cross-cultural therapy, I bring a unique perspective to my practice.",
+    "shortBio": "With extensive experience in individual and couples therapy, I am dedicated to fostering a supportive and safe space where growth and healing can thrive. By integrating evidence-based practices with a deep commitment to authentic human connection, I help clients navigate challenges and uncover their full potential.",
     "education": [
       "MA in Marriage and Family Therapy from Alliant International University, Los Angeles CA",
       "Additional training: Couples therapy, Obsessive compulsive disorder, Personality disorders, Hoarding, and therapeutic modalities such as ACT, DBT, and iCBT",
@@ -22,6 +22,78 @@
       "Cultural Transitions",
       "Sex-Positivity & Kink-Friendly"
     ],
-    "approach": "I view therapy as a collaborative journey, partnering with my clients to achieve their personalized goals. I also believe in the power of humor to create connection and lightness, making the process both meaningful and relatable. My therapeutic approach blends a variety of evidence-based methods with psychodynamic processing and creative, out-of-the-box techniques. I tailor each session to meet the unique needs of my clients, ensuring a personalized and effective experience. I integrate:\n\n• Dialectial Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)\n• Cognitive Behavioral Techniques\n• Emotionally Focused Therapy (EFT)\n• Narrative & Experiential Therapy- Mindfulness-Based Approaches\n• Attachment-Based Therapy"
+    "approach": "I view therapy as a collaborative journey, partnering with my clients to achieve their personalized goals. I also believe in the power of humor to create connection and lightness, making the process both meaningful and relatable. My therapeutic approach blends a variety of evidence-based methods with psychodynamic processing and creative, out-of-the-box techniques. I tailor each session to meet the unique needs of my clients, ensuring a personalized and effective experience. I integrate:\n\n• Dialectial Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)\n• Cognitive Behavioral Techniques\n• Emotionally Focused Therapy (EFT)\n• Narrative & Experiential Therapy\n• Mindfulness-Based Approaches\n• Attachment-Based Therapy"
+  },
+  "taylor": {
+    "id": "taylor",
+    "name": "Taylor Lewis",
+    "title": "Associate MFT",
+    "license": "AMFT #152021",
+    "image": "/Taylor.png",
+    "languages": ["English"],
+    "featured": false,
+    "shortBio": "I'm a passionate Associate Marriage and Family Therapist who strives to support my clients on their journey toward healing and growth. Deeply inspired by the positive transformations I've witnessed, I create a safe and nurturing space where individuals, couples, and families can navigate challenges and cultivate meaningful connections.",
+    "education": [
+      "MA in Clinical Psychology from Antioch University, Los Angeles, CA",
+      "Additional Training: Crisis Intervention Certification and CAPPA Certified Postpartum Doula, Adult/Child/Infant CPR AED and First Aid Certification"
+    ],
+    "background": "Before becoming a therapist, I worked as a Postpartum Doula, gaining invaluable experience supporting families through the emotional and physical challenges of parenthood. This hands-on work has shaped my therapeutic approach, providing me with a deep understanding of the complexities families face during this transitional period.\nAs a therapist, I have worked with teens and their families in school settings offering guidance through academic, social, and emotional challenges. Additionally, I have supported adults in navigating relationship dynamics, processing trauma, and addressing postpartum-related mental health concerns.",
+    "specializations": [
+      "Individual Therapy",
+      "Couples Therapy",
+      "New Parents",
+      "Mothers and Fertility Issues",
+      "Life Adjustment Issues",
+      "Teens"
+    ],
+    "approach": "I take a collaborative approach, working closely with each individual to develop practical tools that foster growth, healing, and a more fulfilling life. Committed to continuous learning, I actively engage in professional development to refine my skills and better serve the diverse communities I support.\nMy diverse experience allows me to offer a compassionate and practical approach to therapy—meeting clients where they are and guiding them toward meaningful transformation.\nI integrate:\n• Narrative Therapy\n• Dialectical Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)"
+  },
+  "megan": {
+    "id": "megan",
+    "name": "Megan Adamson",
+    "title": "Associate MFT",
+    "license": "AMFT",
+    "image": "/Megan.png",
+    "languages": ["English"],
+    "featured": false,
+    "shortBio": "I'm an Associate Marriage and Family Therapist passionate about supporting individuals, couples, and families in navigating trauma, mental health challenges, and relational dynamics. I embrace my client's authentic selves and bring curiosity and appreciation to the therapeutic experience.",
+    "education": [
+      "MS in Marriage and Family Therapy from the University of Southern California",
+      "Additional Training: Exposure and Response Prevention (ERP)"
+    ],
+    "background": "Before becoming a therapist, I worked with an international nonprofit that empowers children from diverse backgrounds through filmmaking, fostering creativity and self-expression. I also have experience providing educational services for incarcerated and justice-involved individuals navigating reentry, as well as supporting clients with OCD. These experiences have shaped my therapeutic approach, allowing me to meet clients where they are and tailor therapy to their unique needs.",
+    "specializations": [
+      "Individual Therapy",
+      "Couples Therapy",
+      "OCD & Anxiety Disorders",
+      "Personality Disorders",
+      "Existential Therapy & Trauma Work",
+      "Previously Incarcerated Populations"
+    ],
+    "approach": "With a strong foundation in resilience-building and depth-oriented exploration, I take a compassionate and humanistic approach to therapy, fostering growth, self-acceptance, and deeper insight. Drawing from experience working with diverse and complex populations, I provide structured support to help clients develop practical tools for lasting change.\n\nI integrate:\n• Humanistic approach\n• Mentalization\n• Dialectical Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)"
+  },
+  "daniah": {
+    "id": "daniah",
+    "name": "Daniah Hamouda",
+    "title": "Associate MFT",
+    "license": "AMFT",
+    "image": "/Daniah.png",
+    "languages": ["English", "Arabic"],
+    "featured": false,
+    "shortBio": "I'm an Associate Marriage and Family Therapist dedicated to supporting individuals and couples as they navigate anxiety, depression, trauma, and relationship challenges. I believe in fostering a safe, compassionate space where clients can explore their experiences, develop self-awareness, and create meaningful change.",
+    "education": [
+      "MA in Clinical Psychology from Pepperdine University",
+      "Additional Training: Solution-Focused therapy"
+    ],
+    "background": "Before becoming a therapist, I worked in intensive outpatient (IOP) and partial hospitalization (PHP) programs, providing structured support to individuals facing complex mental health challenges. This experience deepened my understanding of how anxiety, depression, and trauma impact daily life and relationships, shaping my ability to offer personalized and effective care.",
+    "specializations": [
+      "Couples Therapy",
+      "PTSD & Trauma",
+      "Personality Disorders",
+      "Anxiety Disorders",
+      "Marital & Premarital Issues",
+      "Postpartum"
+    ],
+    "approach": "With a foundation in empathy and depth-oriented exploration, I take a tailored and compassionate approach to therapy. I integrate a blend of evidence-based techniques to address the root causes of distress while helping clients develop practical tools for healing and growth. Together, we'll work toward greater emotional well-being, resilience, and fulfilling connections.\n\nI integrate:\n• Dialectical Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)\n• Solution-focused therapy"
   }
 }

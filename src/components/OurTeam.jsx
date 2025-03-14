@@ -1,11 +1,26 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import portrait from "../assets/portrait.png";
-import woman from "../assets/woman.jpg";
+import Taylor from "../assets/Taylor.png";
+import Megan from "../assets/Megan.png";
+import Daniah from "../assets/Daniah.png";
 import floralPattern2 from "../assets/floral-pattern2.png";
+import therapistsData from "../data/therapists.json";
+
+// Image mapping object to connect JSON image paths to actual imported images
+const imageMap = {
+  "/portrait.png": portrait,
+  "/Taylor.png": Taylor,
+  "/Megan.png": Megan,
+  "/Daniah.png": Daniah
+};
 
 const TeamMemberCard = ({ therapist, isFeatured }) => {
   const [ref, isVisible] = useIntersectionObserver();
+  
+  // Get the correct image source from our mapping
+  const imageSource = imageMap[therapist.image] || therapist.image;
 
   return (
     <div
@@ -18,7 +33,7 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="h-[550px] overflow-hidden">
               <img
-                src={therapist.image}
+                src={imageSource}
                 alt={therapist.name}
                 className="w-full h-full object-cover"
               />
@@ -38,7 +53,7 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
                   Specialties
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {therapist.specialties.map((specialty, index) => (
+                  {therapist.specializations && therapist.specializations.map((specialty, index) => (
                     <span
                       key={index}
                       className="px-2 py-1 bg-white/20 text-mountain-shadow/90 rounded-full text-sm"
@@ -71,11 +86,12 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
           className="group bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden 
             hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
         >
-          <div className="h-[300px] overflow-hidden">
+          <div className="h-[300px] overflow-hidden relative">
             <img
-              src={therapist.image}
+              src={imageSource}
               alt={therapist.name}
               className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
+              style={therapist.id === "daniah" ? { objectPosition: "center 20%" } : {}}
             />
           </div>
           <div className="p-6">
@@ -88,7 +104,7 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
             </p>
             <div className="mb-4">
               <div className="flex flex-wrap gap-2">
-                {therapist.specialties.slice(0, 3).map((specialty, index) => (
+                {therapist.specializations && therapist.specializations.slice(0, 3).map((specialty, index) => (
                   <span
                     key={index}
                     className="px-2 py-1 bg-white/20 text-mountain-shadow/90 rounded-full text-sm"
@@ -96,6 +112,11 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
                     {specialty}
                   </span>
                 ))}
+                {therapist.specializations && therapist.specializations.length > 3 && (
+                  <span className="px-2 py-1 bg-white/20 text-mountain-shadow/90 rounded-full text-sm">
+                    +{therapist.specializations.length - 3} more
+                  </span>
+                )}
               </div>
             </div>
             <Link
@@ -114,27 +135,13 @@ const TeamMemberCard = ({ therapist, isFeatured }) => {
 
 const OurTeam = () => {
   const [titleRef, isTitleVisible] = useIntersectionObserver();
+  const [therapists, setTherapists] = useState([]);
 
-  const teamMembers = [
-    {
-      id: "elinor",
-      name: "Elinor Bawnik",
-      title: "Lead Therapist, LMFT",
-      image: portrait,
-      specialties: [
-        "Individual Therapy",
-        "Couples Therapy",
-        "OCD & Anxiety Disorders",
-        "Personality Disorders",
-        "Cultural Transitions",
-        "Sex-Positivity & Kink-Friendly"
-      ],
-      languages: ["English", "Hebrew"],
-      featured: true,
-      shortBio:
-        "With extensive experience in individual and couples therapy, I am dedicated to fostering a supportive and safe space where growth and healing can thrive. By integrating evidence-based practices with a deep commitment to authentic human connection, I help clients navigate challenges and uncover their full potential.",
-    },
-  ];
+  useEffect(() => {
+    // Convert the therapists object to an array
+    const therapistsArray = Object.values(therapistsData);
+    setTherapists(therapistsArray);
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40">
@@ -184,7 +191,7 @@ const OurTeam = () => {
 
           {/* Featured Therapist */}
           <div className="mb-20">
-            {teamMembers
+            {therapists
               .filter((member) => member.featured)
               .map((therapist) => (
                 <TeamMemberCard 
@@ -197,7 +204,7 @@ const OurTeam = () => {
 
           {/* Other Team Members */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers
+            {therapists
               .filter((member) => !member.featured)
               .map((therapist) => (
                 <TeamMemberCard 

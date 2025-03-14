@@ -18,12 +18,17 @@ import therapistsData from "../data/therapists.json";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import background from "../assets/tree.png";
 import portrait from "../assets/portrait.png";
-import woman from "../assets/woman.jpg";
+import Taylor from "../assets/Taylor.png";
+import Megan from "../assets/Megan.png";
+import Daniah from "../assets/Daniah.png";
 import iocdfLogo from "../assets/IOCDF-Logo.png";
 
+// Image mapping object to connect JSON image paths to actual imported images
 const imageMap = {
   "/portrait.png": portrait,
-  "/woman.jpg": woman,
+  "/Taylor.png": Taylor,
+  "/Megan.png": Megan,
+  "/Daniah.png": Daniah,
   "/IOCDF-Logo.png": iocdfLogo,
 };
 
@@ -147,6 +152,7 @@ const TherapistProfile = () => {
     };
   }, [isSectionVisible]);
 
+  // Add Psychology Today verification script for Elinor specifically
   useEffect(() => {
     if (id === "elinor") {
       const script = document.createElement("script");
@@ -206,6 +212,7 @@ const TherapistProfile = () => {
                   src={imageSource}
                   alt={therapist.name}
                   className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                  style={id === "daniah" ? { objectPosition: "center 25%" } : {}}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/20 to-transparent" />
               </div>
@@ -237,16 +244,17 @@ const TherapistProfile = () => {
                     </p>
                   </div>
 
-                  <div className="flex flex-row items-center justify-start space-x-4 mt-8">
+                  {/* Action Buttons - horizontal with responsive sizing */}
+                  <div className="flex flex-wrap items-center gap-3 mt-8">
                     {/* Schedule Button */}
                     <Link
                       to="/contact"
-                      className="inline-flex items-center px-5 py-3
+                      className="inline-flex items-center px-3 sm:px-4 py-2 sm:py-3
                         bg-mountain-terra text-white 
                         rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
-                        transform hover:scale-105 hover:shadow-lg whitespace-nowrap flex-shrink-0"
+                        transform hover:scale-105 hover:shadow-lg text-sm sm:text-base"
                     >
-                      <Mail className="w-5 h-5 mr-2 flex-shrink-0" />
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
                       <span className="whitespace-nowrap">
                         Schedule Consultation
                       </span>
@@ -259,16 +267,16 @@ const TherapistProfile = () => {
                         className="sx-verified-seal flex-shrink-0 hover:opacity-90 transition-opacity"
                         rel="noopener noreferrer"
                       >
-                        <div className="bg-white rounded-full px-4 py-1.5 flex items-center border border-gray-200 shadow-sm">
-                          <div className="flex-shrink-0 mr-1.5">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div className="bg-white rounded-full px-2 sm:px-4 py-1 sm:py-1.5 flex items-center border border-gray-200 shadow-sm">
+                          <div className="flex-shrink-0 mr-1 sm:mr-1.5">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <circle cx="12" cy="12" r="11" stroke="#D8D8D8" strokeWidth="1" fill="white"/>
                               <path d="M19 8L10 17L5 12" stroke="#FF5252" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-[10px] text-gray-500 uppercase leading-tight tracking-wide">VERIFIED BY</span>
-                            <span className="text-sm font-bold text-blue-600 leading-tight" style={{fontFamily: 'sans-serif'}}>Psychology Today</span>
+                            <span className="text-[8px] sm:text-[10px] text-gray-500 uppercase leading-tight tracking-wide">VERIFIED BY</span>
+                            <span className="text-xs sm:text-sm font-bold text-blue-600 leading-tight" style={{fontFamily: 'sans-serif'}}>Psychology Today</span>
                           </div>
                         </div>
                       </a>
@@ -351,7 +359,7 @@ const TherapistProfile = () => {
 
             {activeTab === "specializations" && (
               <div className="grid md:grid-cols-3 gap-6">
-                {therapist.specializations.map((specialty, index) => (
+                {therapist.specializations && therapist.specializations.map((specialty, index) => (
                   <Specialization key={index} title={specialty} />
                 ))}
               </div>
@@ -388,9 +396,9 @@ const TherapistProfile = () => {
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center px-8 py-4 bg-mountain-terra text-white 
+                className="inline-flex items-center px-6 py-3 bg-mountain-terra text-white 
                   rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
-                  transform hover:scale-105 hover:shadow-lg"
+                  transform hover:scale-105 hover:shadow-lg justify-center w-full sm:w-auto max-w-xs mx-auto"
               >
                 <CalendarCheck className="w-5 h-5 mr-2" />
                 Schedule Consultation
