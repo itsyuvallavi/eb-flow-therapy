@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Users } from "lucide-react";
+import { Mail, Phone, MapPin, Users, ChevronDown } from "lucide-react";
 import { useState, useRef } from "react";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import { sendContactEmails } from "../services/emailService";
@@ -11,9 +11,9 @@ import floralPattern from "../assets/floral-pattern.jpg";
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
-  { id: "taylor", name: "Taylor Lewis, AMFT", email: "elinorlmft@gmail.com" },
+  { id: "daniah", name: "Daniah Hamouda, AMFT", email: "elinorlmft@gmail.com" },
   { id: "megan", name: "Megan Adamson, AMFT", email: "elinorlmft@gmail.com" },
-  { id: "daniah", name: "Daniah Hamouda, AMFT", email: "elinorlmft@gmail.com" }
+  { id: "taylor", name: "Taylor Lewis, AMFT", email: "elinorlmft@gmail.com" }
 ];
 
 const Contact = () => {
@@ -205,7 +205,7 @@ const Contact = () => {
                         className="w-full px-4 py-3 rounded-lg bg-white/10 border border-mountain-shadow/20 
                           text-mountain-shadow placeholder-mountain-shadow/40
                           focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
-                          transition-all group-hover:border-mountain-shadow/40 appearance-none"
+                          transition-all group-hover:border-mountain-shadow/40 appearance-none pr-10"
                       >
                         {therapists.map((therapist) => (
                           <option
@@ -217,7 +217,10 @@ const Contact = () => {
                           </option>
                         ))}
                       </select>
-                      <Users className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-mountain-shadow/50 pointer-events-none" />
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-mountain-shadow/50 pointer-events-none flex items-center">
+                        <Users className="w-5 h-5 mr-1" />
+                        <ChevronDown className="w-5 h-5" />
+                      </div>
                     </div>
                   </div>
 
