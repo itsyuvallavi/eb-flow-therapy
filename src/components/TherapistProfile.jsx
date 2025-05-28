@@ -271,7 +271,7 @@ const TherapistProfile = () => {
                               transition-all duration-300 transform hover:scale-110"
                             aria-label="Instagram"
                           >
-                            <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <Instagram className="w-5 h-5 sm:w-5 sm:h-5" />
                           </a>
                         )}
                         {therapist.socialMedia.facebook && (
@@ -284,7 +284,7 @@ const TherapistProfile = () => {
                               transition-all duration-300 transform hover:scale-110"
                             aria-label="Facebook"
                           >
-                            <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <Facebook className="w-5 h-5 sm:w-5 sm:h-5" />
                           </a>
                         )}
                       </div>

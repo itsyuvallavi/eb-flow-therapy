@@ -16,6 +16,12 @@ emailjs.init(EMAILJS_PUBLIC_KEY);
 
 export const sendContactEmails = async (formData) => {
   const { name, email, phone, message, selectedTherapist } = formData;
+
+  console.log("ENV VARS:", {
+  EMAILJS_PUBLIC_KEY,
+  EMAILJS_SERVICE_ID,
+  EMAILJS_TEMPLATE_ID
+});
   
   try {
     // Updated template parameters to include all necessary information
@@ -45,5 +51,8 @@ export const sendContactEmails = async (formData) => {
       message: 'Failed to send message. Please try again or contact us directly.',
       error: error.text 
     };
+
+    
   }
+  
 };
