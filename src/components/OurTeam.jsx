@@ -2,18 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import portrait from "../assets/portrait.png";
-import Taylor from "../assets/Taylor.png";
 import Megan from "../assets/Megan.png";
-import Daniah from "../assets/Daniah.png";
 import floralPattern2 from "../assets/floral-pattern2.png";
 import therapistsData from "../data/therapists.json";
 
 // Image mapping object to connect JSON image paths to actual imported images
 const imageMap = {
   "/portrait.png": portrait,
-  "/Taylor.png": Taylor,
   "/Megan.png": Megan,
-  "/Daniah.png": Daniah
 };
 
 const TeamMemberCard = ({ therapist, isFeatured }) => {

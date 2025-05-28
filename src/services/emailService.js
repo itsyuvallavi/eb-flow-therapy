@@ -1,8 +1,18 @@
 // services/emailService.js
 import emailjs from '@emailjs/browser';
 
+// Initialize EmailJS with environment variable
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+// Check if environment variables are loaded
+if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
+  console.error('EmailJS environment variables are not properly configured');
+}
+
 // Initialize EmailJS
-emailjs.init("pBvBJnus_GURsn7yo");
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 export const sendContactEmails = async (formData) => {
   const { name, email, phone, message, selectedTherapist } = formData;
@@ -21,8 +31,8 @@ export const sendContactEmails = async (formData) => {
     };
 
     const result = await emailjs.send(
-      'service_6ctc9at',     // Your service ID
-      'template_329fpke',    // Your template ID
+      EMAILJS_SERVICE_ID,     // Use environment variable
+      EMAILJS_TEMPLATE_ID,    // Use environment variable
       templateParams
     );
 

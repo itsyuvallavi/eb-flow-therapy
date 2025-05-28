@@ -11,9 +11,7 @@ import floralPattern from "../assets/floral-pattern.jpg";
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
-  { id: "daniah", name: "Daniah Hamouda, AMFT", email: "elinorlmft@gmail.com" },
   { id: "megan", name: "Megan Adamson, AMFT", email: "elinorlmft@gmail.com" },
-  { id: "taylor", name: "Taylor Lewis, AMFT", email: "elinorlmft@gmail.com" }
 ];
 
 const Contact = () => {
