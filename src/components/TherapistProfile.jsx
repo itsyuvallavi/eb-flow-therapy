@@ -13,6 +13,8 @@ import {
   Star,
   CheckCircle,
   Award,
+  Instagram,
+  Facebook,
 } from "lucide-react";
 import therapistsData from "../data/therapists.json";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
@@ -255,6 +257,38 @@ const TherapistProfile = () => {
                         Schedule Consultation
                       </span>
                     </Link>
+
+                    {/* Social Media Links */}
+                    {therapist.socialMedia && (
+                      <div className="flex items-center gap-2">
+                        {therapist.socialMedia.instagram && (
+                          <a
+                            href={therapist.socialMedia.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 sm:p-2.5 rounded-full bg-white/10 border border-mountain-shadow/20
+                              text-mountain-shadow hover:bg-mountain-terra hover:text-white hover:border-mountain-terra
+                              transition-all duration-300 transform hover:scale-110"
+                            aria-label="Instagram"
+                          >
+                            <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
+                          </a>
+                        )}
+                        {therapist.socialMedia.facebook && (
+                          <a
+                            href={therapist.socialMedia.facebook}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 sm:p-2.5 rounded-full bg-white/10 border border-mountain-shadow/20
+                              text-mountain-shadow hover:bg-mountain-terra hover:text-white hover:border-mountain-terra
+                              transition-all duration-300 transform hover:scale-110"
+                            aria-label="Facebook"
+                          >
+                            <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
+                          </a>
+                        )}
+                      </div>
+                    )}
 
                     {/* Psychology Today Verification Badge */}
                     {id === "elinor" && (

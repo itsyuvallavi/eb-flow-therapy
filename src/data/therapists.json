@@ -7,6 +7,10 @@
     "image": "/portrait.png",
     "languages": ["English", "Hebrew"],
     "featured": true,
+    "socialMedia": {
+      "instagram": "https://www.instagram.com/elinorlmft/",
+      "facebook": "https://www.facebook.com/people/Elinor-Bawnik/100073185439886/"
+    },
     "shortBio": "With extensive experience in individual and couples therapy, I am dedicated to fostering a supportive and safe space where growth and healing can thrive. By integrating evidence-based practices with a deep commitment to authentic human connection, I help clients navigate challenges and uncover their full potential.",
     "education": [
       "MA in Marriage and Family Therapy from Alliant International University, Los Angeles CA",
@@ -32,6 +36,10 @@
     "image": "/Megan.png",
     "languages": ["English"],
     "featured": false,
+    "socialMedia": {
+      "instagram": "https://www.instagram.com/meganadamsonmft",
+      "facebook": "https://www.facebook.com/megan.adamson.95269?mibextid=wwXIfr"
+    },
     "shortBio": "I'm an Associate Marriage and Family Therapist passionate about supporting individuals, couples, and families in navigating trauma, mental health challenges, and relational dynamics. I embrace my client's authentic selves and bring curiosity and appreciation to the therapeutic experience.",
     "education": [
       "MS in Marriage and Family Therapy from the University of Southern California",

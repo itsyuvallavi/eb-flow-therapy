@@ -8,6 +8,7 @@ import Home from "./HomePage/_HomeLayout.jsx";
 import OurTeam from "./OurTeam.jsx";
 import PageLayout from "./modal/PageLayout.jsx";
 import TherapistProfile from './TherapistProfile.jsx';
+import Media from './Media.jsx';
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const MainLayout = () => {
             <Route path="/our-team" element={<OurTeam />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/media" element={<Media />} />
             <Route path="/therapists/:id" element={<TherapistProfile />} />
           </Routes>
         </PageLayout>
