@@ -1,5 +1,6 @@
 // hooks/useIntersectionObserver.jsx
 import { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const useIntersectionObserver = (options = {}) => {
   const elementRef = useRef(null);
@@ -32,7 +33,7 @@ export const useIntersectionObserver = (options = {}) => {
         observer.unobserve(currentElement);
       }
     };
-  }, []);
+  }, [options]);
 
   return [elementRef, isVisible];
 };
@@ -50,4 +51,10 @@ export const FloatingIcon = ({ Icon, className, delay }) => {
       <Icon className="w-8 h-8 text-white/20" />
     </div>
   );
+};
+
+FloatingIcon.propTypes = {
+  Icon: PropTypes.elementType.isRequired,
+  className: PropTypes.string.isRequired,
+  delay: PropTypes.number.isRequired,
 };

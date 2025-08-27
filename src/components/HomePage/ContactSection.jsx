@@ -1,9 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Phone, MapPin, Mail, Users, Leaf, Heart, Stars, ChevronDown } from "lucide-react";
-import {
-  useIntersectionObserver,
-  FloatingIcon,
-} from "../modal/useIntersectionObserver";
+import { Phone, MapPin, Mail, Users, ChevronDown } from "lucide-react";
+import { useIntersectionObserver } from "../modal/useIntersectionObserver";
 import { sendContactEmails } from "../../services/emailService.js";
 import Popup from "../Popup.jsx";
 import lmft from "../../assets/lmft.png";

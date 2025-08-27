@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { User, Heart, Users, Shield, Globe, Flower, Leaf, Stars } from 'lucide-react';
-import { useIntersectionObserver, FloatingIcon } from "../modal/useIntersectionObserver";
+import { useState, useEffect } from "react";
+import { User, Heart, Users, Shield, Globe, Flower } from 'lucide-react';
+import PropTypes from 'prop-types';
+import { useIntersectionObserver } from "../modal/useIntersectionObserver";
 import background from "../../assets/tree.png";
 
 const ServiceCard = ({ title, description, Icon, delay = 0 }) => {
@@ -49,6 +50,18 @@ const AnimatedTitle = ({ children, delay = 0 }) => {
       {children}
     </div>
   );
+};
+
+ServiceCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  Icon: PropTypes.elementType.isRequired,
+  delay: PropTypes.number,
+};
+
+AnimatedTitle.propTypes = {
+  children: PropTypes.node.isRequired,
+  delay: PropTypes.number,
 };
 
 const ServicesSection = () => {

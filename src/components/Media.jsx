@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Newspaper, Mic, ExternalLink, Calendar, Clock, UserCheck } from "lucide-react";
+import SEOHead from "./SEO/SEOHead";
+import { generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import background from "../assets/tree.png";
 import psychchetral from "../assets/PsychCentral.jpg";
@@ -121,6 +124,13 @@ const MediaCard = ({ item, delay = 0 }) => {
 const Media = () => {
   const [titleRef, isTitleVisible] = useIntersectionObserver();
 
+  const seoData = getSEOData('media');
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Media", path: "/media" }
+  ];
+  const structuredData = generateBreadcrumbSchema(breadcrumbs);
+
   // Media items data
   const mediaItems = [
     {
@@ -163,7 +173,16 @@ const Media = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
+    <>
+      <SEOHead 
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        url={seoData.url}
+        image={seoData.image}
+        structuredData={structuredData}
+      />
+      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
       {/* Background Image */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
@@ -239,7 +258,8 @@ const Media = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

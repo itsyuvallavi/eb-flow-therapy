@@ -1,6 +1,7 @@
 // components/sections/HeroSection.jsx
 import { useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
+import PropTypes from 'prop-types';
 import background from "../../assets/mountain.jpg";
 
 
@@ -57,6 +58,10 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
       </button>
     </section>
   );
+};
+
+HeroSection.propTypes = {
+  onScrollToWelcome: PropTypes.func.isRequired,
 };
 
 export default HeroSection;

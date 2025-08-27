@@ -13,6 +13,9 @@ import {
   CalendarCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEOHead from "./SEO/SEOHead";
+import { generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import background from "../assets/tree.png";
 import floralPattern from "../assets/floral-pattern.jpg";
@@ -101,6 +104,13 @@ const Services = () => {
   const [expandedService, setExpandedService] = useState(null);
   const [titleRef, isTitleVisible] = useIntersectionObserver();
   const [contentRef, isContentVisible] = useIntersectionObserver();
+
+  const seoData = getSEOData('services');
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" }
+  ];
+  const structuredData = generateBreadcrumbSchema(breadcrumbs);
   const [buttonRef, isButtonVisible] = useIntersectionObserver();
   const [ctaTitleRef, isCTATitleVisible] = useIntersectionObserver();
 
@@ -186,7 +196,16 @@ const Services = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
+    <>
+      <SEOHead 
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        url={seoData.url}
+        image={seoData.image}
+        structuredData={structuredData}
+      />
+      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
       {/* Background Image */}
       <div
         className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
@@ -341,7 +360,8 @@ const Services = () => {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 };
 

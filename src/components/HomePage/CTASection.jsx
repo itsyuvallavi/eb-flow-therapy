@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { CalendarCheck, Leaf, Heart, Stars } from 'lucide-react';
+import { CalendarCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import background from '../../assets/floral-pattern.jpg'
 
@@ -24,7 +24,7 @@ const useIntersectionObserver = (options = {}) => {
         observer.unobserve(currentElement);
       }
     };
-  }, []);
+  }, [options]);
 
   return [elementRef, isVisible];
 };

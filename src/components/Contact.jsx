@@ -1,12 +1,15 @@
 import { Mail, Phone, MapPin, Users, ChevronDown } from "lucide-react";
 import { useState, useRef } from "react";
+import SEOHead from "./SEO/SEOHead";
+import { generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import { sendContactEmails } from "../services/emailService";
+import LazyBackground from "./ui/LazyBackground";
 import background from "../assets/tree.png";
 import Popup from "./Popup";
 import { useEffect } from "react";
 import lmft from "../assets/lmft.png";
-import floralPattern from "../assets/floral-pattern.jpg";
 
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
@@ -34,6 +37,13 @@ const Contact = () => {
   const [titleRef, isTitleVisible] = useIntersectionObserver();
   const [formRef2, isFormVisible] = useIntersectionObserver();
   const [infoRef, isInfoVisible] = useIntersectionObserver();
+
+  const seoData = getSEOData('contact');
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" }
+  ];
+  const structuredData = generateBreadcrumbSchema(breadcrumbs);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -101,7 +111,16 @@ const Contact = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
+    <>
+      <SEOHead 
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        url={seoData.url}
+        image={seoData.image}
+        structuredData={structuredData}
+      />
+      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
       {/* Show popup if exists */}
       {popup && (
         <Popup
@@ -112,14 +131,15 @@ const Contact = () => {
       )}
 
       {/* Background Image - matching Services page */}
-      <div
-        className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
+      <LazyBackground
+        src={background}
+        className="fixed inset-0 bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${background})`,
           backgroundSize: "1200px",
           opacity: 0.1,
           zIndex: 0,
         }}
+        placeholder="bg-gray-50"
       />
 
       <div
@@ -153,7 +173,7 @@ const Contact = () => {
               <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
               <p className="text-lg text-mountain-shadow/80 py-6">
                 Ready to take the first step? Reach out for a free consultation
-                and let's explore how we can support your journey together.
+                and let&apos;s explore how we can support your journey together.
               </p>
               <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
             </div>
@@ -173,7 +193,7 @@ const Contact = () => {
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                 <div className="mb-8">
                   <p className="text-mountain-shadow/90 text-lg mb-2">
-                    Schedule a free 15-minute consultation to see if we're the
+                    Schedule a free 15-minute consultation to see if we&apos;re the
                     right fit for your journey.
                   </p>
                   <p className="text-mountain-terra font-medium">
@@ -341,7 +361,8 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

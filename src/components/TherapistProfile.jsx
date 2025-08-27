@@ -16,6 +16,9 @@ import {
   Instagram,
   Facebook,
 } from "lucide-react";
+import SEOHead from "./SEO/SEOHead";
+import { generatePersonSchema, generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { getSEOData } from "../data/seoData";
 import therapistsData from "../data/therapists.json";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import background from "../assets/tree.png";
@@ -177,6 +180,32 @@ const TherapistProfile = () => {
 
   const imageSource = imageMap[therapist.image] || therapist.image;
 
+  const seoData = getSEOData('therapistProfile', id);
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Our Team", path: "/our-team" },
+    { name: therapist.name, path: `/therapists/${id}` }
+  ];
+
+  // Generate person schema with specific therapist data
+  const personSchemaData = {
+    name: therapist.name,
+    jobTitle: therapist.title,
+    description: `${therapist.name}, ${therapist.title} (${therapist.license}) specializing in ${therapist.specializations.slice(0, 3).join(', ')} in West Los Angeles, California.`,
+    image: `https://itsyuvallavi.github.io/eb-flow-therapy${therapist.image}`,
+    email: "elinorlmft@gmail.com",
+    telephone: "(424) 431-1122",
+    license: therapist.license,
+    languages: therapist.languages,
+    specializations: therapist.specializations,
+    socialMedia: therapist.socialMedia
+  };
+
+  const structuredData = [
+    generatePersonSchema(personSchemaData),
+    generateBreadcrumbSchema(breadcrumbs)
+  ];
+
   const tabs = [
     { id: "background", label: "Background", Icon: BookOpen },
     { id: "specializations", label: "Specializations", Icon: Star },
@@ -184,10 +213,20 @@ const TherapistProfile = () => {
   ];
 
   return (
-    <div
-      ref={sectionRef}
-      className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25"
-    >
+    <>
+      <SEOHead 
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        url={seoData.url}
+        image={seoData.image}
+        type={seoData.type}
+        structuredData={structuredData}
+      />
+      <div
+        ref={sectionRef}
+        className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25"
+      >
       <div
         className="fixed inset-0 bg-center bg-no-repeat bg-cover opacity-10"
         style={{
@@ -437,7 +476,8 @@ const TherapistProfile = () => {
           </div>
         </AnimatedSection>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

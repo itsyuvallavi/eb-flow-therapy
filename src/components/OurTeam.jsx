@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SEOHead from "./SEO/SEOHead";
+import { generatePersonSchema, generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import portrait from "../assets/portrait.png";
 import Megan from "../assets/Megan.png";
@@ -139,8 +142,27 @@ const OurTeam = () => {
     setTherapists(therapistsArray);
   }, []);
 
+  const seoData = getSEOData('ourTeam');
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Our Team", path: "/our-team" }
+  ];
+  const structuredData = [
+    generatePersonSchema(),
+    generateBreadcrumbSchema(breadcrumbs)
+  ];
+
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40">
+    <>
+      <SEOHead 
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        url={seoData.url}
+        image={seoData.image}
+        structuredData={structuredData}
+      />
+      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40">
       {/* Background Pattern */}
       <div
         className="absolute inset-0 opacity-10 transition-opacity duration-500"
@@ -212,7 +234,8 @@ const OurTeam = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

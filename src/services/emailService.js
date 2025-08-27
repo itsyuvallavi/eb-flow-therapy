@@ -17,11 +17,10 @@ emailjs.init(EMAILJS_PUBLIC_KEY);
 export const sendContactEmails = async (formData) => {
   const { name, email, phone, message, selectedTherapist } = formData;
 
-  console.log("ENV VARS:", {
-  EMAILJS_PUBLIC_KEY,
-  EMAILJS_SERVICE_ID,
-  EMAILJS_TEMPLATE_ID
-});
+  // Environment variables loaded successfully (development only)
+  if (import.meta.env.DEV) {
+    console.log('EmailJS configuration loaded');
+  }
   
   try {
     // Updated template parameters to include all necessary information
