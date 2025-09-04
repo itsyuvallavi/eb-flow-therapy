@@ -51,25 +51,23 @@ const CTASection = () => {
   const [buttonRef, isButtonVisible] = useIntersectionObserver();
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-mountain-forest/40 to-mountain-peak/20">
+    <section className="relative py-20 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
       {/* Decorative overlay */}
       <div className="absolute inset-0" />
       
       <div className="relative z-10 max-w-4xl mx-auto px-4">
         <div 
-          className="relative bg-mountain-terra/20 backdrop-blur-sm rounded-2xl p-12 shadow-xl
+          className="relative bg-white backdrop-blur-sm rounded-2xl p-12 shadow-xl
             transform transition-all duration-700 
-            hover:bg-opacity-80 
             group"
         >
-          {/* Background image that appears on hover */}
+          {/* Background image that appears when scrolled into view */}
           <div 
-            className="absolute inset-0 z-[-1] opacity-0 group-hover:opacity-20 
-                       transition-opacity duration-700 
-                       bg-cover bg-center bg-no-repeat rounded-2xl"
+            className={`absolute inset-0 z-[-1] transition-opacity duration-1000 
+                       bg-cover bg-center bg-no-repeat rounded-2xl
+                       ${isTitleVisible ? 'opacity-20' : 'opacity-0'}`}
             style={{
                 backgroundImage: `url(${background})`,
-                // Replace with your actual background image
             }}
           />
 
@@ -83,7 +81,7 @@ const CTASection = () => {
               <h2 className="text-4xl font-light text-mountain-shadow mb-2">
                 Begin Your Journey Today
               </h2>
-              <div className="w-24 h-1 bg-mountain-terra  mx-auto mt-4" />
+              <div className="w-24 h-1 bg-sunset-coral mx-auto mt-4" />
             </div>
             
             {/* Animated Content */}
@@ -108,7 +106,7 @@ const CTASection = () => {
             >
               <Link
                 to="/contact"
-                className="group inline-flex items-center px-8 py-4 bg-mountain-terra/70 hover:bg-mountain-terra 
+                className="group inline-flex items-center px-8 py-4 bg-sunset-coral hover:bg-sunset-coral/80 
                   text-mountain-shadow rounded-full transition-all duration-300 transform hover:scale-105 
                   hover:shadow-lg backdrop-blur-sm mountain-terra "
               >

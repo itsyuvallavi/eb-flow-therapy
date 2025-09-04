@@ -1,180 +1,147 @@
-import { useState, useEffect } from "react";
-import { User, Heart, Users, Shield, Globe, Flower } from 'lucide-react';
+import { useState } from "react";
+import { User, Heart, Users, Shield, Globe, Brain, Flower, ArrowRight, Sparkles } from 'lucide-react';
 import PropTypes from 'prop-types';
 import { useIntersectionObserver } from "../modal/useIntersectionObserver";
-import background from "../../assets/tree.png";
+import { Link } from 'react-router-dom';
 
 const ServiceCard = ({ title, description, Icon, delay = 0 }) => {
   const [ref, isVisible] = useIntersectionObserver();
+  const [isHovered, setIsHovered] = useState(false);
   
   return (
     <div 
       ref={ref}
-      className={`group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm p-4 md:p-8 
-        shadow-xl hover:shadow-2xl
-        transition-all duration-700 ease-out will-change-transform
-        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}
+      className={`group relative overflow-hidden rounded-2xl p-8 h-80 transition-all duration-500 transform hover:-translate-y-2
+        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
       style={{ 
         transitionDelay: `${delay}ms`,
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-mountain-terra/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+      {/* Simple Gradient Background */}
+      <div className={`absolute inset-0 bg-gradient-to-br transition-all duration-500
+        ${isHovered 
+          ? 'from-primary-sage/20 via-white/95 to-accent-mint/15' 
+          : 'from-white/95 via-white/90 to-primary-sage/10'
+        }`} 
+      />
       
-      <div className="relative z-10">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-white/30 group-hover:bg-white/40 transition-colors duration-300">
-            <Icon className="w-5 h-5 md:w-6 md:h-6 text-mountain-terra/60 group-hover:text-mountain-terra transition-colors duration-300" />
+      {/* Subtle Border */}
+      <div className="absolute inset-0 border border-primary-sage/20 rounded-2xl" />
+      
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col">
+        {/* Icon */}
+        <div className="mb-6">
+          <div className={`w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-500
+            bg-primary-sage/10 group-hover:bg-primary-sage/20 group-hover:scale-110`}>
+            <Icon className="w-8 h-8 text-primary-forest transition-transform group-hover:scale-110" />
           </div>
-          <h3 className="text-base md:text-xl font-medium text-mountain-shadow group-hover:text-mountain-forest transition-colors duration-300">
+        </div>
+        
+        {/* Text Content */}
+        <div className="flex-1 space-y-4">
+          <h3 className="text-xl font-semibold text-text-primary group-hover:text-primary-forest transition-colors duration-300">
             {title}
           </h3>
+          <p className="text-text-secondary leading-relaxed text-sm group-hover:text-text-primary transition-colors duration-300">
+            {description}
+          </p>
         </div>
-        <p className="text-xs md:text-base text-mountain-shadow/90 group-hover:text-mountain-shadow transition-colors duration-300">
-          {description}
-        </p>
+
+        {/* Bottom CTA */}
+        <div className="mt-6 pt-4 border-t border-primary-sage/10">
+          <Link 
+            to="/services"
+            className="inline-flex items-center space-x-2 text-primary-sage hover:text-primary-forest 
+              transition-all duration-300 font-medium group-hover:translate-x-1"
+          >
+            <span className="text-sm">Learn More</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
 
-const AnimatedTitle = ({ children, delay = 0 }) => {
-  const [ref, isVisible] = useIntersectionObserver();
-  
-  return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 transform
-        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-};
-
-ServiceCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  Icon: PropTypes.elementType.isRequired,
-  delay: PropTypes.number,
-};
-
-AnimatedTitle.propTypes = {
-  children: PropTypes.node.isRequired,
-  delay: PropTypes.number,
-};
-
 const ServicesSection = () => {
-  const [backgroundOpacity, setBackgroundOpacity] = useState(0.1);
-  const [sectionRef, isSectionVisible] = useIntersectionObserver({
-    threshold: 0.1 // Trigger when at least 10% of the section is visible
-  });
+  const [titleRef, isTitleVisible] = useIntersectionObserver();
 
   const services = [
     {
       title: "Individual Therapy",
-      description: "Personalized support to navigate life’s challenges, enhance self-awareness, and develop effective coping strategies.",
+      description: "Personalized support for anxiety, depression, OCD, and personal growth through evidence-based approaches like DBT, CBT, and ACT.",
       Icon: User
     },
     {
-      title: "Relationship Therapies",
-      description: "Family and couple therapies to foster deeper communication, understanding, and connection.",
+      title: "Couples Therapy",
+      description: "Strengthen relationships through improved communication, conflict resolution, and emotional intimacy using EFT techniques.",
       Icon: Heart
     },
     {
-      title: "Cultural Competence",
-      description: "Navigating systemic challenges with a culturally informed perspective.",
+      title: "Family Therapy",
+      description: "Navigate family dynamics, cultural transitions, and intergenerational challenges in a supportive environment.",
+      Icon: Users
+    },
+    {
+      title: "OCD Treatment",
+      description: "Specialized exposure and response prevention (ERP) therapy for obsessive-compulsive disorder with proven outcomes.",
+      Icon: Brain
+    },
+    {
+      title: "Cultural Support",
+      description: "Culturally affirming therapy for immigrants and individuals navigating identity and cultural transitions.",
       Icon: Globe
     },
     {
-      title: "Personality Disorders",
-      description: "Develop coping skills to manage intense emotions and reactivity with a compassionate, non-judgmental approach.",
-      Icon: Flower
-    },
-    {
-      title: "Anxiety & Related Disorders",
-      description: "Evidence-based therapies to manage anxiety, reduce stress, and build long-term resilience.",
+      title: "Trauma Processing",
+      description: "Safe, trauma-informed approaches to healing from past experiences and building resilience for the future.",
       Icon: Shield
-    },
-    {
-      title: "Trauma-Informed Care",
-      description: "Create a safe space to explore the impact of past experiences, fostering healing, resilience, and emotional growth.",
-      Icon: Users
     },
   ];
 
-  // Effect to change opacity when section becomes visible
-  useEffect(() => {
-    // Reset opacity when page loads or is refreshed
-    setBackgroundOpacity(0.10);
-  }, []);
-
-  useEffect(() => {
-    let timeoutId;
-    if (isSectionVisible) {
-      timeoutId = setTimeout(() => {
-        setBackgroundOpacity(0.35);
-      }, 1000);
-    } else {
-      timeoutId = setTimeout(() => {
-        setBackgroundOpacity(0.1);
-      }, 1000);
-    }
-
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [isSectionVisible]);
-
   return (
-    <section 
-      ref={sectionRef}
-      className="relative min-h-screen bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40"
-    >
-      {/* Decorative overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-mountain-shadow/0 to-transparent" />
+    <section className="relative py-24 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.08)' }}>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-sage/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-mint/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      </div>
       
-      {/* Background Image with dynamic opacity */}
-      <div
-        className="absolute inset-0 bg-center bg-no-repeat transition-opacity duration-500"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundSize: "1000px",
-          opacity: backgroundOpacity,
-        }}
-      />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12 md:mb-16 relative">
-          <AnimatedTitle>
-            <h2 className="relative inline-block text-3xl md:text-5xl text-mountain-shadow mb-4 md:mb-6 font-bold">
-              <span className="relative">Therapeutic Services</span>
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Enhanced Section Header */}
+        <div 
+          ref={titleRef}
+          className={`text-center mb-20 transform transition-all duration-700
+            ${isTitleVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        >
+          <div className="relative inline-block mb-8">
+            <h2 className="text-5xl lg:text-6xl font-light text-text-primary">
+              <span className="block text-sm uppercase tracking-wider text-primary-sage mb-4 font-medium">
+                Comprehensive Care
+              </span>
+              Therapy Services
             </h2>
-          </AnimatedTitle>
-
-          <AnimatedTitle delay={200}>
-            <div className="flex flex-col items-center space-y-4 mb-6 md:mb-8">
-              <div className="w-24 md:w-36 h-1 bg-mountain-shadow/30" />
-              <div className="space-y-2">
-                <h3 className="text-2xl md:text-3xl text-mountain-shadow/90 font-light">
-                  Your Path Towards Growth & Healing
-                </h3>
-                <p className="text-base md:text-lg text-mountain-shadow/80 font-normal">
-                  Comprehensive therapeutic support tailored to your unique journey
-                </p>
-              </div>
-            </div>
-          </AnimatedTitle>
+            {/* Decorative Line */}
+            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-primary-sage to-accent-mint rounded-full" />
+          </div>
+          
+          <p className="text-xl text-text-secondary max-w-4xl mx-auto leading-relaxed">
+            Evidence-based therapeutic approaches designed to support your unique journey toward 
+            <span className="text-primary-sage font-medium"> healing, growth, and lasting change</span>
+          </p>
         </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
+        
+        {/* Uniform Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <ServiceCard 
-              key={index} 
-              title={service.title} 
-              description={service.description} 
+              key={index}
+              title={service.title}
+              description={service.description}
               Icon={service.Icon}
               delay={index * 100}
             />
@@ -183,6 +150,13 @@ const ServicesSection = () => {
       </div>
     </section>
   );
+};
+
+ServiceCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  Icon: PropTypes.elementType.isRequired,
+  delay: PropTypes.number,
 };
 
 export default ServicesSection;

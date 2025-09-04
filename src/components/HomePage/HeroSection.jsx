@@ -2,58 +2,88 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import PropTypes from 'prop-types';
-import background from "../../assets/mountain.jpg";
+// Using the new beach background from public directory
 
 
 const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the prop
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundPosition: "center",
-        }}
-      />
+    <section className="min-h-screen flex items-center" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* Text Content */}
+          <div className="space-y-8 lg:pr-8">
+            <div className="animate-fade-in">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-text-primary leading-tight">
+                Guiding you toward 
+                <span className="italic font-medium text-primary-sage"> emotional well-being</span>
+                <br />and personal growth
+              </h1>
+            </div>
+            
+            <p className="animate-fade-in animate-delay-200 text-xl text-text-secondary leading-relaxed max-w-xl">
+              Professional, compassionate therapy tailored to your unique journey 
+              toward healing and self-discovery.
+            </p>
+            
+            <div className="animate-fade-in animate-delay-400 flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => navigate("/contact")}
+                className="bg-primary-sage text-black px-8 py-4 rounded-lg hover:bg-primary-forest hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg font-medium"
+              >
+                Schedule Consultation
+              </button>
+              <button
+                onClick={() => navigate("/our-team")}
+                className="border-2 border-primary-forest text-primary-forest px-8 py-4 rounded-lg hover:bg-primary-forest hover:text-white transition-all duration-300 font-medium"
+              >
+                Meet Our Team
+              </button>
+            </div>
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-        <div className="animate-fade-in">
-          <h1 className="text-mountain-shadow text-4xl md:text-5xl lg:text-7xl font-light mb-6 leading-tight drop-shadow-lg">
-            Your Journey to
-            <span className="block text-mountain-forest animate-float drop-shadow-lg">
-              Wellness Begins Here
-            </span>
-          </h1>
-        </div>
-
-        <p className="animate-fade-in animate-delay-200 text-mountain-forest text-xl md:text-2xl font-light mb-12 max-w-2xl drop-shadow-lg">
-          A collective of experienced therapists dedicated to your growth and
-          healing
-        </p>
-
-        <div className="animate-fade-in animate-delay-400">
-          <button
-            onClick={() => navigate("/our-team")}
-            className="group px-8 py-4 bg-mountain-peak text-mountain-terra rounded-full hover:bg-mountain-dusk/90 hover:text-mountain-forest transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 backdrop-blur-sm"
-          >
-            <span>Meet Our Therapists</span>
-            <span className="transform transition-transform group-hover:translate-x-1">
-              →
-            </span>
-          </button>
+            {/* Trust indicators */}
+            <div className="animate-fade-in animate-delay-600 pt-4">
+              <div className="flex flex-wrap items-center gap-4 text-sm text-text-muted">
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">LMFT #124458</span>
+                <span>•</span>
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">10+ Years Experience</span>
+                <span>•</span>
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">DBT, CBT, ACT Certified</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Hero Image */}
+          <div className="relative animate-fade-in animate-delay-400">
+            <div className="relative">
+              <img 
+                src="/beach.jpg" 
+                alt="Peaceful therapeutic landscape" 
+                className="rounded-2xl shadow-2xl object-cover h-96 lg:h-[500px] w-full"
+              />
+              {/* Subtle overlay to soften the image */}
+              <div className="absolute inset-0 bg-white/10 rounded-2xl"></div>
+            </div>
+            
+            {/* Decorative element */}
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-sunset-pink/30 rounded-full blur-xl"></div>
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-sunset-rose/30 rounded-full blur-2xl"></div>
+          </div>
+          
         </div>
       </div>
 
+      {/* Scroll indicator */}
       <button
-        onClick={onScrollToWelcome}  // Use the prop here
-        className="absolute bottom-8 -translate-x-1/2 text-mountain-terra cursor-pointer animate-float"
+        onClick={onScrollToWelcome}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-sage cursor-pointer animate-float hover:text-primary-forest transition-colors duration-300"
         aria-label="Scroll to About section"
       >
         <ChevronDown
-          size={54}
-          className="hover:text-mountain-dusk transition-colors duration-300 stroke-2"
+          size={48}
+          className="stroke-2"
         />
       </button>
     </section>

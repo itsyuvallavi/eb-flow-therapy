@@ -2,121 +2,90 @@ import { useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
-  Mail,
   Brain,
-  Leaf,
   Heart,
   Shield,
-  Globe,
-  Flower,
   Users,
   CalendarCheck,
+  CheckCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
 import SEOHead from "./SEO/SEOHead";
-import { generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
+import treeImage from "../assets/tree.png";
+import floralPattern2 from "../assets/floral-pattern2.png";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
-import background from "../assets/tree.png";
-import floralPattern from "../assets/floral-pattern.jpg";
 
-const ServiceCard = ({ service, isExpanded, onToggle, delay = 0 }) => {
+const ServiceCard = ({ service, delay = 0 }) => {
   const [ref, isVisible] = useIntersectionObserver();
-
+  
   return (
     <div
       ref={ref}
-      className={`transform transition-all duration-700 ease-out
-        ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
-        }`}
+      className={`transform transition-all duration-700 ease-out ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+      }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div
-        className="relative bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl 
-        hover:shadow-2xl transition-all duration-300 min-h-[240px]"
-      >
-        <div className="p-6 md:p-8">
-          {/* Main content that's always visible */}
-          <button onClick={onToggle} className="w-full text-left">
-            <div className="flex justify-between items-center group-hover:text-mountain-terra transition-colors">
-              <div className="flex items-center space-x-4">
-                <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors">
-                  <Flower className="w-6 h-6 text-mountain-terra" />
+      <Card className="bg-[#faf7f2] shadow-2xl hover:shadow-2xl border-none h-full transition-all duration-300 relative overflow-hidden mt-8" style={{ boxShadow: '0 -10px 25px -5px rgba(0, 0, 0, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
+        {/* Centered tree background */}
+        <div 
+          className="absolute inset-0 opacity-15"
+          style={{
+            backgroundImage: `url(${treeImage})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center'
+          }}
+        />
+        
+        <CardContent className="p-8 h-full flex flex-col relative z-10">
+          {/* Title - smaller size */}
+          <h3 className="text-2xl md:text-3xl font-light text-[#5d5043] text-center mb-6">{service.title}</h3>
+          
+          <p className="text-[#6b5d47] leading-relaxed mb-6 flex-grow">
+            {service.description}
+          </p>
+          
+          <div>
+            <h4 className="font-medium text-[#5d5043] mb-3">What's Included:</h4>
+            <div className="space-y-2">
+              {service.details.slice(0, 4).map((detail, i) => (
+                <div key={i} className="flex items-start space-x-2">
+                  <CheckCircle className="w-4 h-4 text-[#a8b5a0] mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-[#6b5d47]">{detail}</span>
                 </div>
-                <h3 className="text-2xl font-light text-mountain-shadow group-hover:text-mountain-terra transition-colors">
-                  {service.title}
-                </h3>
-              </div>
-              <div className="transform transition-transform duration-700">
-                {isExpanded ? (
-                  <ChevronUp className="w-6 h-6 flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-6 h-6 flex-shrink-0" />
-                )}
-              </div>
-            </div>
-
-            <p className="mt-4 text-mountain-shadow/80 leading-relaxed pl-16 pr-8 min-h-[96px]">
-              {service.description}
-            </p>
-          </button>
-
-          {/* Expandable content */}
-          <div
-            className={`transition-all duration-700 ease-in-out
-              ${
-                isExpanded
-                  ? "opacity-100 max-h-[800px] mt-6"
-                  : "opacity-0 max-h-0 mt-0"
-              }`}
-          >
-            <div
-              className={`border-t border-mountain-shadow/10 pt-6 transition-opacity duration-700 ${
-                isExpanded ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <div className="pl-16 pr-8">
-                <h4 className="text-lg font-medium text-mountain-terra mb-4">
-                  What's Included
-                </h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {service.details.map((detail, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center space-x-3 text-mountain-shadow"
-                    >
-                      <Leaf className="w-4 h-4 text-mountain-terra flex-shrink-0" />
-                      <span>{detail}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
+              {service.details.length > 4 && (
+                <p className="text-xs text-[#6b5d47]/70 mt-2">
+                  +{service.details.length - 4} more areas covered
+                </p>
+              )}
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
 
 const Services = () => {
-  const [expandedService, setExpandedService] = useState(null);
-  const [titleRef, isTitleVisible] = useIntersectionObserver();
-  const [contentRef, isContentVisible] = useIntersectionObserver();
-
+  const [ctaRef, isCtaVisible] = useIntersectionObserver();
   const seoData = getSEOData('services');
   const breadcrumbs = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" }
   ];
   const structuredData = generateBreadcrumbSchema(breadcrumbs);
-  const [buttonRef, isButtonVisible] = useIntersectionObserver();
-  const [ctaTitleRef, isCTATitleVisible] = useIntersectionObserver();
+
 
   const services = [
     {
       title: "Individual Therapy",
+      icon: Brain,
       description:
         "Individual sessions are available for those looking to gain deeper self-awareness, foster personal growth, develop coping skills, understand behavioral patterns, and create a private space to focus on their unique needs. Together, we will work toward the life you desire.",
       details: [
@@ -130,8 +99,9 @@ const Services = () => {
     },
     {
       title: "Couples Therapy",
+      icon: Heart,
       description:
-        "Couples therapy provides a space for partners to improve communication, rebuild trust, and deepen emotional connection. Together, we will explore relationship dynamics, set shared goals, and navigate life’s challenges as a team, fostering understanding and growth along the way.",
+        "Couples therapy provides a space for partners to improve communication, rebuild trust, and deepen emotional connection. Together, we will explore relationship dynamics, set shared goals, and navigate life's challenges as a team, fostering understanding and growth along the way.",
       details: [
         "Improving Communication",
         "Conflict Resolution",
@@ -143,8 +113,9 @@ const Services = () => {
     },
     {
       title: "Family Therapy",
+      icon: Users,
       description:
-        "Family therapy offers a space for family members to improve communication, strengthen bonds, and address underlying issues. Together, we will explore each member’s perspective, and develop strategies to navigate challenges and conflicts. Through collaboration, we’ll work toward fostering understanding and growth within the family unit.",
+        "Family therapy offers a space for family members to improve communication, strengthen bonds, and address underlying issues. Together, we will explore each member's perspective, and develop strategies to navigate challenges and conflicts. Through collaboration, we'll work toward fostering understanding and growth within the family unit.",
       details: [
         "Family Communication",
         "Role Pattern Analysis",
@@ -156,6 +127,7 @@ const Services = () => {
     },
     {
       title: "Personality Disorders",
+      icon: Shield,
       description:
         "Therapy for personality disorders provides a supportive space to navigate intense emotions, relationship difficulties, and overwhelming thought patterns. Together, we will explore identity, emotional regulation, and interpersonal dynamics while developing strategies to manage distress and improve daily functioning.",
       details: [
@@ -169,6 +141,7 @@ const Services = () => {
     },
     {
       title: "Anxiety and Related Disorders",
+      icon: Brain,
       description:
         "Therapy providing a supportive space to navigate intrusive thoughts, overwhelming anxiety, and behavioral patterns that impact daily life. Together, we will explore triggers, emotional responses, and coping strategies while developing tools to manage distress and lack of control.",
       details: [
@@ -182,6 +155,7 @@ const Services = () => {
     },
     {
       title: "Trauma-Informed Care",
+      icon: Shield,
       description:
         "A tailored approach for those seeking to heal from past trauma and build resilience. Through evidence-based techniques, we cultivate a safe, compassionate space to process experiences and develop healthy coping strategies that support your path to healing.",
       details: [
@@ -205,161 +179,88 @@ const Services = () => {
         image={seoData.image}
         structuredData={structuredData}
       />
-      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
-      {/* Background Image */}
-      <div
-        className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundSize: "1200px",
-          opacity: 0.1,
-          zIndex: 0,
-        }}
-      />
+      
+      <div className="min-h-screen">
+        {/* Hero Section */}
+        <section className="relative px-6 py-16 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          {/* Background Pattern with fade effect - same as teams section */}
+          <div 
+            className="absolute inset-0 opacity-15 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${floralPattern2})`,
+              backgroundPosition: 'center top',
+              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+              zIndex: 0
+            }}
+          />
+          <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
+            <h1 className="text-4xl md:text-5xl font-light text-text-primary">
+              Our Services
+            </h1>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+              Discover our comprehensive range of therapeutic services, each tailored to support your unique journey to wellness and personal growth.
+            </p>
+          </div>
+        </section>
 
-      {/* Hero Section */}
-      <div
-        className="relative"
-        style={{
-          paddingTop: "var(--page-padding-top)",
-          paddingBottom: "var(--page-padding-bottom)",
-        }}
-      >
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <div
-            ref={titleRef}
-            className={`text-center transform transition-all duration-700
-              ${
-                isTitleVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
-          >
-            <div className="relative inline-block">
-              <h1 className="relative text-5xl font-light text-mountain-shadow">
-                <span className="block text-sm uppercase tracking-wider text-mountain-shadow/80 mb-2">
-                  Welcome to Our Practice
-                </span>
-                Our Services
-              </h1>
-            </div>
-
-            <div className="relative max-w-2xl mx-auto">
-              <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-              <p className="text-lg text-mountain-shadow/80 py-6">
-                Discover our comprehensive range of therapeutic services, each
-                tailored to support your unique journey to wellness and personal
-                growth.
-              </p>
-              <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-b from-mountain-peak/20 to-mountain-forest/40" />
+        {/* Services Grid */}
+        <section className="relative px-6 pt-24 pb-16 z-20" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <ServiceCard 
+                  key={index}
+                  service={service}
+                  delay={index * 100}
+                />
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Services Section */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {services.map((service, index) => (
-            <div key={index} className="grid-item">
-              <ServiceCard
-                service={service}
-                isExpanded={expandedService === index}
-                onToggle={() =>
-                  setExpandedService(expandedService === index ? null : index)
-                }
-                delay={index * 100}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* CTA Section */}
-      <section className="relative py-12">
-        <div className="relative z-10 max-w-4xl mx-auto px-4">
-          <div
-            className="relative bg-mountain-terra/20 backdrop-blur-sm rounded-2xl p-12 shadow-xl
-            transform transition-all duration-700 
-            hover:bg-opacity-80 
-            group"
-          >
-            {/* Background image that appears on hover */}
+        {/* CTA Section */}
+        <section className="px-6 py-16" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          <div className="max-w-4xl mx-auto">
             <div
-              className="absolute inset-0 z-[-1] opacity-0 group-hover:opacity-20 
-                     transition-opacity duration-700 
-                     bg-cover bg-center bg-no-repeat rounded-2xl"
-              style={{
-                backgroundImage: `url(${floralPattern})`,
-              }}
-            />
-
-            <div className="text-center space-y-6">
-              {/* Animated Title */}
-              <div
-                ref={ctaTitleRef}
-                className={`transform transition-all duration-700
-                  ${
-                    isCTATitleVisible
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-10 opacity-0"
-                  }`}
-              >
-                <h2 className="text-4xl font-light text-mountain-shadow mb-2">
-                  Begin Your Journey Today
-                </h2>
-                <div className="w-24 h-1 bg-mountain-terra mx-auto mt-4" />
-              </div>
-
-              {/* Animated Content */}
-              <div
-                ref={contentRef}
-                className={`transform transition-all duration-700 delay-200
-                  ${
-                    isContentVisible
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-10 opacity-0"
-                  }`}
-                style={{ transitionDelay: "200ms" }}
-              >
-                <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
-                  Schedule a complimentary 15-minute consultation to find the
-                  right therapist for you.
+              ref={ctaRef}
+              className={`transform transition-all duration-700 ease-out ${
+                isCtaVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              }`}
+            >
+            <Card className="bg-[#f2e6d6] border-[#e8d5c4] shadow-lg">
+              <CardContent className="p-12 text-center space-y-8">
+                <div>
+                  <h2 className="text-4xl font-light text-[#5d5043] mb-4">
+                    Begin Your Journey Today
+                  </h2>
+                  <div className="w-24 h-1 bg-[#d4a574] mx-auto" />
+                </div>
+                
+                <p className="text-xl text-[#6b5d47] max-w-2xl mx-auto leading-relaxed">
+                  Schedule a complimentary 15-minute consultation to find the right therapist for you.
                 </p>
-              </div>
-
-              {/* Animated Button */}
-              <div
-                ref={buttonRef}
-                className={`pt-6 transform transition-all duration-700 delay-400
-                  ${
-                    isButtonVisible
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-10 opacity-0"
-                  }`}
-                style={{ transitionDelay: "400ms" }}
-              >
-                <Link
-                  to="/contact"
-                  className="group inline-flex items-center px-8 py-4 bg-mountain-terra/70 hover:bg-mountain-terra 
-                    text-white rounded-full transition-all duration-300 transform hover:scale-105 
-                    hover:shadow-lg backdrop-blur-sm"
-                >
-                  <CalendarCheck className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
-                  <span className="font-medium">Schedule Consultation</span>
-                  <span className="ml-2 transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </Link>
-
-                <p className="text-mountain-shadow/70 text-sm mt-6 animate-pulse">
-                  *Currently accepting new clients for online therapy sessions
-                </p>
-              </div>
+                
+                <div className="space-y-4">
+                  <Button 
+                    asChild 
+                    className="bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043] px-8 py-4 text-lg"
+                  >
+                    <Link to="/contact">
+                      <CalendarCheck className="w-5 h-5 mr-2" />
+                      Schedule Consultation
+                    </Link>
+                  </Button>
+                  
+                  <p className="text-[#6b5d47]/70 text-sm">
+                    *Currently accepting new clients for online therapy sessions
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
       </div>
     </>
   );

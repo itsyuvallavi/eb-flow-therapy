@@ -38,7 +38,8 @@
     "featured": false,
     "socialMedia": {
       "instagram": "https://www.instagram.com/meganadamsonmft",
-      "facebook": "https://www.facebook.com/megan.adamson.95269?mibextid=wwXIfr"
+      "facebook": "https://www.facebook.com/megan.adamson.95269?mibextid=wwXIfr",
+      "psychologyToday": "https://www.psychologytoday.com/us/therapists/megan-adamson-malibu-ca/1478719"
     },
     "shortBio": "I'm an Associate Marriage and Family Therapist passionate about supporting individuals, couples, and families in navigating trauma, mental health challenges, and relational dynamics. I embrace my client's authentic selves and bring curiosity and appreciation to the therapeutic experience.",
     "education": [
@@ -55,5 +56,33 @@
       "Previously Incarcerated Populations"
     ],
     "approach": "With a strong foundation in resilience-building and depth-oriented exploration, I take a compassionate and humanistic approach to therapy, fostering growth, self-acceptance, and deeper insight. Drawing from experience working with diverse and complex populations, I provide structured support to help clients develop practical tools for lasting change.\n\nI integrate:\n• Humanistic approach\n• Mentalization\n• Dialectical Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)"
+  },
+  "shira": {
+    "id": "shira",
+    "name": "Shira Feinstein",
+    "title": "Licensed Marriage and Family Therapist",
+    "license": "LMFT #124458",
+    "image": "/Shira.jpg",
+    "languages": ["English"],
+    "featured": false,
+    "socialMedia": {
+      "psychologyToday": "https://www.psychologytoday.com/us/therapists/shira-feinstein-encino-ca/1013385"
+    },
+    "shortBio": "I am dedicated to providing a supportive and non-judgmental space where clients can navigate emotions, resolve conflict, and release trauma. By integrating evidence-based theory with an intuitive, practical approach, I help clients gain tangible tools to get unstuck and move forward in their personal and relational lives.",
+    "education": [
+      "MA, Clinical Psychology, Pepperdine University",
+      "BA, Political Science, Columbia University",
+      "Additional Training: Gottman Method, Emotionally-Focused Therapy (EFT), Dialectical Behavioral Therapy (DBT), Cognitive Processing Therapy (CPT)"
+    ],
+    "background": "I love helping clients uncover what's really going on beneath the surface, build healthier relationship patterns, and find relief from trauma and overwhelming emotions. I'm especially passionate about premarital counseling—supporting couples in creating strong, lasting foundations from the very beginning. As a parent, partner, and someone who has made a significant career change, I bring real-life experience alongside a direct, down-to-earth approach, offering both compassion and practical tools to support meaningful growth and lasting change.",
+    "specializations": [
+      "Individual Therapy",
+      "Couples Therapy",
+      "Trauma Work",
+      "Premarital Counseling/Early Relationship Support",
+      "Parenting Support",
+      "Personality Disorders"
+    ],
+    "approach": "Clients often describe me as warm, encouraging, and goal-oriented, focused on fostering meaningful progress and connection. I tailor each treatment plan to a client's unique goals, using empathy, humor, and a deep knowledge of evidence-based practices.\n\nI integrate:\n• Dialectical Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)\n• Cognitive Behavioral Techniques\n• Cognitive-Processing Therapy (CPT)\n• Emotionally Focused Therapy (EFT)"
   }
 }

@@ -1,174 +1,108 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.png";
-import logoWhite from "../assets/logo_white.png";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import logo from '../assets/logo.png';
+import { Menu, X } from 'lucide-react';
+import { Button } from './ui/button';
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [crossedHero, setCrossedHero] = useState(false);
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+
+  const navItems = [
+    { id: 'home', label: 'Home', path: '/' },
+    { id: 'about', label: 'About', path: '/our-team' },
+    { id: 'services', label: 'Services', path: '/services' },
+    { id: 'media', label: 'Media', path: '/media' },
+    { id: 'contact', label: 'Contact', path: '/contact' },
+  ];
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const mobileProgress = Math.min(scrollPosition / 100, 1);
-      setScrollProgress(mobileProgress);
-
-      if (isHomePage) {
-        const heroSection = document.querySelector('section');
-        if (heroSection) {
-          const heroHeight = heroSection.offsetHeight;
-          setCrossedHero(scrollPosition > heroHeight - 100);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
-
-  useEffect(() => {
-    setIsMenuOpen(false);
+    setIsOpen(false);
   }, [location]);
 
-  const getNavBackground = () => {
-    if (isMenuOpen) {
-      return "bg-mountain-shadow/20 backdrop-blur-md md:bg-transparent md:backdrop-blur-none";
-    }
-    
-    if (scrollProgress > 0 || !isHomePage) {
-      return "md:bg-mountain-peak/10 md:backdrop-blur-sm";
-    }
-    
-    return "";
-  };
-
   return (
-    <nav className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${getNavBackground()}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-28">
-          {/* Logo Container */}
-          <div className="flex-1 flex justify-start">
-            <Link 
-              to="/"
-              className="h-16 md:h-24 relative"
-              style={{
-                opacity: isMobile ? 1 - scrollProgress : 1
-              }}
-            >
-              {/* Base Color Logo */}
-              <img 
-                src={logo}
-                alt="Logo"
-                className={`h-full w-auto transition-opacity duration-500
-                  ${!isHomePage || crossedHero ? 'opacity-100' : 'opacity-0'}`}
-              />
-              
-              {/* Homepage White Logo Overlay */}
-              {isHomePage && (
-                <img 
-                  src={logoWhite}
-                  alt="Logo"
-                  className={`absolute top-0 left-0 h-full w-auto transition-opacity duration-500
-                    ${crossedHero ? 'opacity-0' : 'opacity-100'}`}
-                />
-              )}
-            </Link>
-          </div>
+    <header className="bg-[#faf9f6] border-b border-[#e8d5c4] px-6 py-4 fixed top-0 left-0 right-0 z-50">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <img 
+            src={logo} 
+            alt="EB & Flow Therapy" 
+            className="h-10 w-auto"
+          />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {[
-              { name: "HOME", path: "/" },
-              { name: "OUR TEAM", path: "/our-team" },
-              { name: "SERVICES", path: "/services" },
-              { name: "MEDIA", path: "/media" },
-            ].map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="relative text-sm font-medium transition-colors duration-200 group text-mountain-shadow hover:text-mountain-shadow"
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full bg-mountain-shadow" />
-              </Link>
-            ))}
+        {/* Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          {navItems.map((item) => (
             <Link
-              to="/contact"
-              className="px-6 py-2 text-sm font-medium border-2 rounded-full transition-all duration-300 hover:scale-105 
-                text-mountain-shadow border-mountain-shadow hover:bg-mountain-shadow hover:text-mountain-terra"
+              key={item.id}
+              to={item.path}
+              className={`text-sm font-medium transition-colors hover:text-[#a8b5a0] ${
+                location.pathname === item.path
+                  ? 'text-[#a8b5a0]'
+                  : 'text-[#6b5d47]'
+              }`}
             >
-              CONTACT
+              {item.label}
             </Link>
-          </div>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <div className="flex-1 flex justify-end md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 z-20"
-              aria-label="Toggle menu"
-            >
-              <svg
-                className="w-10 h-10 text-mountain-shadow"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {isMenuOpen ? (
-                  <path d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div
-          className={`md:hidden transition-all duration-300 ease-in-out
-            ${isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"} 
-            overflow-hidden bg-white/90 backdrop-blur-sm rounded-lg mt-2`}
+        {/* CTA Button */}
+        <Button 
+          asChild 
+          className="hidden md:inline-flex bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043] border-0"
         >
-          <div className="py-4 space-y-4">
-            {[
-              { name: "HOME", path: "/" },
-              { name: "OUR TEAM", path: "/our-team" },
-              { name: "SERVICES", path: "/services" },
-              { name: "MEDIA", path: "/media" },
-              { name: "CONTACT", path: "/contact" },
-            ].map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="block px-4 py-2 text-sm font-medium text-mountain-shadow 
-                  hover:bg-mountain-shadow/10 rounded-lg transition-colors text-right"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
+          <Link to="/contact">Book Consultation</Link>
+        </Button>
+
+        {/* Mobile menu button */}
+        <Button 
+          variant="ghost" 
+          className="md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
+        </Button>
+      </div>
+      
+      {/* Mobile Navigation Menu */}
+      <div
+        className={`md:hidden fixed inset-0 bg-[#faf9f6]/95 backdrop-blur-sm z-40 transition-all duration-300 ${
+          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        }`}
+      >
+        <div className="flex flex-col items-center justify-center h-full space-y-8 pt-20">
+          {navItems.map((item) => (
+            <Link
+              key={item.id}
+              to={item.path}
+              onClick={() => setIsOpen(false)}
+              className={`text-2xl font-medium transition-colors ${
+                location.pathname === item.path
+                  ? 'text-[#a8b5a0]'
+                  : 'text-[#6b5d47] hover:text-[#a8b5a0]'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Button 
+            asChild 
+            className="mt-8 bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043] border-0"
+          >
+            <Link to="/contact" onClick={() => setIsOpen(false)}>Book Consultation</Link>
+          </Button>
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
 
-export default Navbar;
+export default NavBar;
+export { NavBar as Header };

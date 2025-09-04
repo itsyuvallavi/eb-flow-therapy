@@ -1,6 +1,6 @@
 // pages/Home.jsx
 import SEOHead from "../SEO/SEOHead";
-import { generateLocalBusinessSchema, generateWebsiteSchema } from "../SEO/StructuredData";
+import { generateLocalBusinessSchema, generateWebsiteSchema } from "../SEO/StructuredData.jsx";
 import { getSEOData } from "../../data/seoData";
 import HeroSection from "./HeroSection";
 import WelcomeSection from "./WelcomeSection";

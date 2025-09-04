@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Newspaper, Mic, ExternalLink, Calendar, Clock, UserCheck } from "lucide-react";
 import SEOHead from "./SEO/SEOHead";
-import { generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import background from "../assets/tree.png";
 import psychchetral from "../assets/PsychCentral.jpg";
 import tiredthriving from "../assets/Tired&Thriving.jpg";
 import shoutoutla from "../assets/ShoutoutLA.jpg";
+import floralPattern2 from "../assets/floral-pattern2.png";
 
 // Media Item Component with Hover Effect
 const MediaCard = ({ item, delay = 0 }) => {
@@ -38,7 +39,7 @@ const MediaCard = ({ item, delay = 0 }) => {
         href={item.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="block relative overflow-hidden rounded-2xl shadow-xl group h-96 bg-mountain-shadow/10"
+        className="block relative overflow-hidden rounded-2xl shadow-xl group h-96 bg-white/90"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -182,51 +183,33 @@ const Media = () => {
         image={seoData.image}
         structuredData={structuredData}
       />
-      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
-      {/* Background Image */}
-      <div
-        className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundSize: "1200px",
-          opacity: 0.1,
-          zIndex: 0,
-        }}
-      />
-
-      <div
-        className="relative"
-        style={{
-          paddingTop: "var(--page-padding-top)",
-          paddingBottom: "var(--page-padding-bottom)",
-        }}
-      >
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          {/* Header */}
-          <div
-            ref={titleRef}
-            className={`text-center mb-16 transform transition-all duration-700
-                ${isTitleVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-          >
-            <div className="relative inline-block">
-              <h1 className="relative text-5xl font-light text-mountain-shadow">
-                <span className="block text-sm uppercase tracking-wider text-mountain-shadow/80 mb-2">
-                  Insights & Resources
-                </span>
-                Media & Publications
-              </h1>
-            </div>
-
-            <div className="relative max-w-2xl mx-auto">
-              <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-              <p className="text-lg text-mountain-shadow/80 py-6">
-                Explore featured articles, interviews, and podcast appearances where we share
-                insights on mental health, therapeutic approaches, and the
-                journey toward healing.
-              </p>
-              <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-            </div>
+      <div className="min-h-screen">
+        {/* Hero Section */}
+        <section className="relative px-6 py-16 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          {/* Background Pattern with fade effect - same as teams section */}
+          <div 
+            className="absolute inset-0 opacity-15 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${floralPattern2})`,
+              backgroundPosition: 'center top',
+              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+              zIndex: 0
+            }}
+          />
+          <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
+            <h1 className="text-4xl md:text-5xl font-light text-text-primary">
+              Media & Publications
+            </h1>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+              Explore featured articles, interviews, and podcast appearances where we share insights on mental health, therapeutic approaches, and the journey toward healing.
+            </p>
           </div>
+        </section>
+
+        {/* Media Grid */}
+        <section className="relative px-6 pt-24 pb-16 z-20" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          <div className="max-w-6xl mx-auto">
 
           {/* Media Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -235,9 +218,13 @@ const Media = () => {
             ))}
           </div>
 
-          {/* Call to Action */}
-          <div className="mt-20 text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="px-6 py-16" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
               <h3 className="text-2xl font-light text-mountain-shadow mb-4">
                 Stay Connected
               </h3>
@@ -248,7 +235,7 @@ const Media = () => {
               </p>
               <a
                 href="/contact"
-                className="inline-flex items-center px-6 py-3 bg-mountain-terra text-white 
+                className="inline-flex items-center px-6 py-3 bg-primary-sage text-white 
                     rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
                     transform hover:scale-105 hover:shadow-lg"
               >
@@ -256,8 +243,7 @@ const Media = () => {
               </a>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
       </div>
     </>
   );
