@@ -1,15 +1,14 @@
 import { Mail, Phone, MapPin, Users, ChevronDown } from "lucide-react";
 import { useState, useRef } from "react";
 import SEOHead from "./SEO/SEOHead";
-import { generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import { sendContactEmails } from "../services/emailService";
-import LazyBackground from "./ui/LazyBackground";
-import background from "../assets/tree.png";
 import Popup from "./Popup";
 import { useEffect } from "react";
 import lmft from "../assets/lmft.png";
+import floralPattern from "../assets/floral-pattern.jpg";
 
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
@@ -34,7 +33,6 @@ const Contact = () => {
   }, [popup]);
 
   const formRef = useRef(null);
-  const [titleRef, isTitleVisible] = useIntersectionObserver();
   const [formRef2, isFormVisible] = useIntersectionObserver();
   const [infoRef, isInfoVisible] = useIntersectionObserver();
 
@@ -120,7 +118,6 @@ const Contact = () => {
         image={seoData.image}
         structuredData={structuredData}
       />
-      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
       {/* Show popup if exists */}
       {popup && (
         <Popup
@@ -129,57 +126,35 @@ const Contact = () => {
           onClose={() => setPopup(null)}
         />
       )}
-
-      {/* Background Image - matching Services page */}
-      <LazyBackground
-        src={background}
-        className="fixed inset-0 bg-center bg-no-repeat"
-        style={{
-          backgroundSize: "1200px",
-          opacity: 0.1,
-          zIndex: 0,
-        }}
-        placeholder="bg-gray-50"
-      />
-
-      <div
-        className="relative"
-        style={{
-          paddingTop: "var(--page-padding-top)",
-          paddingBottom: "var(--page-padding-bottom)",
-        }}
-      >
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          {/* Header */}
-          <div
-            ref={titleRef}
-            className={`text-center mb-16 transform transition-all duration-700
-              ${
-                isTitleVisible
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
-              }`}
-          >
-            <div className="relative inline-block">
-              <h1 className="relative text-5xl font-light text-mountain-shadow">
-                <span className="block text-sm uppercase tracking-wider text-mountain-shadow/80 mb-2">
-                  Welcome to Our Practice
-                </span>
-                Get in Touch
-              </h1>
-            </div>
-
-            <div className="relative max-w-2xl mx-auto">
-              <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-              <p className="text-lg text-mountain-shadow/80 py-6">
-                Ready to take the first step? Reach out for a free consultation
-                and let&apos;s explore how we can support your journey together.
-              </p>
-              <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-            </div>
+      
+      <div className="min-h-screen">
+        {/* Hero Section - matching other pages */}
+        <section className="relative px-6 py-16 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          {/* Background Pattern with fade effect - same as other pages */}
+          <div 
+            className="absolute inset-0 opacity-15 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${floralPattern})`,
+              backgroundPosition: 'center top',
+              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+            }}
+          />
+          <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
+            <h1 className="text-4xl md:text-5xl font-light text-text-primary">
+              Contact Us
+            </h1>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+              Ready to take the first step? Reach out for a free consultation
+              and let&apos;s explore how we can support your journey together.
+            </p>
           </div>
+        </section>
 
-          <div className="grid md:grid-cols-2 gap-12">
+        {/* Contact Content Section */}
+        <section className="relative px-6 pt-24 pb-16" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div
               ref={formRef2}
@@ -190,13 +165,13 @@ const Contact = () => {
                     : "translate-y-10 opacity-0"
                 }`}
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                 <div className="mb-8">
-                  <p className="text-mountain-shadow/90 text-lg mb-2">
+                  <p className="text-text-primary/90 text-lg mb-2">
                     Schedule a free 15-minute consultation to see if we&apos;re the
                     right fit for your journey.
                   </p>
-                  <p className="text-mountain-terra font-medium">
+                  <p className="text-primary-sage font-medium">
                     *Currently accepting new clients
                   </p>
                 </div>
@@ -210,7 +185,7 @@ const Contact = () => {
                   <div className="group">
                     <label
                       htmlFor="therapist"
-                      className="block text-mountain-shadow/90 mb-2 text-sm"
+                      className="block text-text-primary/90 mb-2 text-sm"
                     >
                       Select Recipient
                     </label>
@@ -220,8 +195,8 @@ const Contact = () => {
                         value={selectedTherapist}
                         onChange={(e) => setSelectedTherapist(e.target.value)}
                         required
-                        className="w-full px-4 py-3 rounded-lg bg-white/10 border border-mountain-shadow/20 
-                          text-mountain-shadow placeholder-mountain-shadow/40
+                        className="w-full px-4 py-3 rounded-lg bg-white border border-primary-sage/20 
+                          text-text-primary placeholder-mountain-shadow/40
                           focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
                           transition-all group-hover:border-mountain-shadow/40 appearance-none pr-10"
                       >
@@ -229,13 +204,13 @@ const Contact = () => {
                           <option
                             key={therapist.id}
                             value={therapist.id}
-                            className="bg-white text-mountain-shadow"
+                            className="bg-white text-text-primary"
                           >
                             {therapist.name}
                           </option>
                         ))}
                       </select>
-                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-mountain-shadow/50 pointer-events-none flex items-center">
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-primary/50 pointer-events-none flex items-center">
                         <Users className="w-5 h-5 mr-1" />
                         <ChevronDown className="w-5 h-5" />
                       </div>
@@ -247,7 +222,7 @@ const Contact = () => {
                     <div key={field} className="group">
                       <label
                         htmlFor={field}
-                        className="block text-mountain-shadow/90 mb-2 text-sm capitalize"
+                        className="block text-text-primary/90 mb-2 text-sm capitalize"
                       >
                         {field === "phone" ? "Phone Number" : `Your ${field}`}
                       </label>
@@ -258,8 +233,8 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         placeholder={field === "phone" ? "(123) 456-7890" : ""}
-                        className="w-full px-4 py-3 rounded-lg bg-white/10 border border-mountain-shadow/20 
-                          text-mountain-shadow placeholder-mountain-shadow/40
+                        className="w-full px-4 py-3 rounded-lg bg-white border border-primary-sage/20 
+                          text-text-primary placeholder-mountain-shadow/40
                           focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
                           transition-all group-hover:border-mountain-shadow/40"
                       />
@@ -270,7 +245,7 @@ const Contact = () => {
                   <div className="group">
                     <label
                       htmlFor="message"
-                      className="block text-mountain-shadow/90 mb-2 text-sm"
+                      className="block text-text-primary/90 mb-2 text-sm"
                     >
                       Your Message
                     </label>
@@ -282,7 +257,7 @@ const Contact = () => {
                       placeholder="Tell us a bit about what brings you here..."
                       rows={6}
                       className="w-full px-4 py-3 rounded-lg bg-white/10 border border-mountain-shadow/20 
-                        text-mountain-shadow placeholder-mountain-shadow/40
+                        text-text-primary placeholder-mountain-shadow/40
                         focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
                         transition-all group-hover:border-mountain-shadow/40"
                     />
@@ -292,8 +267,8 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-mountain-terra text-white rounded-lg 
-                      hover:bg-mountain-terra/90 transition-all duration-300 transform hover:scale-[1.02] 
+                    className="w-full py-4 bg-primary-sage text-white rounded-lg 
+                      hover:bg-primary-sage/90 transition-all duration-300 transform hover:scale-[1.02] 
                       hover:shadow-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
@@ -312,7 +287,7 @@ const Contact = () => {
                     : "translate-y-10 opacity-0"
                 }`}
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+              <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                 <div className="space-y-8">
                   {[
                     { Icon: Phone, title: "Phone", text: "(424) 431-1122" },
@@ -330,16 +305,16 @@ const Contact = () => {
                   ].map(({ Icon, title, text, subtext }) => (
                     <div
                       key={title}
-                      className="group flex items-start space-x-4 p-2 rounded-lg hover:bg-white/5 transition-all"
+                      className="group flex items-start space-x-4 p-2 rounded-lg hover:bg-primary-sage/10 transition-all"
                     >
-                      <Icon className="w-6 h-6 text-mountain-terra mt-1 group-hover:scale-110 transition-transform" />
+                      <Icon className="w-6 h-6 text-primary-sage mt-1 group-hover:scale-110 transition-transform" />
                       <div>
-                        <h3 className="text-lg font-medium text-mountain-shadow mb-1">
+                        <h3 className="text-lg font-medium text-text-primary mb-1">
                           {title}
                         </h3>
-                        <p className="text-mountain-shadow/80">{text}</p>
+                        <p className="text-text-primary/80">{text}</p>
                         {subtext && (
-                          <p className="text-mountain-shadow/60 text-sm mt-1">
+                          <p className="text-text-primary/60 text-sm mt-1">
                             {subtext}
                           </p>
                         )}
@@ -350,7 +325,7 @@ const Contact = () => {
               </div>
 
               {/* LMFT Logo */}
-              <div className="bg-white/10 rounded-2xl p-4">
+              <div className="bg-white/90 rounded-2xl p-4">
                 <img
                   src={lmft}
                   alt="Decorative left image"
@@ -358,9 +333,9 @@ const Contact = () => {
                 />
               </div>
             </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
       </div>
     </>
   );

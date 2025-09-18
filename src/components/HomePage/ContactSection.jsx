@@ -97,7 +97,15 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="relative py-10 overflow-hidden bg-gradient-to-b from-mountain-peak/20 to-mountain-shadow/50">
+    <section className="relative py-10 overflow-hidden">
+      {/* Gradient Background - exact CTA pink color transitioning to green in first 7% */}
+      <div 
+        className="absolute inset-0 -z-10"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(244, 194, 161, 0.1) 0%, rgba(244, 194, 161, 0.08) 3%, rgba(200, 180, 150, 0.12) 7%, rgba(143, 166, 142, 0.18) 15%, rgba(143, 166, 142, 0.25) 100%)'
+        }}
+      />
+      
       {/* Show popup if exists */}
       {popup && (
         <Popup
@@ -106,9 +114,6 @@ const ContactSection = () => {
           onClose={() => setPopup(null)}
         />
       )}
-
-      {/* Decorative overlay */}
-      <div className="absolute inset-0" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Header */}
@@ -122,7 +127,7 @@ const ContactSection = () => {
             }`}
         ></div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-12 mt-12">
           {/* Contact Form */}
           <div
             ref={formRef2}
@@ -133,7 +138,7 @@ const ContactSection = () => {
                   : "translate-y-10 opacity-0"
               }`}
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
               <div className="mb-8">
                 <p className="text-mountain-terra font-medium">
                   *Currently accepting new clients
@@ -247,7 +252,7 @@ const ContactSection = () => {
                   : "translate-y-10 opacity-0"
               }`}
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
               <div className="space-y-8">
                 {[
                   { Icon: Phone, title: "Phone", text: "(424) 431-1122" },
@@ -281,7 +286,7 @@ const ContactSection = () => {
             </div>
 
             {/* LMFT Logo */}
-            <div className="bg-white/10 rounded-2xl p-6">
+            <div className="bg-white/90 rounded-2xl p-6">
               <img
                 src={lmft}
                 alt="Decorative left image"

@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { Newspaper, Mic, ExternalLink, Calendar, Clock, UserCheck } from "lucide-react";
+import { Newspaper, Mic, ExternalLink, Calendar, Clock, UserCheck, CalendarCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import SEOHead from "./SEO/SEOHead";
-import { generateBreadcrumbSchema } from "./SEO/StructuredData";
+import floralPattern from "../assets/floral-pattern.jpg";
+import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
 import background from "../assets/tree.png";
 import psychchetral from "../assets/PsychCentral.jpg";
 import tiredthriving from "../assets/Tired&Thriving.jpg";
 import shoutoutla from "../assets/ShoutoutLA.jpg";
+import floralPattern2 from "../assets/floral-pattern2.png";
 
 // Media Item Component with Hover Effect
 const MediaCard = ({ item, delay = 0 }) => {
@@ -38,7 +41,7 @@ const MediaCard = ({ item, delay = 0 }) => {
         href={item.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="block relative overflow-hidden rounded-2xl shadow-xl group h-96 bg-mountain-shadow/10"
+        className="block relative overflow-hidden rounded-2xl shadow-xl group h-96 bg-white/90"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -123,6 +126,7 @@ const MediaCard = ({ item, delay = 0 }) => {
 
 const Media = () => {
   const [titleRef, isTitleVisible] = useIntersectionObserver();
+  const [ctaRef, isCtaVisible] = useIntersectionObserver();
 
   const seoData = getSEOData('media');
   const breadcrumbs = [
@@ -182,51 +186,33 @@ const Media = () => {
         image={seoData.image}
         structuredData={structuredData}
       />
-      <div className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25">
-      {/* Background Image */}
-      <div
-        className="fixed inset-0 bg-center bg-no-repeat transition-opacity duration-500"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundSize: "1200px",
-          opacity: 0.1,
-          zIndex: 0,
-        }}
-      />
-
-      <div
-        className="relative"
-        style={{
-          paddingTop: "var(--page-padding-top)",
-          paddingBottom: "var(--page-padding-bottom)",
-        }}
-      >
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          {/* Header */}
-          <div
-            ref={titleRef}
-            className={`text-center mb-16 transform transition-all duration-700
-                ${isTitleVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-          >
-            <div className="relative inline-block">
-              <h1 className="relative text-5xl font-light text-mountain-shadow">
-                <span className="block text-sm uppercase tracking-wider text-mountain-shadow/80 mb-2">
-                  Insights & Resources
-                </span>
-                Media & Publications
-              </h1>
-            </div>
-
-            <div className="relative max-w-2xl mx-auto">
-              <div className="absolute left-0 right-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-              <p className="text-lg text-mountain-shadow/80 py-6">
-                Explore featured articles, interviews, and podcast appearances where we share
-                insights on mental health, therapeutic approaches, and the
-                journey toward healing.
-              </p>
-              <div className="absolute left-0 right-0 h-[1px] bottom-0 bg-gradient-to-r from-transparent via-mountain-shadow/20 to-transparent" />
-            </div>
+      <div className="min-h-screen">
+        {/* Hero Section */}
+        <section className="relative px-6 py-16 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          {/* Background Pattern with fade effect - same as teams section */}
+          <div 
+            className="absolute inset-0 opacity-15 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${floralPattern2})`,
+              backgroundPosition: 'center top',
+              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+              zIndex: 0
+            }}
+          />
+          <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
+            <h1 className="text-4xl md:text-5xl font-light text-text-primary">
+              Media & Publications
+            </h1>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+              Explore featured articles, interviews, and podcast appearances where we share insights on mental health, therapeutic approaches, and the journey toward healing.
+            </p>
           </div>
+        </section>
+
+        {/* Media Grid */}
+        <section className="relative px-6 pt-24 pb-16 z-20" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          <div className="max-w-6xl mx-auto">
 
           {/* Media Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -235,29 +221,72 @@ const Media = () => {
             ))}
           </div>
 
-          {/* Call to Action */}
-          <div className="mt-20 text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-light text-mountain-shadow mb-4">
-                Stay Connected
-              </h3>
-              <p className="text-mountain-shadow/80 mb-6">
-                For more insights and updates on mental health topics, check
-                back regularly as we continue to share valuable resources and
-                perspectives.
-              </p>
-              <a
-                href="/contact"
-                className="inline-flex items-center px-6 py-3 bg-mountain-terra text-white 
-                    rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
-                    transform hover:scale-105 hover:shadow-lg"
-              >
-                Get in Touch
-              </a>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="relative py-20 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          {/* Decorative overlay */}
+          <div className="absolute inset-0" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-4">
+            <div
+              className="relative bg-white backdrop-blur-sm rounded-2xl p-12 shadow-xl border border-gray-200
+                transform transition-all duration-700
+                group"
+            >
+              {/* Background image that appears when scrolled into view */}
+              <div
+                className={`absolute inset-0 z-[-1] transition-opacity duration-1000
+                           bg-cover bg-center bg-no-repeat rounded-2xl
+                           ${isCtaVisible ? 'opacity-20' : 'opacity-0'}`}
+                style={{
+                    backgroundImage: `url(${floralPattern})`,
+                }}
+              />
+
+              <div className="text-center space-y-6">
+                {/* Animated Title */}
+                <div
+                  ref={ctaRef}
+                  className={`transform transition-all duration-700
+                    ${isCtaVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                >
+                  <h2 className="text-4xl font-light text-mountain-shadow mb-2">
+                    Contact Us To Get Started!
+                  </h2>
+                  <div className="w-24 h-1 bg-sunset-coral mx-auto mt-4" />
+                </div>
+
+                {/* Content */}
+                <div>
+                  <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
+                    Ready to take the first step? Schedule a complimentary 15-minute consultation to find the right
+                    therapist for you.
+                  </p>
+                </div>
+
+                {/* Button */}
+                <div className="pt-6">
+                  <Link
+                    to="/contact"
+                    className="group inline-flex items-center px-8 py-4 bg-sunset-coral hover:bg-sunset-coral/80
+                      text-mountain-shadow rounded-full transition-all duration-300 transform hover:scale-105
+                      hover:shadow-lg backdrop-blur-sm mountain-terra "
+                  >
+                    <CalendarCheck className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
+                    <span className="font-medium">Schedule Consultation</span>
+                    <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+
+                  <p className="text-mountain-shadow/70 text-sm mt-6 animate-pulse">
+                    *Currently accepting new clients for online therapy sessions
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
       </div>
     </>
   );

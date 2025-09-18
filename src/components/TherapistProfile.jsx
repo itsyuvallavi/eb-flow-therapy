@@ -1,157 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import {
-  Mail,
   CalendarCheck,
   GraduationCap,
-  BookOpen,
-  Brain,
   Globe,
-  MessageSquare,
-  UserCheck,
-  Flower,
   Star,
-  CheckCircle,
-  Award,
   Instagram,
   Facebook,
+  ArrowLeft
 } from "lucide-react";
 import SEOHead from "./SEO/SEOHead";
-import { generatePersonSchema, generateBreadcrumbSchema } from "./SEO/StructuredData";
+import { generatePersonSchema, generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
 import therapistsData from "../data/therapists.json";
-import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
-import background from "../assets/tree.png";
 import portrait from "../assets/portrait.png";
 import Megan from "../assets/Megan.png";
+import Shira from "../assets/Shira.jpg";
 import iocdfLogo from "../assets/IOCDF-Logo.png";
+import pstLogo from "../assets/PST.png";
 
 // Image mapping object to connect JSON image paths to actual imported images
 const imageMap = {
   "/portrait.png": portrait,
   "/Megan.png": Megan,
+  "/Shira.jpg": Shira,
   "/IOCDF-Logo.png": iocdfLogo,
 };
 
-const AnimatedSection = ({ children, delay = 0 }) => {
-  const [ref, isVisible] = useIntersectionObserver();
-  return (
-    <div
-      ref={ref}
-      className={`transform transition-all duration-700
-        ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        }`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-};
-
-const Specialization = ({ title }) => (
-  <div
-    className="group bg-mountain-forest/80 rounded-2xl shadow-xl 
-    hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
-  >
-    <div className="flex items-center space-x-3 p-6">
-      <div className="p-2 rounded-lg transition-colors">
-        <Star className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
-      </div>
-      <h3 className="text-xl text-white/90 group-hover:text-mountain-terra transition-colors">
-        {title}
-      </h3>
-    </div>
-  </div>
-);
-
-const EducationItem = ({ education }) => {
-  if (typeof education === 'string') {
-    return (
-      <div className="flex items-start space-x-3 group">
-        <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors mt-1">
-          <GraduationCap className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
-        </div>
-        <span className="text-mountain-shadow group-hover:text-mountain-terra transition-colors">
-          {education}
-        </span>
-      </div>
-    );
-  } else {
-    return (
-      <div className="flex items-start space-x-3 group">
-        <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors mt-1">
-          <GraduationCap className="w-5 h-5 text-mountain-terra group-hover:scale-110 transition-transform" />
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-mountain-shadow group-hover:text-mountain-terra transition-colors">
-            {education.text}
-          </span>
-          {education.logo && (
-            <img 
-              src={imageMap[education.logo] || education.logo}
-              alt="Organization Logo" 
-              className="h-5 object-contain" 
-            />
-          )}
-        </div>
-      </div>
-    );
-  }
-};
-
-const TabButton = ({ id, label, Icon, isActive, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`group flex-shrink-0 pb-2 sm:pb-4 text-base sm:text-lg font-medium 
-      transition-all relative whitespace-nowrap
-      ${
-        isActive
-          ? "text-mountain-terra"
-          : "text-mountain-shadow/80 hover:text-mountain-terra"
-      }`}
-  >
-    <div className="flex items-center space-x-2">
-      <Icon
-        className={`w-5 h-5 transition-transform group-hover:scale-110
-        ${isActive ? "text-mountain-terra" : "text-mountain-shadow/60"}`}
-      />
-      <span>{label}</span>
-    </div>
-    {isActive && (
-      <div className="absolute bottom-0 left-0 w-full h-0.5 bg-mountain-terra" />
-    )}
-  </button>
-);
-
 const TherapistProfile = () => {
   const { id } = useParams();
-  const [activeTab, setActiveTab] = useState("background");
   const therapist = therapistsData[id];
-  const [backgroundOpacity, setBackgroundOpacity] = useState(0.1);
-
-  const [sectionRef, isSectionVisible] = useIntersectionObserver({
-    threshold: 0.1,
-  });
-
-  useEffect(() => {
-    let timeoutId;
-    if (isSectionVisible) {
-      timeoutId = setTimeout(() => {
-        setBackgroundOpacity(0.15);
-      }, 500);
-    } else {
-      timeoutId = setTimeout(() => {
-        setBackgroundOpacity(0.1);
-      }, 500);
-    }
-
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [isSectionVisible]);
 
   // Add Psychology Today verification script for Elinor specifically
   useEffect(() => {
@@ -206,11 +86,18 @@ const TherapistProfile = () => {
     generateBreadcrumbSchema(breadcrumbs)
   ];
 
-  const tabs = [
-    { id: "background", label: "Background", Icon: BookOpen },
-    { id: "specializations", label: "Specializations", Icon: Star },
-    { id: "approach", label: "Approach", Icon: Brain },
-  ];
+  if (!therapist) {
+    return (
+      <div className="bg-[#faf9f6] min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <h1 className="text-2xl font-light text-[#5d5043]">Therapist Not Found</h1>
+          <Button asChild>
+            <Link to="/our-team">Back to Our Team</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -223,259 +110,271 @@ const TherapistProfile = () => {
         type={seoData.type}
         structuredData={structuredData}
       />
-      <div
-        ref={sectionRef}
-        className="relative min-h-screen bg-gradient-to-b from-mountain-peak/15 to-mountain-forest/25"
-      >
-      <div
-        className="fixed inset-0 bg-center bg-no-repeat bg-cover opacity-10"
-        style={{
-          backgroundImage: `url(${background})`,
-        }}
-      />
+      
+      <div className="bg-[#faf9f6] min-h-screen">
+        {/* Hero Section */}
+        <section className="px-6 py-16 bg-[#f7f5f1]">
+          <div className="max-w-7xl mx-auto">
+            {/* Back Button */}
+            <div className="mb-8">
+              <Button asChild variant="outline" className="border-[#a8b5a0] text-[#6b5d47] hover:bg-[#f2f0eb]">
+                <Link to="/our-team">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Team
+                </Link>
+              </Button>
+            </div>
 
-      <div
-        className="relative"
-        style={{
-          paddingTop: "var(--page-padding-top)",
-          paddingBottom: "var(--page-padding-bottom)",
-        }}
-      >
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          <AnimatedSection>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[300px] md:h-[600px] rounded-2xl overflow-hidden shadow-xl group">
-                <img
-                  src={imageSource}
-                  alt={therapist.name}
-                  className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                  style={id === "daniah" ? { objectPosition: "center 25%" } : {}}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/20 to-transparent" />
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* Photo */}
+              <div className="flex justify-center">
+                <div className="w-96 h-96 md:w-[500px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl">
+                  <img
+                    src={imageSource}
+                    alt={therapist.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
 
-              <div className="space-y-8">
-                <div className="relative">
-                  <h1 className="text-4xl md:text-5xl font-light text-mountain-shadow mb-3">
+              {/* Basic Info */}
+              <div className="space-y-6">
+                <div>
+                  <h1 className="text-4xl font-light text-[#5d5043] mb-2">
                     {therapist.name}
                   </h1>
-                  <div className="flex items-center space-x-2 text-mountain-terra">
-                    <UserCheck className="w-5 h-5" />
-                    <p className="text-xl md:text-2xl">{therapist.title}</p>
-                  </div>
-                  <div className="flex items-center space-x-2 text-mountain-shadow mt-2">
-                    <BookOpen className="w-5 h-5" />
-                    <p>{therapist.license}</p>
-                  </div>
-                  <div className="flex items-center space-x-2 text-mountain-shadow mt-4">
-                    <Globe className="w-5 h-5" />
-                    <span>{therapist.languages.join(" • ")}</span>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-3">
-                    <MessageSquare className="w-5 h-5 text-mountain-terra mt-1.5" />
-                    <p className="text-base md:text-lg text-mountain-shadow leading-relaxed">
-                      {therapist.shortBio}
-                    </p>
-                  </div>
-
-                  {/* Action Buttons - horizontal with responsive sizing */}
-                  <div className="flex flex-wrap items-center gap-3 mt-8">
-                    {/* Schedule Button */}
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center px-3 sm:px-4 py-2 sm:py-3
-                        bg-mountain-terra text-white 
-                        rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
-                        transform hover:scale-105 hover:shadow-lg text-sm sm:text-base"
-                    >
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 flex-shrink-0" />
-                      <span className="whitespace-nowrap">
-                        Schedule Consultation
-                      </span>
-                    </Link>
-
-                    {/* Social Media Links */}
-                    {therapist.socialMedia && (
-                      <div className="flex items-center gap-2">
-                        {therapist.socialMedia.instagram && (
-                          <a
-                            href={therapist.socialMedia.instagram}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 sm:p-2.5 rounded-full bg-white/10 border border-mountain-shadow/20
-                              text-mountain-shadow hover:bg-mountain-terra hover:text-white hover:border-mountain-terra
-                              transition-all duration-300 transform hover:scale-110"
-                            aria-label="Instagram"
-                          >
-                            <Instagram className="w-5 h-5 sm:w-5 sm:h-5" />
-                          </a>
-                        )}
-                        {therapist.socialMedia.facebook && (
-                          <a
-                            href={therapist.socialMedia.facebook}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 sm:p-2.5 rounded-full bg-white/10 border border-mountain-shadow/20
-                              text-mountain-shadow hover:bg-mountain-terra hover:text-white hover:border-mountain-terra
-                              transition-all duration-300 transform hover:scale-110"
-                            aria-label="Facebook"
-                          >
-                            <Facebook className="w-5 h-5 sm:w-5 sm:h-5" />
-                          </a>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Psychology Today Verification Badge */}
-                    {id === "elinor" && (
-                      <a
-                        href="https://www.psychologytoday.com/profile/1015567"
-                        className="sx-verified-seal flex-shrink-0 hover:opacity-90 transition-opacity"
-                        rel="noopener noreferrer"
-                      >
-                        <div className="bg-white rounded-full px-2 sm:px-4 py-1 sm:py-1.5 flex items-center border border-gray-200 shadow-sm">
-                          <div className="flex-shrink-0 mr-1 sm:mr-1.5">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <circle cx="12" cy="12" r="11" stroke="#D8D8D8" strokeWidth="1" fill="white"/>
-                              <path d="M19 8L10 17L5 12" stroke="#FF5252" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-[8px] sm:text-[10px] text-gray-500 uppercase leading-tight tracking-wide">VERIFIED BY</span>
-                            <span className="text-xs sm:text-sm font-bold text-blue-600 leading-tight" style={{fontFamily: 'sans-serif'}}>Psychology Today</span>
-                          </div>
-                        </div>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </div>
-
-      <div className="relative max-w-6xl mx-auto px-4 py-16">
-        <AnimatedSection delay={200}>
-          <div
-            className="flex flex-nowrap overflow-x-auto sm:flex-wrap border-b border-mountain-shadow/10 mb-12 
-            gap-2 sm:gap-8 pb-2 sm:pb-0 px-4 sm:px-0"
-          >
-            {tabs.map(({ id, label, Icon }) => (
-              <TabButton
-                key={id}
-                id={id}
-                label={label}
-                Icon={Icon}
-                isActive={activeTab === id}
-                onClick={() => setActiveTab(id)}
-              />
-            ))}
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={400}>
-          <div className="space-y-12">
-            {activeTab === "background" && (
-              <div className="grid md:grid-cols-2 gap-12">
-                <div>
-                  <div className="flex items-center space-x-3 mb-6">
-                    <BookOpen className="w-6 h-6 text-mountain-terra" />
-                    <h3 className="text-xl md:text-2xl font-light text-mountain-shadow">
-                      Background
-                    </h3>
-                  </div>
-                  <p className="text-mountain-shadow leading-relaxed whitespace-pre-line">
-                    {therapist.background}
-                  </p>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-3 mb-6">
-                    <GraduationCap className="w-6 h-6 text-mountain-terra" />
-                    <h3 className="text-2xl font-light text-mountain-shadow">
-                      Education
-                    </h3>
-                  </div>
-                  <div className="space-y-4">
-                    {therapist.education.map((edu, index) => (
-                      <EducationItem key={index} education={edu} />
-                    ))}
-                  </div>
-
-                  {/* IOCDF Logo - Only for Elinor */}
-                  {id === "elinor" && (
-                    <div className="mt-8 flex ml-12">
-                      <a
-                        href="https://iocdf.org/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="International OCD Foundation"
-                      >
-                        <img
-                          src={iocdfLogo}
-                          alt="International OCD Foundation (IOCDF) Logo"
-                          className="max-w-[160px] object-contain"
-                        />
-                      </a>
+                  <p className="text-xl text-[#6b5d47] mb-2">{therapist.title}</p>
+                  {therapist.license && (
+                    <div className="bg-[#e8d5c4] text-[#6b5d47] px-3 py-1 rounded-full text-sm inline-block mb-4">
+                      {therapist.license}
                     </div>
                   )}
                 </div>
-              </div>
-            )}
 
-            {activeTab === "specializations" && (
-              <div className="grid md:grid-cols-3 gap-6">
-                {therapist.specializations && therapist.specializations.map((specialty, index) => (
-                  <Specialization key={index} title={specialty} />
-                ))}
-              </div>
-            )}
+                <p className="text-[#6b5d47] leading-relaxed">{therapist.shortBio}</p>
 
-            {activeTab === "approach" && (
-              <div className="max-w-3xl">
-                <div className="flex items-center space-x-3 mb-6">
-                  <Brain className="w-6 h-6 text-mountain-terra" />
-                  <h3 className="text-2xl font-light text-mountain-shadow">
-                    My Approach
-                  </h3>
+                {/* Languages */}
+                {therapist.languages && (
+                  <div className="flex items-center space-x-2 text-[#6b5d47]">
+                    <Globe className="w-5 h-5 text-[#a8b5a0]" />
+                    <span>{therapist.languages.join(" • ")}</span>
+                  </div>
+                )}
+
+                {/* Specialties */}
+                <div>
+                  <h3 className="font-medium text-[#5d5043] mb-3">Specializations</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {therapist.specializations && therapist.specializations.map((specialty) => (
+                      <span 
+                        key={specialty}
+                        className="bg-[#e8d5c4] text-[#6b5d47] px-3 py-1 rounded-full text-sm"
+                      >
+                        {specialty}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <p className="text-lg text-mountain-shadow leading-relaxed whitespace-pre-line">
-                  {therapist.approach}
-                </p>
-              </div>
-            )}
-          </div>
-        </AnimatedSection>
-      </div>
 
-      {/* CTA Section */}
-      <div className="relative py-16">
-        <AnimatedSection delay={600}>
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 shadow-xl">
-              <h2 className="text-3xl font-light text-mountain-shadow mb-6">
-                Ready to Start Your Journey?
-              </h2>
-              <p className="text-lg text-mountain-shadow mb-8">
-                Schedule a complimentary 15-minute consultation to see if we're
-                a good fit.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center px-6 py-3 bg-mountain-terra text-white 
-                  rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
-                  transform hover:scale-105 hover:shadow-lg justify-center w-full sm:w-auto max-w-xs mx-auto"
-              >
-                <CalendarCheck className="w-5 h-5 mr-2" />
-                Schedule Consultation
-              </Link>
+                <div className="flex gap-4">
+                  <Button 
+                    asChild 
+                    className="bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043]"
+                  >
+                    <Link to="/contact">
+                      <CalendarCheck className="w-4 h-4 mr-2" />
+                      Schedule Consultation
+                    </Link>
+                  </Button>
+                  
+                  {/* Social Media Links */}
+                  {therapist.socialMedia && (
+                    <div className="flex items-center gap-3">
+                      {therapist.socialMedia.instagram && (
+                        <a
+                          href={therapist.socialMedia.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#6b5d47] hover:text-[#a8b5a0] transition-colors"
+                          aria-label="Instagram"
+                        >
+                          <Instagram className="w-5 h-5" />
+                        </a>
+                      )}
+                      {therapist.socialMedia.facebook && (
+                        <a
+                          href={therapist.socialMedia.facebook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#6b5d47] hover:text-[#a8b5a0] transition-colors"
+                          aria-label="Facebook"
+                        >
+                          <Facebook className="w-5 h-5" />
+                        </a>
+                      )}
+                      {therapist.socialMedia.psychologyToday && (
+                        <a
+                          href={therapist.socialMedia.psychologyToday}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:opacity-80 transition-opacity"
+                          aria-label="Psychology Today"
+                        >
+                          <img
+                            src={pstLogo}
+                            alt="Psychology Today"
+                            className="h-5 w-auto object-contain"
+                          />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                
+              </div>
             </div>
           </div>
-        </AnimatedSection>
-      </div>
+        </section>
+
+        {/* Detailed Information */}
+        <section className="px-6 py-16">
+          <div className="max-w-6xl mx-auto">
+            
+            {/* Main Content - Centered */}
+            <div className="space-y-8 mb-12">
+              
+              {/* Therapeutic Approach - Full Width */}
+              {therapist.approach && (
+                <Card className="bg-[#fefdfb] shadow-lg border-none">
+                  <CardContent className="p-8 space-y-6">
+                    <h2 className="text-2xl font-light text-[#5d5043]">My Approach</h2>
+                    <div className="text-[#6b5d47] leading-relaxed">
+                      {/* Split the approach text to handle the bullet points separately */}
+                      {(() => {
+                        const text = therapist.approach;
+                        const parts = text.split('I integrate:');
+                        
+                        return (
+                          <>
+                            {/* Main approach text */}
+                            <p className="whitespace-pre-line mb-6">{parts[0]}</p>
+                            
+                            {/* If there's a bullet point section */}
+                            {parts[1] && (
+                              <div>
+                                <h3 className="font-medium text-[#5d5043] mb-4">I integrate:</h3>
+                                <div className="grid md:grid-cols-2 gap-3">
+                                  {parts[1].split('•').filter(item => item.trim()).map((item, index) => (
+                                    <div key={index} className="flex items-start space-x-2">
+                                      <div className="w-2 h-2 bg-[#d4a574] rounded-full mt-2 flex-shrink-0"></div>
+                                      <span className="text-sm font-medium text-[#6b5d47]">{item.trim()}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        );
+                      })()}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Background & Education - Side by Side */}
+              <div className="grid md:grid-cols-2 gap-8">
+                
+                {/* Background */}
+                {therapist.background && (
+                  <Card className="bg-[#fefdfb] shadow-lg border-none">
+                    <CardContent className="p-8 space-y-6">
+                      <h2 className="text-2xl font-light text-[#5d5043]">Background</h2>
+                      <p className="text-[#6b5d47] leading-relaxed whitespace-pre-line">{therapist.background}</p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Education */}
+                {therapist.education && (
+                  <Card className="bg-[#fefdfb] shadow-lg border-none">
+                    <CardContent className="p-8 space-y-6">
+                      <h2 className="text-2xl font-light text-[#5d5043]">Education & Training</h2>
+                      <ul className="space-y-3">
+                        {therapist.education.map((item, index) => (
+                          <li key={index} className="text-[#6b5d47] flex items-start">
+                            <span className="text-[#a8b5a0] mr-3">•</span>
+                            <div className="flex-1">
+                              {typeof item === 'string' ? (
+                                // Check if this is the IOCDF membership line for Elinor
+                                item.includes("Member of the International OCD Foundation") && id === "elinor" ? (
+                                  <div className="flex items-center space-x-3">
+                                    <span>{item}</span>
+                                    <a
+                                      href="https://iocdf.org/"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      aria-label="International OCD Foundation"
+                                      className="flex-shrink-0"
+                                    >
+                                      <img
+                                        src={iocdfLogo}
+                                        alt="International OCD Foundation (IOCDF) Logo"
+                                        className="h-8 object-contain hover:opacity-80 transition-opacity"
+                                      />
+                                    </a>
+                                  </div>
+                                ) : (
+                                  item
+                                )
+                              ) : (
+                                <div className="flex items-center space-x-2">
+                                  <span>{item.text}</span>
+                                  {item.logo && (
+                                    <img 
+                                      src={imageMap[item.logo] || item.logo}
+                                      alt="Organization Logo" 
+                                      className="h-5 object-contain" 
+                                    />
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                )}
+                
+              </div>
+
+            </div>
+
+            {/* Centered CTA */}
+            <div className="flex justify-center">
+              <div className="max-w-lg">
+                <Card className="bg-[#f2e6d6] border-[#e8d5c4] shadow-lg">
+                  <CardContent className="p-8 space-y-6 text-center">
+                    <h3 className="text-2xl font-light text-[#5d5043]">Ready to Get Started?</h3>
+                    <p className="text-[#6b5d47] leading-relaxed">
+                      Schedule your initial consultation to see if we're a good fit. Contact us to discuss your needs and goals.
+                    </p>
+                    <Button 
+                      asChild 
+                      className="bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043] px-8 py-3"
+                    >
+                      <Link to="/contact">
+                        <CalendarCheck className="w-5 h-5 mr-2" />
+                        Book Consultation
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

@@ -2,61 +2,136 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import PropTypes from 'prop-types';
-import background from "../../assets/mountain.jpg";
+// Using the new beach background from public directory
 
 
 const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the prop
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center">
+    <>
+      <style>
+        {`
+          @keyframes gradient {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-10px);
+            }
+          }
+        `}
+      </style>
+    <section className="min-h-screen flex items-center relative overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+      {/* Background image with sophisticated gradient fade like Welcome section */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute bg-no-repeat bg-center"
         style={{
-          backgroundImage: `url(${background})`,
-          backgroundPosition: "center",
+          backgroundImage: 'url(/beach.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)'
         }}
       />
+      {/* Overlay for readability with same gradient */}
+      <div
+        className="absolute bg-white/70"
+        style={{
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)'
+        }}
+      ></div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div className="flex items-center justify-center min-h-[80vh]">
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-        <div className="animate-fade-in">
-          <h1 className="text-mountain-shadow text-4xl md:text-5xl lg:text-7xl font-light mb-6 leading-tight drop-shadow-lg">
-            Your Journey to
-            <span className="block text-mountain-forest animate-float drop-shadow-lg">
-              Wellness Begins Here
-            </span>
-          </h1>
-        </div>
+          {/* Text Content - Centered */}
+          <div className="space-y-8 text-center max-w-6xl">
+            <div className="animate-fade-in">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-text-primary leading-tight">
+                <span
+                  className="text-6xl md:text-7xl lg:text-8xl block mb-8 font-black tracking-wider text-primary-sage"
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'float 4s ease-in-out infinite'
+                  }}
+                >
+                  EB & Flow Therapy
+                </span>
+                <span className="italic font-medium text-text-primary">Flexible Therapy</span>
+                <br />That Fits Your Flow
+              </h1>
+            </div>
+            
+            <p className="animate-fade-in animate-delay-200 text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto">
+              Personalized therapy that adapts to your unique story. We honor your journey
+              while providing evidence-based tools for healing and growth.
+            </p>
+            
+            <div className="animate-fade-in animate-delay-400 flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => navigate("/contact")}
+                className="bg-primary-sage text-black px-8 py-4 rounded-lg hover:bg-primary-forest hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg font-medium"
+              >
+                Contact Us To Get Started!
+              </button>
+              <button
+                onClick={() => navigate("/our-team")}
+                className="border-2 border-primary-forest text-primary-forest px-8 py-4 rounded-lg hover:bg-primary-forest hover:text-white transition-all duration-300 font-medium"
+              >
+                Meet Our Team
+              </button>
+            </div>
 
-        <p className="animate-fade-in animate-delay-200 text-mountain-forest text-xl md:text-2xl font-light mb-12 max-w-2xl drop-shadow-lg">
-          A collective of experienced therapists dedicated to your growth and
-          healing
-        </p>
+            {/* Trust indicators */}
+            <div className="animate-fade-in animate-delay-600 pt-4">
+              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-text-muted">
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">Licensed Therapists</span>
+                <span>•</span>
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">Evidence-Based Practice</span>
+                <span>•</span>
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">Personalized Approach</span>
+              </div>
+            </div>
+          </div>
 
-        <div className="animate-fade-in animate-delay-400">
-          <button
-            onClick={() => navigate("/our-team")}
-            className="group px-8 py-4 bg-mountain-peak text-mountain-terra rounded-full hover:bg-mountain-dusk/90 hover:text-mountain-forest transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 backdrop-blur-sm"
-          >
-            <span>Meet Our Therapists</span>
-            <span className="transform transition-transform group-hover:translate-x-1">
-              →
-            </span>
-          </button>
         </div>
       </div>
 
-      <button
-        onClick={onScrollToWelcome}  // Use the prop here
-        className="absolute bottom-8 -translate-x-1/2 text-mountain-terra cursor-pointer animate-float"
-        aria-label="Scroll to About section"
-      >
-        <ChevronDown
-          size={54}
-          className="hover:text-mountain-dusk transition-colors duration-300 stroke-2"
-        />
-      </button>
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <button
+          onClick={onScrollToWelcome}
+          className="text-primary-sage cursor-pointer animate-float hover:text-primary-forest transition-colors duration-300"
+          aria-label="Scroll to About section"
+        >
+          <ChevronDown
+            size={48}
+            className="stroke-2"
+          />
+        </button>
+      </div>
     </section>
+    </>
   );
 };
 
