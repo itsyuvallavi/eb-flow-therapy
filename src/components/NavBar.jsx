@@ -10,7 +10,8 @@ const NavBar = () => {
 
   const navItems = [
     { id: 'home', label: 'Home', path: '/' },
-    { id: 'about', label: 'About', path: '/our-team' },
+    { id: 'about', label: 'About', path: '/about' },
+    { id: 'team', label: 'Meet the Therapists', path: '/our-team' },
     { id: 'services', label: 'Services', path: '/services' },
     { id: 'media', label: 'Media', path: '/media' },
     { id: 'contact', label: 'Contact', path: '/contact' },

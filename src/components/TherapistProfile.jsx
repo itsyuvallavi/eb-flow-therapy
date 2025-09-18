@@ -19,6 +19,7 @@ import portrait from "../assets/portrait.png";
 import Megan from "../assets/Megan.png";
 import Shira from "../assets/Shira.jpg";
 import iocdfLogo from "../assets/IOCDF-Logo.png";
+import pstLogo from "../assets/PST.png";
 
 // Image mapping object to connect JSON image paths to actual imported images
 const imageMap = {
@@ -188,58 +189,49 @@ const TherapistProfile = () => {
                   
                   {/* Social Media Links */}
                   {therapist.socialMedia && (
-                    <div className="flex gap-2">
+                    <div className="flex items-center gap-3">
                       {therapist.socialMedia.instagram && (
-                        <Button asChild variant="outline" size="icon" className="border-[#a8b5a0] text-[#6b5d47] hover:bg-[#f2f0eb]">
-                          <a
-                            href={therapist.socialMedia.instagram}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Instagram"
-                          >
-                            <Instagram className="w-4 h-4" />
-                          </a>
-                        </Button>
+                        <a
+                          href={therapist.socialMedia.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#6b5d47] hover:text-[#a8b5a0] transition-colors"
+                          aria-label="Instagram"
+                        >
+                          <Instagram className="w-5 h-5" />
+                        </a>
                       )}
                       {therapist.socialMedia.facebook && (
-                        <Button asChild variant="outline" size="icon" className="border-[#a8b5a0] text-[#6b5d47] hover:bg-[#f2f0eb]">
-                          <a
-                            href={therapist.socialMedia.facebook}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Facebook"
-                          >
-                            <Facebook className="w-4 h-4" />
-                          </a>
-                        </Button>
+                        <a
+                          href={therapist.socialMedia.facebook}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#6b5d47] hover:text-[#a8b5a0] transition-colors"
+                          aria-label="Facebook"
+                        >
+                          <Facebook className="w-5 h-5" />
+                        </a>
+                      )}
+                      {therapist.socialMedia.psychologyToday && (
+                        <a
+                          href={therapist.socialMedia.psychologyToday}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:opacity-80 transition-opacity"
+                          aria-label="Psychology Today"
+                        >
+                          <img
+                            src={pstLogo}
+                            alt="Psychology Today"
+                            className="h-5 w-auto object-contain"
+                          />
+                        </a>
                       )}
                     </div>
                   )}
                 </div>
 
-                {/* Psychology Today Badge */}
-                {id === "elinor" && (
-                  <div className="pt-4">
-                    <a
-                      href="https://www.psychologytoday.com/profile/1015567"
-                      className="sx-verified-seal inline-block"
-                      rel="noopener noreferrer"
-                    >
-                      <div className="bg-white rounded-full px-4 py-2 flex items-center border border-gray-200 shadow-sm">
-                        <div className="flex-shrink-0 mr-2">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="11" stroke="#D8D8D8" strokeWidth="1" fill="white"/>
-                            <path d="M19 8L10 17L5 12" stroke="#FF5252" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-[10px] text-gray-500 uppercase leading-tight tracking-wide">VERIFIED BY</span>
-                          <span className="text-sm font-bold text-blue-600 leading-tight">Psychology Today</span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                )}
+                
               </div>
             </div>
           </div>

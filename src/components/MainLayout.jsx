@@ -5,6 +5,7 @@ import Footer from "./Footer.jsx";
 import Contact from "./Contact.jsx";
 import Services from './Services.jsx';
 import Home from "./HomePage/_HomeLayout.jsx";
+import About from "./About.jsx";
 import OurTeam from "./OurTeam.jsx";
 import PageLayout from "./modal/PageLayout.jsx";
 import TherapistProfile from './TherapistProfile.jsx';
@@ -27,6 +28,7 @@ const MainLayout = () => {
         <PageLayout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/our-team" element={<OurTeam />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />

@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Newspaper, Mic, ExternalLink, Calendar, Clock, UserCheck } from "lucide-react";
+import { Newspaper, Mic, ExternalLink, Calendar, Clock, UserCheck, CalendarCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import SEOHead from "./SEO/SEOHead";
+import floralPattern from "../assets/floral-pattern.jpg";
 import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
 import { useIntersectionObserver } from "../components/modal/useIntersectionObserver";
@@ -124,6 +126,7 @@ const MediaCard = ({ item, delay = 0 }) => {
 
 const Media = () => {
   const [titleRef, isTitleVisible] = useIntersectionObserver();
+  const [ctaRef, isCtaVisible] = useIntersectionObserver();
 
   const seoData = getSEOData('media');
   const breadcrumbs = [
@@ -221,26 +224,66 @@ const Media = () => {
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="px-6 py-16" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-light text-mountain-shadow mb-4">
-                Stay Connected
-              </h3>
-              <p className="text-mountain-shadow/80 mb-6">
-                For more insights and updates on mental health topics, check
-                back regularly as we continue to share valuable resources and
-                perspectives.
-              </p>
-              <a
-                href="/contact"
-                className="inline-flex items-center px-6 py-3 bg-primary-sage text-white 
-                    rounded-full hover:bg-mountain-terra/90 transition-all duration-300 
-                    transform hover:scale-105 hover:shadow-lg"
-              >
-                Get in Touch
-              </a>
+        {/* CTA Section */}
+        <section className="relative py-20 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          {/* Decorative overlay */}
+          <div className="absolute inset-0" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-4">
+            <div
+              className="relative bg-white backdrop-blur-sm rounded-2xl p-12 shadow-xl border border-gray-200
+                transform transition-all duration-700
+                group"
+            >
+              {/* Background image that appears when scrolled into view */}
+              <div
+                className={`absolute inset-0 z-[-1] transition-opacity duration-1000
+                           bg-cover bg-center bg-no-repeat rounded-2xl
+                           ${isCtaVisible ? 'opacity-20' : 'opacity-0'}`}
+                style={{
+                    backgroundImage: `url(${floralPattern})`,
+                }}
+              />
+
+              <div className="text-center space-y-6">
+                {/* Animated Title */}
+                <div
+                  ref={ctaRef}
+                  className={`transform transition-all duration-700
+                    ${isCtaVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                >
+                  <h2 className="text-4xl font-light text-mountain-shadow mb-2">
+                    Contact Us To Get Started!
+                  </h2>
+                  <div className="w-24 h-1 bg-sunset-coral mx-auto mt-4" />
+                </div>
+
+                {/* Content */}
+                <div>
+                  <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
+                    Ready to take the first step? Schedule a complimentary 15-minute consultation to find the right
+                    therapist for you.
+                  </p>
+                </div>
+
+                {/* Button */}
+                <div className="pt-6">
+                  <Link
+                    to="/contact"
+                    className="group inline-flex items-center px-8 py-4 bg-sunset-coral hover:bg-sunset-coral/80
+                      text-mountain-shadow rounded-full transition-all duration-300 transform hover:scale-105
+                      hover:shadow-lg backdrop-blur-sm mountain-terra "
+                  >
+                    <CalendarCheck className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
+                    <span className="font-medium">Schedule Consultation</span>
+                    <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+
+                  <p className="text-mountain-shadow/70 text-sm mt-6 animate-pulse">
+                    *Currently accepting new clients for online therapy sessions
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

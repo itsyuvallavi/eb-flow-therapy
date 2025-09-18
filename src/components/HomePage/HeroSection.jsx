@@ -9,31 +9,90 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
   const navigate = useNavigate();
 
   return (
-    <section className="min-h-screen flex items-center" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
-          {/* Text Content */}
-          <div className="space-y-8 lg:pr-8">
+    <>
+      <style>
+        {`
+          @keyframes gradient {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-10px);
+            }
+          }
+        `}
+      </style>
+    <section className="min-h-screen flex items-center relative overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+      {/* Background image with sophisticated gradient fade like Welcome section */}
+      <div
+        className="absolute bg-no-repeat bg-center"
+        style={{
+          backgroundImage: 'url(/beach.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)'
+        }}
+      />
+      {/* Overlay for readability with same gradient */}
+      <div
+        className="absolute bg-white/70"
+        style={{
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)'
+        }}
+      ></div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div className="flex items-center justify-center min-h-[80vh]">
+
+          {/* Text Content - Centered */}
+          <div className="space-y-8 text-center max-w-6xl">
             <div className="animate-fade-in">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-text-primary leading-tight">
-                Guiding you toward 
-                <span className="italic font-medium text-primary-sage"> emotional well-being</span>
-                <br />and personal growth
+                <span
+                  className="text-6xl md:text-7xl lg:text-8xl block mb-8 font-black tracking-wider text-primary-sage"
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    animation: 'float 4s ease-in-out infinite'
+                  }}
+                >
+                  EB & Flow Therapy
+                </span>
+                <span className="italic font-medium text-text-primary">Flexible Therapy</span>
+                <br />That Fits Your Flow
               </h1>
             </div>
             
-            <p className="animate-fade-in animate-delay-200 text-xl text-text-secondary leading-relaxed max-w-xl">
-              Professional, compassionate therapy tailored to your unique journey 
-              toward healing and self-discovery.
+            <p className="animate-fade-in animate-delay-200 text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto">
+              Personalized therapy that adapts to your unique story. We honor your journey
+              while providing evidence-based tools for healing and growth.
             </p>
             
-            <div className="animate-fade-in animate-delay-400 flex flex-col sm:flex-row gap-4">
+            <div className="animate-fade-in animate-delay-400 flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => navigate("/contact")}
                 className="bg-primary-sage text-black px-8 py-4 rounded-lg hover:bg-primary-forest hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg font-medium"
               >
-                Schedule Consultation
+                Contact Us To Get Started!
               </button>
               <button
                 onClick={() => navigate("/our-team")}
@@ -45,48 +104,34 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
 
             {/* Trust indicators */}
             <div className="animate-fade-in animate-delay-600 pt-4">
-              <div className="flex flex-wrap items-center gap-4 text-sm text-text-muted">
-                <span className="bg-white px-3 py-1 rounded-full shadow-sm">LMFT #124458</span>
+              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-text-muted">
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">Licensed Therapists</span>
                 <span>•</span>
-                <span className="bg-white px-3 py-1 rounded-full shadow-sm">10+ Years Experience</span>
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">Evidence-Based Practice</span>
                 <span>•</span>
-                <span className="bg-white px-3 py-1 rounded-full shadow-sm">DBT, CBT, ACT Certified</span>
+                <span className="bg-white px-3 py-1 rounded-full shadow-sm">Personalized Approach</span>
               </div>
             </div>
           </div>
-          
-          {/* Hero Image */}
-          <div className="relative animate-fade-in animate-delay-400">
-            <div className="relative">
-              <img 
-                src="/beach.jpg" 
-                alt="Peaceful therapeutic landscape" 
-                className="rounded-2xl shadow-2xl object-cover h-96 lg:h-[500px] w-full"
-              />
-              {/* Subtle overlay to soften the image */}
-              <div className="absolute inset-0 bg-white/10 rounded-2xl"></div>
-            </div>
-            
-            {/* Decorative element */}
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-sunset-pink/30 rounded-full blur-xl"></div>
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-sunset-rose/30 rounded-full blur-2xl"></div>
-          </div>
-          
+
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <button
-        onClick={onScrollToWelcome}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-primary-sage cursor-pointer animate-float hover:text-primary-forest transition-colors duration-300"
-        aria-label="Scroll to About section"
-      >
-        <ChevronDown
-          size={48}
-          className="stroke-2"
-        />
-      </button>
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <button
+          onClick={onScrollToWelcome}
+          className="text-primary-sage cursor-pointer animate-float hover:text-primary-forest transition-colors duration-300"
+          aria-label="Scroll to About section"
+        >
+          <ChevronDown
+            size={48}
+            className="stroke-2"
+          />
+        </button>
+      </div>
     </section>
+    </>
   );
 };
 

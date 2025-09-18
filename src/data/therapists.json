@@ -5,11 +5,14 @@
     "title": "Lead Therapist, LMFT",
     "license": "LMFT #127577",
     "image": "/portrait.png",
+    "logo": "/lmft.png",
     "languages": ["English", "Hebrew"],
     "featured": true,
     "socialMedia": {
       "instagram": "https://www.instagram.com/elinorlmft/",
-      "facebook": "https://www.facebook.com/people/Elinor-Bawnik/100073185439886/"
+      "facebook": "https://www.facebook.com/people/Elinor-Bawnik/100073185439886/",
+      "psychologyToday": "https://www.psychologytoday.com/us/therapists/eb-flow-marriage-therapy-inc-los-angeles-ca/1015567",
+      "psychologyTodayDescription": "Find comprehensive therapy services and schedule appointments through Psychology Today's trusted platform."
     },
     "shortBio": "With extensive experience in individual and couples therapy, I am dedicated to fostering a supportive and safe space where growth and healing can thrive. By integrating evidence-based practices with a deep commitment to authentic human connection, I help clients navigate challenges and uncover their full potential.",
     "education": [
@@ -39,7 +42,8 @@
     "socialMedia": {
       "instagram": "https://www.instagram.com/meganadamsonmft",
       "facebook": "https://www.facebook.com/megan.adamson.95269?mibextid=wwXIfr",
-      "psychologyToday": "https://www.psychologytoday.com/us/therapists/megan-adamson-malibu-ca/1478719"
+      "psychologyToday": "https://www.psychologytoday.com/us/therapists/megan-adamson-malibu-ca/1478719",
+      "psychologyTodayDescription": "Connect with Megan through Psychology Today to learn more about her approach and schedule sessions."
     },
     "shortBio": "I'm an Associate Marriage and Family Therapist passionate about supporting individuals, couples, and families in navigating trauma, mental health challenges, and relational dynamics. I embrace my client's authentic selves and bring curiosity and appreciation to the therapeutic experience.",
     "education": [
@@ -66,7 +70,10 @@
     "languages": ["English"],
     "featured": false,
     "socialMedia": {
-      "psychologyToday": "https://www.psychologytoday.com/us/therapists/shira-feinstein-encino-ca/1013385"
+      "instagram": "https://www.instagram.com/therapywshira/",
+      "facebook": "https://www.facebook.com/sbfeinstein",
+      "psychologyToday": "https://www.psychologytoday.com/us/therapists/shira-feinstein-encino-ca/1013385",
+      "psychologyTodayDescription": "Learn more about Shira's therapeutic approach and book consultations through Psychology Today."
     },
     "shortBio": "I am dedicated to providing a supportive and non-judgmental space where clients can navigate emotions, resolve conflict, and release trauma. By integrating evidence-based theory with an intuitive, practical approach, I help clients gain tangible tools to get unstuck and move forward in their personal and relational lives.",
     "education": [

@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="space-y-4">
               <h4 className="text-lg font-medium text-white">EB & Flow Therapy</h4>
               <p className="text-gray-300 text-sm leading-relaxed">
-                Professional, compassionate therapy guiding you toward emotional well-being and personal growth.
+                Therapy that adapts to your unique story, honoring your journey toward healing and growth.
               </p>
             </div>
             
@@ -26,11 +26,17 @@ const Footer = () => {
                 <Link to="/" className="text-gray-300 text-sm hover:text-primary-sage transition-colors">
                   Home
                 </Link>
+                <Link to="/about" className="text-gray-300 text-sm hover:text-primary-sage transition-colors">
+                  About
+                </Link>
                 <Link to="/our-team" className="text-gray-300 text-sm hover:text-primary-sage transition-colors">
-                  Our Team
+                  Meet the Therapists
                 </Link>
                 <Link to="/services" className="text-gray-300 text-sm hover:text-primary-sage transition-colors">
                   Services
+                </Link>
+                <Link to="/media" className="text-gray-300 text-sm hover:text-primary-sage transition-colors">
+                  Media
                 </Link>
                 <Link to="/contact" className="text-gray-300 text-sm hover:text-primary-sage transition-colors">
                   Contact
@@ -42,9 +48,9 @@ const Footer = () => {
             <div className="space-y-4">
               <h4 className="text-lg font-medium text-white">Get in Touch</h4>
               <div className="text-gray-300 text-sm space-y-2">
-                <p>Licensed LMFT #124458</p>
-                <p>West Los Angeles, CA</p>
-                <p className="text-primary-sage">Professional, HIPAA-compliant care</p>
+                <p>Licensed LMFT #127577</p>
+                <p>Los Angeles, CA</p>
+                <p className="text-primary-sage">*Telehealth only at this time</p>
               </div>
             </div>
             
@@ -53,8 +59,8 @@ const Footer = () => {
           {/* Copyright & Legal */}
           <div className="border-t border-gray-700 pt-8">
             <p className="text-xs text-gray-400 text-center max-w-4xl mx-auto leading-relaxed">
-              Copyright © EB &amp; Flow Marriage Therapy, Inc. {currentYear} All Rights Reserved. 
-              Professional therapy services in West Los Angeles. HIPAA-compliant and confidential care.
+              Copyright © EB & Flow Therapy {currentYear} All Rights Reserved.
+              Professional therapy services in Los Angeles. HIPAA-compliant and confidential care.
             </p>
           </div>
           

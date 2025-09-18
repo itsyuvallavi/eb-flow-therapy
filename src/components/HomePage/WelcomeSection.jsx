@@ -2,7 +2,7 @@
 import React from 'react';
 import { Heart, Users, Shield, Sparkles, GraduationCap, Award } from "lucide-react";
 import { useIntersectionObserver } from "../modal/useIntersectionObserver";
-import portrait from "../../assets/portrait.png";
+import circleLogo from "../../assets/circle_logo.png";
 import floralPattern2 from "../../assets/floral-pattern2.png";
 
 const WelcomeSection = () => {
@@ -12,30 +12,30 @@ const WelcomeSection = () => {
   const features = [
     {
       icon: <GraduationCap className="w-8 h-8" />,
-      title: "Expert Training",
-      text: "DBT, CBT, and ACT certified with ongoing education",
+      title: "Expert Team",
+      text: "Licensed therapists with specialized training in evidence-based approaches",
     },
     {
       icon: <Heart className="w-8 h-8" />,
-      title: "Compassionate Care",
-      text: "Warm, empathetic approach to every therapeutic relationship",
+      title: "Personalized Care",
+      text: "Therapy that adapts to your unique needs and goals",
     },
     {
-      icon: <Award className="w-8 h-8" />,
-      title: "Proven Results",
-      text: "10+ years helping individuals and couples thrive",
+      icon: <Sparkles className="w-8 h-8" />,
+      title: "Inclusive Practice",
+      text: "Sex-positive, kink-affirming, welcoming to all identities",
     },
     {
       icon: <Shield className="w-8 h-8" />,
-      title: "Safe Environment",
-      text: "Culturally affirming, LGBTQ+ friendly practice",
+      title: "Collaborative Approach",
+      text: "You're the expert on your life - we provide tools and support",
     },
   ];
 
   return (
     <section className="relative pt-10 pb-20 overflow-hidden" id="welcome" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
-      {/* Background Pattern - starts from middle of Elinor's image with bottom fade */}
-      <div 
+      {/* Background Pattern - starts from middle of logo with bottom fade */}
+      <div
         className={`absolute bg-no-repeat bg-center transition-opacity duration-1000 ${
           isProfileVisible ? 'opacity-15' : 'opacity-5'
         }`}
@@ -61,12 +61,12 @@ const WelcomeSection = () => {
               ${isProfileVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
           >
             
-            {/* Circular Image - Centered */}
+            {/* Circle Logo - Centered */}
             <div className="relative mb-6">
-              <img 
-                src={portrait} 
-                alt="Elinor Bawnik, LMFT"
-                className="w-48 h-48 lg:w-56 lg:h-56 rounded-full object-cover ring-4 ring-white"
+              <img
+                src={circleLogo}
+                alt="EB & Flow Therapy Logo"
+                className="w-48 h-48 lg:w-56 lg:h-56 object-contain"
               />
               {/* Decorative accent */}
               <div className="absolute -inset-2 bg-gradient-to-r from-primary-sage/20 to-accent-mint/20 rounded-full blur-xl -z-10"></div>
@@ -75,20 +75,20 @@ const WelcomeSection = () => {
             {/* Content Section - Centered */}
             <div className="space-y-4 max-w-3xl">
               <h2 className="text-3xl lg:text-4xl font-light text-text-primary leading-tight">
-                Hi, I'm <span className="font-medium text-primary-sage">Elinor Bawnik</span>
+                Welcome to <span className="font-medium text-primary-sage">EB & Flow Therapy</span>
                 <span className="block text-2xl lg:text-3xl mt-2 text-text-secondary">
-                  Licensed Marriage & Family Therapist
+                  Where Your Story Shapes Your Healing
                 </span>
               </h2>
-              
+
               <p className="text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto">
-                With over 10 years of experience, I specialize in helping individuals and couples 
-                navigate life's challenges through evidence-based therapeutic approaches. My practice 
-                combines warmth, professionalism, and proven techniques including DBT, CBT, and ACT 
-                to support your journey toward emotional well-being and personal growth.
+                At EB & Flow Therapy, we believe every client's story is unique, and therapy should honor
+                that individuality. Our team provides personalized, evidence-based care that adapts to your
+                needs. We specialize in OCD, anxiety, personality disorders, and relationship challenges,
+                creating an inclusive space where all identities and experiences are respected.
               </p>
 
-              
+
             </div>
             
           </div>

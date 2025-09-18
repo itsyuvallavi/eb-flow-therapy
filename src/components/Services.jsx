@@ -10,8 +10,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
+import floralPattern from "../assets/floral-pattern.jpg";
 import SEOHead from "./SEO/SEOHead";
 import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
@@ -30,9 +29,9 @@ const ServiceCard = ({ service, delay = 0 }) => {
       }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <Card className="bg-[#faf7f2] shadow-2xl hover:shadow-2xl border-none h-full transition-all duration-300 relative overflow-hidden mt-8" style={{ boxShadow: '0 -10px 25px -5px rgba(0, 0, 0, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
+      <div className="bg-[#faf7f2] shadow-2xl hover:shadow-3xl border-none h-full transition-all duration-300 relative overflow-hidden mt-8 transform hover:-translate-y-2 hover:scale-105 rounded-lg" style={{ boxShadow: '0 -10px 25px -5px rgba(0, 0, 0, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
         {/* Centered tree background */}
-        <div 
+        <div
           className="absolute inset-0 opacity-15"
           style={{
             backgroundImage: `url(${treeImage})`,
@@ -41,8 +40,8 @@ const ServiceCard = ({ service, delay = 0 }) => {
             backgroundPosition: 'center'
           }}
         />
-        
-        <CardContent className="p-8 h-full flex flex-col relative z-10">
+
+        <div className="p-8 h-full flex flex-col relative z-10">
           {/* Title - smaller size */}
           <h3 className="text-2xl md:text-3xl font-light text-[#5d5043] text-center mb-6">{service.title}</h3>
           
@@ -66,8 +65,8 @@ const ServiceCard = ({ service, delay = 0 }) => {
               )}
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };
@@ -220,44 +219,65 @@ const Services = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="px-6 py-16" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
-          <div className="max-w-4xl mx-auto">
+        <section className="relative py-20 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+          {/* Decorative overlay */}
+          <div className="absolute inset-0" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-4">
             <div
-              ref={ctaRef}
-              className={`transform transition-all duration-700 ease-out ${
-                isCtaVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
+              className="relative bg-white backdrop-blur-sm rounded-2xl p-12 shadow-xl border border-gray-200
+                transform transition-all duration-700
+                group"
             >
-            <Card className="bg-[#f2e6d6] border-[#e8d5c4] shadow-lg">
-              <CardContent className="p-12 text-center space-y-8">
-                <div>
-                  <h2 className="text-4xl font-light text-[#5d5043] mb-4">
-                    Begin Your Journey Today
+              {/* Background image that appears when scrolled into view */}
+              <div
+                className={`absolute inset-0 z-[-1] transition-opacity duration-1000
+                           bg-cover bg-center bg-no-repeat rounded-2xl
+                           ${isCtaVisible ? 'opacity-20' : 'opacity-0'}`}
+                style={{
+                    backgroundImage: `url(${floralPattern})`,
+                }}
+              />
+
+              <div className="text-center space-y-6">
+                {/* Animated Title */}
+                <div
+                  ref={ctaRef}
+                  className={`transform transition-all duration-700
+                    ${isCtaVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                >
+                  <h2 className="text-4xl font-light text-mountain-shadow mb-2">
+                    Contact Us To Get Started!
                   </h2>
-                  <div className="w-24 h-1 bg-[#d4a574] mx-auto" />
+                  <div className="w-24 h-1 bg-sunset-coral mx-auto mt-4" />
                 </div>
-                
-                <p className="text-xl text-[#6b5d47] max-w-2xl mx-auto leading-relaxed">
-                  Schedule a complimentary 15-minute consultation to find the right therapist for you.
-                </p>
-                
-                <div className="space-y-4">
-                  <Button 
-                    asChild 
-                    className="bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043] px-8 py-4 text-lg"
+
+                {/* Content */}
+                <div>
+                  <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
+                    Ready to take the first step? Schedule a complimentary 15-minute consultation to find the right
+                    therapist for you.
+                  </p>
+                </div>
+
+                {/* Button */}
+                <div className="pt-6">
+                  <Link
+                    to="/contact"
+                    className="group inline-flex items-center px-8 py-4 bg-sunset-coral hover:bg-sunset-coral/80
+                      text-mountain-shadow rounded-full transition-all duration-300 transform hover:scale-105
+                      hover:shadow-lg backdrop-blur-sm mountain-terra "
                   >
-                    <Link to="/contact">
-                      <CalendarCheck className="w-5 h-5 mr-2" />
-                      Schedule Consultation
-                    </Link>
-                  </Button>
-                  
-                  <p className="text-[#6b5d47]/70 text-sm">
+                    <CalendarCheck className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
+                    <span className="font-medium">Schedule Consultation</span>
+                    <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+
+                  <p className="text-mountain-shadow/70 text-sm mt-6 animate-pulse">
                     *Currently accepting new clients for online therapy sessions
                   </p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
             </div>
           </div>
         </section>

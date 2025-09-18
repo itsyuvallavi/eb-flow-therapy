@@ -8,6 +8,8 @@ import { useIntersectionObserver } from "./modal/useIntersectionObserver";
 import portrait from "../assets/portrait.png";
 import Megan from "../assets/Megan.png";
 import Shira from "../assets/Shira.jpg";
+import lmft from "../assets/lmft.png";
+import pstLogo from "../assets/PST.png";
 import therapistsData from "../data/therapists.json";
 import floralPattern from "../assets/floral-pattern.jpg";
 import floralPattern2 from "../assets/floral-pattern2.png";
@@ -17,6 +19,7 @@ const imageMap = {
   "/portrait.png": portrait,
   "/Megan.png": Megan,
   "/Shira.jpg": Shira,
+  "/lmft.png": lmft,
 };
 
 
@@ -35,11 +38,15 @@ const TherapistCard = ({ therapist, index, imageSource }) => {
       
       <div
         ref={therapistRef}
-        className={`grid md:grid-cols-2 gap-12 items-center transform transition-all duration-700 ease-out ${
+        className={`rounded-2xl p-8 shadow-lg border border-primary-sage/10 transform transition-all duration-700 ease-out ${
           isTherapistVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        } ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}
-        style={{ transitionDelay: `${index * 200}ms` }}
+        }`}
+        style={{
+          transitionDelay: `${index * 200}ms`,
+          background: 'linear-gradient(135deg, rgba(143, 166, 142, 0.15) 0%, rgba(255,255,255,0.8) 100%)'
+        }}
       >
+        <div className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'md:grid-flow-col-dense' : ''}`}>
         {/* Photo */}
         <div className={`${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
           <div className="aspect-square w-full max-w-lg mx-auto rounded-2xl overflow-hidden shadow-lg">
@@ -58,13 +65,21 @@ const TherapistCard = ({ therapist, index, imageSource }) => {
               <h2 className="text-3xl font-light text-text-primary mb-2">
                 {therapist.name}
               </h2>
-              <p className="text-lg text-text-secondary mb-4">{therapist.title}</p>
+              <p className="text-lg text-text-secondary mb-2">{therapist.title}</p>
+              {/* License number under title */}
+              {therapist.license && (
+                <div className="bg-primary-sage/10 px-3 py-1 rounded-full inline-block mb-4">
+                  <p className="text-xs text-primary-sage font-medium">{therapist.license}</p>
+                </div>
+              )}
             </div>
-            {/* License number aligned with name */}
-            {therapist.license && (
-              <div className="bg-primary-sage/10 px-3 py-1 rounded-full">
-                <p className="text-xs text-primary-sage font-medium">{therapist.license}</p>
-              </div>
+            {/* LMFT logo on right side */}
+            {therapist.logo && (
+              <img
+                src={imageMap[therapist.logo] || therapist.logo}
+                alt="LMFT Credential"
+                className="w-40 h-20 object-contain"
+              />
             )}
           </div>
 
@@ -112,7 +127,7 @@ const TherapistCard = ({ therapist, index, imageSource }) => {
 
           {/* Social Media Links */}
           {therapist.socialMedia && (
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               {therapist.socialMedia.instagram && (
                 <a
                   href={therapist.socialMedia.instagram}
@@ -144,12 +159,14 @@ const TherapistCard = ({ therapist, index, imageSource }) => {
                   href={therapist.socialMedia.psychologyToday}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-secondary hover:text-primary-sage transition-colors"
+                  className="hover:opacity-80 transition-opacity"
                   aria-label="Psychology Today"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                  </svg>
+                  <img
+                    src={pstLogo}
+                    alt="Psychology Today"
+                    className="h-5 w-auto object-contain"
+                  />
                 </a>
               )}
             </div>
@@ -172,6 +189,7 @@ const TherapistCard = ({ therapist, index, imageSource }) => {
               Schedule Consultation
             </Link>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -222,7 +240,7 @@ const OurTeam = () => {
           />
           <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
             <h1 className="text-4xl md:text-5xl font-light text-text-primary">
-              Meet Our Team
+              Meet the Therapists
             </h1>
             <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
               Our experienced therapists are here to support you on your journey toward healing and growth. 
