@@ -92,8 +92,6 @@ const Services = () => {
         "Coping and Stress Management",
         "Understanding Behaviors and Thoughts",
         "Personalized Goal Setting",
-        "Managing Life Changes",
-        "Ongoing Emotional Support",
       ],
     },
     {
@@ -106,22 +104,18 @@ const Services = () => {
         "Conflict Resolution",
         "Understanding Relationship Patterns",
         "Exploring Emotional Needs",
-        "Setting Shared Goals",
-        "Navigating Life Transitions",
       ],
     },
     {
-      title: "Family Therapy",
-      icon: Users,
+      title: "OCD and Anxiety Disorder",
+      icon: Brain,
       description:
-        "Family therapy offers a space for family members to improve communication, strengthen bonds, and address underlying issues. Together, we will explore each member's perspective, and develop strategies to navigate challenges and conflicts. Through collaboration, we'll work toward fostering understanding and growth within the family unit.",
+        "Therapy providing a supportive space to navigate intrusive thoughts, overwhelming anxiety, and behavioral patterns that impact daily life. Together, we will explore triggers, emotional responses, and coping strategies while developing tools to manage distress and lack of control.",
       details: [
-        "Family Communication",
-        "Role Pattern Analysis",
-        "Establishing Boundaries ",
-        "Conflict Resolution",
-        "Strengthening Emotional Bonds",
-        "Inter-generational Healing",
+        "Identifying Triggers",
+        "Exposure and Response Prevention",
+        "Mindfulness Techniques",
+        "Anxiety Management",
       ],
     },
     {
@@ -134,22 +128,18 @@ const Services = () => {
         "Emotion Regulation",
         "Interpersonal Effectiveness",
         "Mindfulness",
-        "Develop Sense of Self",
-        "Reduce Reactivity",
       ],
     },
     {
-      title: "Anxiety and Related Disorders",
-      icon: Brain,
+      title: "Inclusive and Collaborative Approach",
+      icon: Users,
       description:
-        "Therapy providing a supportive space to navigate intrusive thoughts, overwhelming anxiety, and behavioral patterns that impact daily life. Together, we will explore triggers, emotional responses, and coping strategies while developing tools to manage distress and lack of control.",
+        "Inclusive and Collaborative Approach for those seeking affirming care around identity, relationships, and sexuality. Our team shares sex-positive and kink-affirming values, we provide a supportive environment that respects your unique experiences. We partner with psychiatrists, medical providers, family, and members of your personal system to ensure your care is comprehensive and aligned with your goals.",
       details: [
-        "Identifying Triggers",
-        "Exposure and Response Prevention",
-        "Mindfulness Techniques",
-        "Anxiety Management",
-        "Cognitive Reframing",
-        "Building Resilience",
+        "Affirming Identity and Expression",
+        "Exploring Sexuality and Relationships without Judgment",
+        "Collaborative Care with Providers and Supports ",
+        "Building Communication and Connection Skills",
       ],
     },
     {
@@ -162,8 +152,6 @@ const Services = () => {
         "Processing Trauma",
         "Body-Mind Connection",
         "Learning Coping Skills",
-        "Addressing Triggers",
-        "Building Support System"
       ],
     },
   ];

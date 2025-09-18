@@ -69,20 +69,20 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
             <div className="animate-fade-in">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-text-primary leading-tight">
                 <span
-                  className="text-6xl md:text-7xl lg:text-8xl block mb-8 font-black tracking-wider text-primary-sage"
+                  className="text-6xl md:text-7xl lg:text-8xl block mb-8 font-black tracking-wider text-text-secondary"
                   style={{
                     textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
                     animation: 'float 4s ease-in-out infinite'
                   }}
                 >
                   EB & Flow Therapy
-                </span>
-                <span className="italic font-medium text-text-primary">Flexible Therapy</span>
-                <br />That Fits Your Flow
+                </span> 
+                <span className="italic font-medium text-primary-sage shadow-sm">Flexible Therapy</span>   
+                <br /><span className="text-primary-sage shadow-sm">That Fits Your Flow</span> 
               </h1>
             </div>
             
-            <p className="animate-fade-in animate-delay-200 text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto">
+            <p className="animate-fade-in animate-delay-200 text-xl text-primary-sage leading-relaxed max-w-2xl mx-auto">
               Personalized therapy that adapts to your unique story. We honor your journey
               while providing evidence-based tools for healing and growth.
             </p>

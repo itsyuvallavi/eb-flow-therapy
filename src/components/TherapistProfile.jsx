@@ -20,6 +20,8 @@ import Megan from "../assets/Megan.png";
 import Shira from "../assets/Shira.jpg";
 import iocdfLogo from "../assets/IOCDF-Logo.png";
 import pstLogo from "../assets/PST.png";
+import logo from "../assets/logo.png";
+import lmft from "../assets/lmft.png";
 
 // Image mapping object to connect JSON image paths to actual imported images
 const imageMap = {
@@ -27,6 +29,7 @@ const imageMap = {
   "/Megan.png": Megan,
   "/Shira.jpg": Shira,
   "/IOCDF-Logo.png": iocdfLogo,
+  "/lmft.png": lmft,
 };
 
 const TherapistProfile = () => {
@@ -136,18 +139,29 @@ const TherapistProfile = () => {
                   />
                 </div>
               </div>
+              
 
               {/* Basic Info */}
               <div className="space-y-6">
-                <div>
-                  <h1 className="text-4xl font-light text-[#5d5043] mb-2">
-                    {therapist.name}
-                  </h1>
-                  <p className="text-xl text-[#6b5d47] mb-2">{therapist.title}</p>
-                  {therapist.license && (
-                    <div className="bg-[#e8d5c4] text-[#6b5d47] px-3 py-1 rounded-full text-sm inline-block mb-4">
-                      {therapist.license}
-                    </div>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h1 className="text-4xl font-light text-[#5d5043] mb-2">
+                      {therapist.name}
+                    </h1>
+                    <p className="text-xl text-[#6b5d47] mb-2">{therapist.title}</p>
+                    {therapist.license && (
+                      <div className="bg-[#e8d5c4] text-[#6b5d47] px-3 py-1 rounded-full text-sm inline-block mb-4">
+                        {therapist.license}
+                      </div>
+                    )}
+                  </div>
+                  {/* LMFT logo on right side */}
+                  {therapist.logo && (
+                    <img
+                      src={imageMap[therapist.logo] || therapist.logo}
+                      alt="LMFT Credential"
+                      className="w-40 h-20 object-contain"
+                    />
                   )}
                 </div>
 

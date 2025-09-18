@@ -4,11 +4,13 @@ import { useIntersectionObserver } from "../modal/useIntersectionObserver";
 import { sendContactEmails } from "../../services/emailService.js";
 import Popup from "../Popup.jsx";
 import lmft from "../../assets/lmft.png";
+import logo from "../../assets/logo.png"
 
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
   { id: "megan", name: "Megan Adamson, AMFT", email: "elinorlmft@gmail.com" },
+  { id: "shira", name: "Shira Feinstein, LMFT", email: "elinorlmft@gmail.com" },
 ];
 
 const ContactSection = () => {
@@ -288,7 +290,7 @@ const ContactSection = () => {
             {/* LMFT Logo */}
             <div className="bg-white/90 rounded-2xl p-6">
               <img
-                src={lmft}
+                src={logo}
                 alt="Decorative left image"
                 className="w-80  mx-auto rounded-lg object-contain"
               />

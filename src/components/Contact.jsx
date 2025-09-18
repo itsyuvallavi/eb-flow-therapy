@@ -8,6 +8,7 @@ import { sendContactEmails } from "../services/emailService";
 import Popup from "./Popup";
 import { useEffect } from "react";
 import lmft from "../assets/lmft.png";
+import logo from "../assets/logo.png"
 import floralPattern from "../assets/floral-pattern.jpg";
 
 const therapists = [
@@ -327,7 +328,7 @@ const Contact = () => {
               {/* LMFT Logo */}
               <div className="bg-white/90 rounded-2xl p-4">
                 <img
-                  src={lmft}
+                  src={logo}
                   alt="Decorative left image"
                   className="w-80  mx-auto rounded-lg object-contain"
                 />

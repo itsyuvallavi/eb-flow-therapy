@@ -59,11 +59,11 @@ const ServicesSection = () => {
     },
     {
       title: "Couples Therapy",
-      description: "Strengthen relationships through improved communication, conflict resolution, and emotional intimacy using EFT techniques.",
+      description: "Strengthen relationships through improved communication, conflict resolution, and emotional intimacy using attachment-based techniques.",
       Icon: Heart
     },
     {
-      title: "Family Therapy",
+      title: "Personality Disorders",
       description: "Navigate family dynamics, cultural transitions, and intergenerational challenges in a supportive environment.",
       Icon: Users
     },
