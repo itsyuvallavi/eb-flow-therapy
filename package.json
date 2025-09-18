@@ -1,9 +1,9 @@
 {
-  "name": "elinorlmft",
+  "name": "eb-flow-therapy",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
-  "homepage": "https://itsyuvallavi.github.io/eb-flow-therapy",
+  "homepage": "https://eb-flowtherapy.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
