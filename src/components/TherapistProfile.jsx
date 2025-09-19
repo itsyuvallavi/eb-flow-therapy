@@ -20,7 +20,6 @@ import Megan from "../assets/Megan.png";
 import Shira from "../assets/Shira.jpg";
 import iocdfLogo from "../assets/IOCDF-Logo.png";
 import pstLogo from "../assets/PST.png";
-import logo from "../assets/logo.png";
 import lmft from "../assets/lmft.png";
 
 // Image mapping object to connect JSON image paths to actual imported images

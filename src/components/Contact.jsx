@@ -7,7 +7,6 @@ import { useIntersectionObserver } from "../components/modal/useIntersectionObse
 import { sendContactEmails } from "../services/emailService";
 import Popup from "./Popup";
 import { useEffect } from "react";
-import lmft from "../assets/lmft.png";
 import logo from "../assets/logo.png"
 import floralPattern from "../assets/floral-pattern.jpg";
 
@@ -15,6 +14,7 @@ const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
   { id: "megan", name: "Megan Adamson, AMFT", email: "elinorlmft@gmail.com" },
+  { id: "shira", name: "Shira Feinstein, AMFT", email: "elinorlmft@gmail.com" }
 ];
 
 const Contact = () => {

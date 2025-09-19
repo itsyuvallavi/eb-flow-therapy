@@ -3,14 +3,13 @@ import { Phone, MapPin, Mail, Users, ChevronDown } from "lucide-react";
 import { useIntersectionObserver } from "../modal/useIntersectionObserver";
 import { sendContactEmails } from "../../services/emailService.js";
 import Popup from "../Popup.jsx";
-import lmft from "../../assets/lmft.png";
 import logo from "../../assets/logo.png"
 
 const therapists = [
   { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
   { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
   { id: "megan", name: "Megan Adamson, AMFT", email: "elinorlmft@gmail.com" },
-  { id: "shira", name: "Shira Feinstein, LMFT", email: "elinorlmft@gmail.com" },
+  { id: "shira", name: "Shira Feinstein, AMFT", email: "elinorlmft@gmail.com" },
 ];
 
 const ContactSection = () => {
