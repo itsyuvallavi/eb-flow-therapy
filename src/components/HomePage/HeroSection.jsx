@@ -33,7 +33,7 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
           }
         `}
       </style>
-    <section className="min-h-screen flex items-center relative overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+    <section className="min-h-screen flex items-center relative overflow-hidden pt-20 md:pt-0" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
       {/* Background image with sophisticated gradient fade like Welcome section */}
       <div
         className="absolute bg-no-repeat bg-center"
@@ -77,8 +77,8 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
                 >
                   EB & Flow Therapy
                 </span> 
-                <span className="italic font-medium text-primary-sage shadow-sm">Flexible Therapy</span>   
-                <br /><span className="text-primary-sage shadow-sm">That Fits Your Flow</span> 
+                <span className="italic font-medium text-primary-sage drop-shadow-md">Flexible Therapy</span>   
+                <br /><span className="text-primary-sage drop-shadow-md">That Fits Your Flow</span> 
               </h1>
             </div>
             
@@ -102,8 +102,8 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
               </button>
             </div>
 
-            {/* Trust indicators */}
-            <div className="animate-fade-in animate-delay-600 pt-4">
+            {/* Trust indicators - Hidden on mobile */}
+            <div className="animate-fade-in animate-delay-600 pt-4 hidden md:block">
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-text-muted">
                 <span className="bg-white px-3 py-1 rounded-full shadow-sm">Licensed Therapists</span>
                 <span>•</span>
@@ -117,8 +117,8 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+      {/* Scroll indicator - Hidden on mobile */}
+      <div className="absolute bottom-8 left-0 right-0 justify-center hidden md:flex">
         <button
           onClick={onScrollToWelcome}
           className="text-primary-sage cursor-pointer animate-float hover:text-primary-forest transition-colors duration-300"

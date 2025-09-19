@@ -115,7 +115,7 @@ const TherapistProfile = () => {
       
       <div className="bg-[#faf9f6] min-h-screen">
         {/* Hero Section */}
-        <section className="px-6 py-16 bg-[#f7f5f1]">
+        <section className="px-6 py-16 pt-24 md:pt-16 bg-[#f7f5f1]">
           <div className="max-w-7xl mx-auto">
             {/* Back Button */}
             <div className="mb-8">
@@ -130,11 +130,11 @@ const TherapistProfile = () => {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               {/* Photo */}
               <div className="flex justify-center">
-                <div className="w-96 h-96 md:w-[500px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl">
+                <div className="w-80 h-80 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px] max-w-full rounded-2xl overflow-hidden shadow-xl">
                   <img
                     src={imageSource}
                     alt={therapist.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
                 </div>
               </div>
