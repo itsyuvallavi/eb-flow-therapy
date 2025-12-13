@@ -35,7 +35,7 @@ const MainLayout = () => {
             <Route path="/services" element={<Services />} />
             <Route path="/media" element={<Media />} />
             <Route path="/therapists/:id" element={<TherapistProfile />} />
-            <Route path="/providers&programs" element={<ProvidersnPrograms />} />
+            <Route path="/providers-programs" element={<ProvidersnPrograms />} />
           </Routes>
         </PageLayout>
         <Footer />
