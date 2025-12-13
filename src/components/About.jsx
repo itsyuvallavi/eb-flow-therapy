@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {
+  CalendarCheck,
+  Globe,
+  Instagram,
+  Facebook,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 import SEOHead from "./SEO/SEOHead";
 import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
 import { getSEOData } from "../data/seoData";
-import { useIntersectionObserver } from "./modal/useIntersectionObserver";
-import floralPattern2 from "../assets/floral-pattern2.png";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
 import portrait from "../assets/portrait.png";
-import treeImage from "../assets/tree.png";
+import iocdfLogo from "../assets/IOCDF-Logo.png";
+import pstLogo from "../assets/PST.png";
+import lmft from "../assets/lmft.png";
+import whoswhoBadge from "../assets/whoswho-badge.png";
 
 const About = () => {
-  const [companyRef, isCompanyVisible] = useIntersectionObserver();
-  const [founderRef, isFounderVisible] = useIntersectionObserver();
+  // Add Psychology Today verification script for Elinor
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://member.psychologytoday.com/verified-seal.js";
+    script.dataset.badge = "10";
+    script.dataset.id = "1015567";
+    script.dataset.code =
+      "aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMC9wcm9maWxlLzEwMTU1Njc/Y2FsbGJhY2s9c3hjYWxsYmFjaw==";
+
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
 
   const seoData = getSEOData('about') || {
     title: "About EB & Flow Therapy - Personalized Mental Health Care",
@@ -25,6 +51,35 @@ const About = () => {
   ];
   const structuredData = generateBreadcrumbSchema(breadcrumbs);
 
+  const therapist = {
+    name: "Elinor Bawnik",
+    title: "Lead Therapist, LMFT",
+    license: "LMFT #127577",
+    languages: ["English", "Hebrew"],
+    socialMedia: {
+      instagram: "https://www.instagram.com/elinorlmft/",
+      facebook: "https://www.facebook.com/people/Elinor-Bawnik/100073185439886/",
+      psychologyToday: "https://www.psychologytoday.com/us/therapists/eb-flow-marriage-therapy-inc-los-angeles-ca/1015567"
+    },
+    shortBio: "With extensive experience in individual and couples therapy, I am dedicated to fostering a supportive and safe space where growth and healing can thrive. By integrating evidence-based practices with a deep commitment to authentic human connection, I help clients navigate challenges and uncover their full potential.",
+    education: [
+      "MA in Marriage and Family Therapy from Alliant International University, Los Angeles CA",
+      "Additional training: Couples therapy, Obsessive compulsive disorder, Personality disorders, Hoarding, and therapeutic modalities such as ACT, DBT, and iCBT",
+      "Member of the International OCD Foundation",
+      "Honored Listee of the Marquis Who's Who in 2025"
+    ],
+    background: "As a passionate therapist with extensive experience, I offer a thorough and straightforward approach to therapy. I have had the privilege of working with adults, couples, families, and teens across a variety of settings, including hospitals, high schools, residential programs, and PHP/IOP environments. Additionally, I bring experience in group therapy and working with underserved populations, including homeless individuals and veterans.",
+    specializations: [
+      "Individual Therapy",
+      "Couples Therapy",
+      "OCD & Anxiety Disorders",
+      "Personality Disorders",
+      "Cultural Transitions",
+      "Sex-Positivity & Kink-Friendly"
+    ],
+    approach: "At EB & Flow Therapy, every client's story is unique, and therapy should honor that individuality. I provide personalized, evidence-based care that adapts to your needs. With a speciality in OCD, anxiety, personality disorders, and relationship challenges, I create an inclusive space where all identities and experiences are respected.\n\nI view therapy as a collaborative journey, partnering with my clients to achieve their personalized goals. I also believe in the power of humor to create connection and lightness, making the process both meaningful and relatable. My therapeutic approach blends a variety of evidence-based methods with psychodynamic processing and creative, out-of-the-box techniques. I tailor each session to meet the unique needs of my clients, ensuring a personalized and effective experience. I integrate:\n\n• Dialectial Behavioral Therapy (DBT)\n• Acceptance and Commitment Therapy (ACT)\n• Cognitive Behavioral Techniques\n• Emotionally Focused Therapy (EFT)\n• Narrative & Experiential Therapy\n• Mindfulness-Based Approaches\n• Attachment-Based Therapy"
+  };
+
   return (
     <>
       <SEOHead
@@ -36,72 +91,109 @@ const About = () => {
         structuredData={structuredData}
       />
 
-      <div className="min-h-screen">
+      <div className="bg-[#faf9f6] min-h-screen">
         {/* Hero Section */}
-        <section className="relative px-6 py-16 overflow-hidden" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
-          {/* Background Pattern */}
-          <div
-            className="absolute inset-0 opacity-15 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${floralPattern2})`,
-              backgroundPosition: 'center top',
-              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 70%, rgba(0,0,0,0.5) 85%, rgba(0,0,0,0) 100%)',
-              zIndex: 0
-            }}
-          />
-          <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
-            <h1 className="text-4xl md:text-5xl font-light text-text-primary">
-              About EB & Flow Therapy
-            </h1>
-            <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-              Therapy that adapts to your unique story, honoring your journey toward healing and growth.
-            </p>
-          </div>
-        </section>
+        <section className="px-6 py-16 pt-32 md:pt-28 bg-[#f7f5f1]">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* Photo */}
+              <div className="flex justify-center">
+                <div className="w-80 h-80 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px] max-w-full rounded-2xl overflow-hidden shadow-xl">
+                  <img
+                    src={portrait}
+                    alt={therapist.name}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+              </div>
 
-        {/* Company Overview Section */}
-        <section className="relative px-6 py-16" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
-          <div className="max-w-4xl mx-auto">
-            <div
-              ref={companyRef}
-              className={`transform transition-all duration-700 ease-out ${
-                isCompanyVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 lg:p-12 shadow-lg relative overflow-hidden">
-                {/* Centered tree background */}
-                <div
-                  className="absolute inset-0 opacity-15"
-                  style={{
-                    backgroundImage: `url(${treeImage})`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center'
-                  }}
-                />
+              {/* Basic Info */}
+              <div className="space-y-6">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h1 className="text-4xl font-light text-[#5d5043] mb-2">
+                      {therapist.name}
+                    </h1>
+                    <p className="text-xl text-[#6b5d47] mb-2">{therapist.title}</p>
+                    <div className="bg-[#e8d5c4] text-[#6b5d47] px-3 py-1 rounded-full text-sm inline-block mb-4">
+                      {therapist.license}
+                    </div>
+                  </div>
+                  {/* LMFT logo on right side */}
+                  <img
+                    src={lmft}
+                    alt="LMFT Credential"
+                    className="w-40 h-20 object-contain"
+                  />
+                </div>
 
-                <div className="relative z-10">
-                  <h2 className="text-3xl lg:text-4xl font-light text-text-primary mb-8 text-center">
-                    Our Mission
-                  </h2>
+                <p className="text-[#6b5d47] leading-relaxed">{therapist.shortBio}</p>
 
-                  <div className="space-y-6 text-lg text-text-secondary leading-relaxed">
-                    <p>
-                      EB & Flow Therapy was created with one guiding principle: every client's story is unique, and therapy should honor that individuality. We see you as the expert on your own life. Our role is to provide the structure, insight, and evidence-based tools that help you move toward the changes you want while supporting your evolving sense of self.
-                    </p>
+                {/* Languages */}
+                <div className="flex items-center space-x-2 text-[#6b5d47]">
+                  <Globe className="w-5 h-5 text-[#a8b5a0]" />
+                  <span>{therapist.languages.join(" • ")}</span>
+                </div>
 
-                    <p>
-                      Our vision is to offer therapy that adapts. No two people are the same, so no two therapy paths should look alike. We specialize in working with OCD and anxiety, personality disorders, couples and relationship challenges, and alternative partnerships. We are sex-positive, kink-affirming, and committed to creating an inclusive space where all identities and experiences are respected.
-                    </p>
+                {/* Specialties */}
+                <div>
+                  <h3 className="font-medium text-[#5d5043] mb-3">Specializations</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {therapist.specializations.map((specialty) => (
+                      <span
+                        key={specialty}
+                        className="bg-[#e8d5c4] text-[#6b5d47] px-3 py-1 rounded-full text-sm"
+                      >
+                        {specialty}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-                    <p>
-                      Our team integrates a range of approaches to best fit your needs. Alongside DBT and ACT, we draw from attachment-based therapy to explore how relationships shape the way you connect, and narrative therapy to help you reauthor the stories that guide your life. Each session is designed to meet you where you are, offering both structure and flexibility as you navigate challenges and growth.
-                    </p>
+                <div className="flex gap-4">
+                  <Button
+                    asChild
+                    className="bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043]"
+                  >
+                    <Link to="/contact">
+                      <CalendarCheck className="w-4 h-4 mr-2" />
+                      Schedule Consultation
+                    </Link>
+                  </Button>
 
-                    <p>
-                      Whether you are seeking individual therapy, couples counseling, or support for complex patterns, EB & Flow Therapy provides a collaborative and affirming space. Together, we help you find steadiness and possibility within the ebbs and flows of life.
-                    </p>
+                  {/* Social Media Links */}
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={therapist.socialMedia.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#6b5d47] hover:text-[#a8b5a0] transition-colors"
+                      aria-label="Instagram"
+                    >
+                      <Instagram className="w-5 h-5" />
+                    </a>
+                    <a
+                      href={therapist.socialMedia.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#6b5d47] hover:text-[#a8b5a0] transition-colors"
+                      aria-label="Facebook"
+                    >
+                      <Facebook className="w-5 h-5" />
+                    </a>
+                    <a
+                      href={therapist.socialMedia.psychologyToday}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-80 transition-opacity"
+                      aria-label="Psychology Today"
+                    >
+                      <img
+                        src={pstLogo}
+                        alt="Psychology Today"
+                        className="h-5 w-auto object-contain"
+                      />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -109,59 +201,123 @@ const About = () => {
           </div>
         </section>
 
-        {/* Founder Bio Section */}
-        <section className="relative px-6 py-16" style={{ backgroundColor: 'rgba(244, 194, 161, 0.1)' }}>
+        {/* Detailed Information */}
+        <section className="px-6 py-16">
           <div className="max-w-6xl mx-auto">
-            <div
-              ref={founderRef}
-              className={`transform transition-all duration-700 ease-out ${
-                isFounderVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-              }`}
-            >
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 lg:p-12 shadow-lg">
-                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
-                  {/* Founder Image */}
-                  <div className="flex-shrink-0">
-                    <div className="relative">
-                      <img
-                        src={portrait}
-                        alt="Elinor Bawnik, LMFT - Founder of EB & Flow Therapy"
-                        className="w-48 h-48 lg:w-56 lg:h-56 rounded-full object-cover ring-4 ring-white shadow-lg"
-                      />
-                      <div className="absolute -inset-2 bg-gradient-to-r from-primary-sage/20 to-accent-mint/20 rounded-full blur-xl -z-10"></div>
-                    </div>
+            {/* Main Content - Centered */}
+            <div className="space-y-8 mb-12">
+              {/* Therapeutic Approach - Full Width */}
+              <Card className="bg-[#fefdfb] shadow-lg border-none">
+                <CardContent className="p-8 space-y-6">
+                  <h2 className="text-2xl font-light text-[#5d5043]">My Approach</h2>
+                  <div className="text-[#6b5d47] leading-relaxed">
+                    {(() => {
+                      const text = therapist.approach;
+                      const parts = text.split('I integrate:');
+
+                      return (
+                        <>
+                          {/* Main approach text */}
+                          <p className="whitespace-pre-line mb-6">{parts[0]}</p>
+
+                          {/* If there's a bullet point section */}
+                          {parts[1] && (
+                            <div>
+                              <h3 className="font-medium text-[#5d5043] mb-4">I integrate:</h3>
+                              <div className="grid md:grid-cols-2 gap-3">
+                                {parts[1].split('•').filter(item => item.trim()).map((item, index) => (
+                                  <div key={index} className="flex items-start space-x-2">
+                                    <div className="w-2 h-2 bg-[#d4a574] rounded-full mt-2 flex-shrink-0"></div>
+                                    <span className="text-sm font-medium text-[#6b5d47]">{item.trim()}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
                   </div>
+                </CardContent>
+              </Card>
 
-                  {/* Founder Content */}
-                  <div className="flex-1 space-y-6">
-                    <div className="text-center lg:text-left">
-                      <h2 className="text-3xl lg:text-4xl font-light text-text-primary mb-2">
-                        About the Founder
-                      </h2>
-                      <h3 className="text-2xl font-medium text-primary-sage mb-6">
-                        Elinor Bawnik, LMFT
-                      </h3>
-                    </div>
+              {/* Background & Education - Side by Side */}
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Background */}
+                <Card className="bg-[#fefdfb] shadow-lg border-none">
+                  <CardContent className="p-8 space-y-6">
+                    <h2 className="text-2xl font-light text-[#5d5043]">Background</h2>
+                    <p className="text-[#6b5d47] leading-relaxed whitespace-pre-line">{therapist.background}</p>
+                  </CardContent>
+                </Card>
 
-                    <div className="space-y-4 text-lg text-text-secondary leading-relaxed">
-                      <p>
-                        I started EB & Flow Therapy with a clear vision: therapy should be personalized and shaped around each client's unique needs. No two people experience life in the same way, so I believe no two therapy journeys should look the same. My goal is always to match each client with the right therapist, approach, and tools to support meaningful healing and growth.
-                      </p>
+                {/* Education */}
+                <Card className="bg-[#fefdfb] shadow-lg border-none">
+                  <CardContent className="p-8 space-y-6">
+                    <h2 className="text-2xl font-light text-[#5d5043]">Education & Training</h2>
+                    <ul className="space-y-3">
+                      {therapist.education.map((item, index) => (
+                        <li key={index} className="text-[#6b5d47] flex items-start">
+                          <span className="text-[#a8b5a0] mr-3">•</span>
+                          <div className="flex-1">
+                            {item.includes("Member of the International OCD Foundation") ? (
+                              <div className="flex items-center space-x-3">
+                                <span>{item}</span>
+                                <a
+                                  href="https://iocdf.org/"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  aria-label="International OCD Foundation"
+                                  className="flex-shrink-0"
+                                >
+                                  <img
+                                    src={iocdfLogo}
+                                    alt="International OCD Foundation (IOCDF) Logo"
+                                    className="h-8 object-contain hover:opacity-80 transition-opacity"
+                                  />
+                                </a>
+                              </div>
+                            ) : item.includes("Honored Listee of the Marquis Who's Who in 2025") ? (
+                              <div className="flex items-center space-x-3">
+                                <span>{item}</span>
+                                <img
+                                  src={whoswhoBadge}
+                                  alt="Marquis Who's Who 2025 Honored Listee Badge"
+                                  className="h-10 object-contain"
+                                />
+                              </div>
+                            ) : (
+                              item
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
 
-                      <p>
-                        Therapy is serious work. We are trusted with people's mental health—something that impacts every part of their lives. I see each client within the larger systems they live in, and I focus on helping them navigate those systems while building resilience and self-understanding. This sometimes means thinking outside of the box to create care that truly fits the person in front of me.
-                      </p>
-
-                      <p>
-                        Part of this vision also includes the structure of my practice. We do not contract with insurance companies, which allows us to prioritize client needs rather than administrative requirements. At the same time, I believe therapy should be accessible, so we remain open to sliding-scale options when needed.
-                      </p>
-
-                      <p>
-                        Because I take this work seriously, I've expanded EB & Flow Therapy to include associates whom I personally train and challenge. My goal is to ensure that every therapist here embodies the same commitment to personalized, thoughtful, and effective care. Together, we strive to create a practice that clients can trust during the most important and difficult times in their lives.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            {/* Centered CTA */}
+            <div className="flex justify-center">
+              <div className="max-w-lg">
+                <Card className="bg-[#f2e6d6] border-[#e8d5c4] shadow-lg">
+                  <CardContent className="p-8 space-y-6 text-center">
+                    <h3 className="text-2xl font-light text-[#5d5043]">Ready to Get Started?</h3>
+                    <p className="text-[#6b5d47] leading-relaxed">
+                      Schedule your initial consultation to see if we're a good fit. Contact us to discuss your needs and goals.
+                    </p>
+                    <Button
+                      asChild
+                      className="bg-[#d4a574] hover:bg-[#c4956a] text-[#5d5043] px-8 py-3"
+                    >
+                      <Link to="/contact">
+                        <CalendarCheck className="w-5 h-5 mr-2" />
+                        Book Consultation
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>

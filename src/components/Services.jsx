@@ -134,7 +134,7 @@ const Services = () => {
       title: "Inclusive and Collaborative Approach",
       icon: Users,
       description:
-        "Inclusive and Collaborative Approach for those seeking affirming care around identity, relationships, and sexuality. Our team shares sex-positive and kink-affirming values, we provide a supportive environment that respects your unique experiences. We partner with psychiatrists, medical providers, family, and members of your personal system to ensure your care is comprehensive and aligned with your goals.",
+        "Inclusive and Collaborative Approach for those seeking affirming care around identity, relationships, and sexuality. Through promoting sex-positive and kink-affirming values, I provide a supportive environment that respects your unique experiences. Partnership with psychiatrists, medical providers, family, and members of your personal system ensures your care is comprehensive and aligned with your goals.",
       details: [
         "Affirming Identity and Expression",
         "Exploring Sexuality and Relationships without Judgment",
@@ -146,7 +146,7 @@ const Services = () => {
       title: "Trauma-Informed Care",
       icon: Shield,
       description:
-        "A tailored approach for those seeking to heal from past trauma and build resilience. Through evidence-based techniques, we cultivate a safe, compassionate space to process experiences and develop healthy coping strategies that support your path to healing.",
+        "A tailored approach for those seeking to heal from past trauma and build resilience. Through evidence-based techniques, a safe, compassionate space is cultivated to process experiences and develop healthy coping strategies that support your path to healing.",
       details: [
         "Developing Sense of Safety",
         "Processing Trauma",
@@ -183,10 +183,10 @@ const Services = () => {
           />
           <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
             <h1 className="text-4xl md:text-5xl font-light text-text-primary">
-              Our Services
+              Services
             </h1>
             <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-              Discover our comprehensive range of therapeutic services, each tailored to support your unique journey to wellness and personal growth.
+              Discover the comprehensive range of therapeutic services, each tailored to support your unique journey to wellness and personal growth.
             </p>
           </div>
         </section>
@@ -235,7 +235,7 @@ const Services = () => {
                     ${isCtaVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                 >
                   <h2 className="text-4xl font-light text-mountain-shadow mb-2">
-                    Contact Us To Get Started!
+                    Contact Now To Get Started!
                   </h2>
                   <div className="w-24 h-1 bg-sunset-coral mx-auto mt-4" />
                 </div>
@@ -243,8 +243,7 @@ const Services = () => {
                 {/* Content */}
                 <div>
                   <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
-                    Ready to take the first step? Schedule a complimentary 15-minute consultation to find the right
-                    therapist for you.
+                   Ready to take the first step? Schedule a complimentary 15-minute consultation.
                   </p>
                 </div>
 

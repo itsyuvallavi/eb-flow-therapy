@@ -92,8 +92,7 @@ const CTASection = () => {
               style={{ transitionDelay: '200ms' }}
             >
               <p className="text-xl text-mountain-shadow/90 max-w-2xl mx-auto">
-              Ready to take the first step? Schedule a complimentary 15-minute consultation to find the right
-                therapist for you.
+              Ready to take the first step? Schedule a complimentary 15-minute consultation.
               </p>
             </div>
             

@@ -9,11 +9,11 @@ import {
   Facebook,
   ArrowLeft
 } from "lucide-react";
-import SEOHead from "./SEO/SEOHead";
+import SEOHead from "./SEO/SEOHead.jsx";
 import { generatePersonSchema, generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
-import { getSEOData } from "../data/seoData";
-import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
+import { getSEOData } from "../data/seoData.js";
+import { Button } from "./ui/button.jsx";
+import { Card, CardContent } from "./ui/card.jsx";
 import therapistsData from "../data/therapists.json";
 import portrait from "../assets/portrait.png";
 import Megan from "../assets/Megan.png";

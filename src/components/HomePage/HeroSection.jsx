@@ -2,7 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import PropTypes from 'prop-types';
-// Using the new beach background from public directory
+import beachImg from '../../assets/beach.jpg';
+// Using the new beach background from assets directory
 
 
 const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the prop
@@ -38,7 +39,7 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
       <div
         className="absolute bg-no-repeat bg-center"
         style={{
-          backgroundImage: 'url(/beach.jpg)',
+          backgroundImage: `url(${beachImg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           top: 0,
@@ -82,9 +83,8 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
               </h1>
             </div>
             
-            <p className="animate-fade-in animate-delay-200 text-xl text-primary-sage leading-relaxed max-w-2xl mx-auto">
-              Personalized therapy that adapts to your unique story. We honor your journey
-              while providing evidence-based tools for healing and growth.
+            <p className="animate-fade-in animate-delay-200 text-xl text-text-secondary leading-relaxed max-w-2xl mx-auto">
+            Personalized therapy that honors your unique story while integrating evidence-based tools for healing and growth. Begin your therapy journey toward meaningful change and well-being.
             </p>
             
             <div className="animate-fade-in animate-delay-400 flex flex-col sm:flex-row gap-4 justify-center">
@@ -92,18 +92,18 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
                 onClick={() => navigate("/contact")}
                 className="bg-primary-sage text-black px-8 py-4 rounded-lg hover:bg-primary-forest hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg font-medium"
               >
-                Contact Us To Get Started!
+                Contact To Get Started!
               </button>
-              <button
+              {/* <button
                 onClick={() => navigate("/our-team")}
                 className="border-2 border-primary-forest text-primary-forest px-8 py-4 rounded-lg hover:bg-primary-forest hover:text-white transition-all duration-300 font-medium"
               >
                 Meet Our Team
-              </button>
+              </button> */}
             </div>
 
             {/* Trust indicators - Hidden on mobile */}
-            <div className="animate-fade-in animate-delay-600 pt-4 hidden md:block">
+            {/* <div className="animate-fade-in animate-delay-600 pt-4 hidden md:block">
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-text-muted">
                 <span className="bg-white px-3 py-1 rounded-full shadow-sm">Licensed Therapists</span>
                 <span>•</span>
@@ -111,7 +111,7 @@ const HeroSection = ({ onScrollToWelcome }) => {  // Properly destructure the pr
                 <span>•</span>
                 <span className="bg-white px-3 py-1 rounded-full shadow-sm">Personalized Approach</span>
               </div>
-            </div>
+            </div> */}
           </div>
 
         </div>

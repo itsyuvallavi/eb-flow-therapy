@@ -10,7 +10,9 @@ import background from "../assets/tree.png";
 import psychchetral from "../assets/PsychCentral.jpg";
 import tiredthriving from "../assets/Tired&Thriving.jpg";
 import shoutoutla from "../assets/ShoutoutLA.jpg";
+import voyagela from "../assets/VoyageLA-2.webp";
 import floralPattern2 from "../assets/floral-pattern2.png";
+import aiBrainChip from "../assets/ai-brain-chip.jpg";
 
 // Media Item Component with Hover Effect
 const MediaCard = ({ item, delay = 0 }) => {
@@ -152,7 +154,7 @@ const Media = () => {
     },
     {
       id: 2,
-      type: "article",
+      type: "interview",
       title: "Expert Insights on Cluster B Personality Disorders",
       description:
         "Featured as an expert contributor in this comprehensive PsychCentral article exploring Cluster B personality disorders, including borderline personality disorder. The article discusses symptoms, treatment approaches, and the importance of specialized therapeutic support.",
@@ -173,6 +175,30 @@ const Media = () => {
       link: "https://shoutoutla.com/meet-elinor-bawnik-licensed-marriage-and-family-therapist-head-therapist-and-supervisor/",
       date: "2023",
       source: "ShoutoutLA",
+    },
+    {
+      id: 4,
+      type: "interview",
+      title: "An Inspired Chat with Elinor Bawnik of Santa Monica",
+      description:
+        "Featured in VoyageLA, this interview highlights my journey as a therapist in Santa Monica, exploring the challenges and rewards of building a practice focused on personalized, evidence-based care. Discover the inspiration behind EB & Flow Therapy and my commitment to creating an inclusive therapeutic space.",
+      image: voyagela,
+      bgColor: "#8FA3B0",
+      link: "https://voyagela.com/interview/an-inspired-chat-with-elinor-bawnik-of-santa-monica-highlight/",
+      date: "2024",
+      source: "VoyageLA",
+    },
+    {
+      id: 5,
+      type: "article",
+      title: "AI Made Safe: Navigating Mental Health in the Age of Technology",
+      description:
+        "A comprehensive exploration of AI safety in mental health contexts. This article examines the risks of AI engagement optimization, the emerging concern of 'AI psychosis,' and provides evidence-based guidelines for safe, intentional AI use. Written by Elinor Bawnik, LMFT, this piece offers critical insights for clinicians, clients, and anyone using AI tools while prioritizing wellbeing and human connection.",
+      image: aiBrainChip,
+      bgColor: "#E67E22",
+      link: "https://drive.google.com/file/d/1JkVXxkGw5sX2-YJWiNXtFV3PnvcrERHp/view?usp=sharing",
+      date: "October 2025",
+      source: "EB & Flow Therapy",
     },
   ];
 
@@ -205,7 +231,7 @@ const Media = () => {
               Media & Publications
             </h1>
             <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-              Explore featured articles, interviews, and podcast appearances where we share insights on mental health, therapeutic approaches, and the journey toward healing.
+              Explore featured articles, interviews, and podcast appearances sharing insights on mental health, therapeutic approaches, and the journey toward healing.
             </p>
           </div>
         </section>
@@ -253,7 +279,7 @@ const Media = () => {
                     ${isCtaVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                 >
                   <h2 className="text-4xl font-light text-mountain-shadow mb-2">
-                    Contact Us To Get Started!
+                    Contact Now To Get Started!
                   </h2>
                   <div className="w-24 h-1 bg-sunset-coral mx-auto mt-4" />
                 </div>

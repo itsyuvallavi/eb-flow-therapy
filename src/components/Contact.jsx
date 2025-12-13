@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Users, ChevronDown } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { useState, useRef } from "react";
 import SEOHead from "./SEO/SEOHead";
 import { generateBreadcrumbSchema } from "./SEO/StructuredData.jsx";
@@ -10,15 +10,7 @@ import { useEffect } from "react";
 import logo from "../assets/logo.png"
 import floralPattern from "../assets/floral-pattern.jpg";
 
-const therapists = [
-  { id: "general", name: "General Inquiry", email: "elinorlmft@gmail.com" },
-  { id: "elinor", name: "Elinor Bawnik, LMFT", email: "elinorlmft@gmail.com" },
-  { id: "megan", name: "Megan Adamson, AMFT", email: "elinorlmft@gmail.com" },
-  { id: "shira", name: "Shira Feinstein, AMFT", email: "elinorlmft@gmail.com" }
-];
-
 const Contact = () => {
-  const [selectedTherapist, setSelectedTherapist] = useState("general");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -59,7 +51,6 @@ const Contact = () => {
       phone: "",
       message: "",
     });
-    setSelectedTherapist("general");
   };
 
   const handleSubmit = async (e) => {
@@ -67,17 +58,13 @@ const Contact = () => {
     setIsSubmitting(true);
 
     console.log("Form submission started:", {
-      selectedTherapist,
       formData,
     });
 
     try {
-      const selectedTherapistData = therapists.find(
-        (t) => t.id === selectedTherapist
-      );
       const result = await sendContactEmails({
         ...formData,
-        selectedTherapist: selectedTherapistData?.name || "General Inquiry",
+        selectedTherapist: "General Inquiry",
       });
 
       console.log("Email service response:", result);
@@ -143,7 +130,7 @@ const Contact = () => {
           />
           <div className="relative z-10 max-w-7xl mx-auto text-center space-y-6" style={{ paddingTop: '8rem' }}>
             <h1 className="text-4xl md:text-5xl font-light text-text-primary">
-              Contact Us
+              Contact Now
             </h1>
             <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
               Ready to take the first step? Reach out for a free consultation
@@ -169,8 +156,7 @@ const Contact = () => {
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
                 <div className="mb-8">
                   <p className="text-text-primary/90 text-lg mb-2">
-                    Schedule a free 15-minute consultation to see if we&apos;re the
-                    right fit for your journey.
+                  Ready to take the first step? Schedule a complimentary 15-minute consultation.
                   </p>
                   <p className="text-primary-sage font-medium">
                     *Currently accepting new clients
@@ -182,42 +168,6 @@ const Contact = () => {
                   onSubmit={handleSubmit}
                   className="space-y-5"
                 >
-                  {/* Therapist Selection */}
-                  <div className="group">
-                    <label
-                      htmlFor="therapist"
-                      className="block text-text-primary/90 mb-2 text-sm"
-                    >
-                      Select Recipient
-                    </label>
-                    <div className="relative">
-                      <select
-                        id="therapist"
-                        value={selectedTherapist}
-                        onChange={(e) => setSelectedTherapist(e.target.value)}
-                        required
-                        className="w-full px-4 py-3 rounded-lg bg-white border border-primary-sage/20 
-                          text-text-primary placeholder-mountain-shadow/40
-                          focus:outline-none focus:ring-2 focus:ring-mountain-terra/30 focus:border-mountain-terra/50 
-                          transition-all group-hover:border-mountain-shadow/40 appearance-none pr-10"
-                      >
-                        {therapists.map((therapist) => (
-                          <option
-                            key={therapist.id}
-                            value={therapist.id}
-                            className="bg-white text-text-primary"
-                          >
-                            {therapist.name}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-primary/50 pointer-events-none flex items-center">
-                        <Users className="w-5 h-5 mr-1" />
-                        <ChevronDown className="w-5 h-5" />
-                      </div>
-                    </div>
-                  </div>
-
                   {/* Input Fields */}
                   {["name", "email", "phone"].map((field) => (
                     <div key={field} className="group">

@@ -10,25 +10,21 @@ const WelcomeSection = () => {
   const [featuresRef, areFeaturesVisible] = useIntersectionObserver();
 
   const features = [
-    {
-      icon: <GraduationCap className="w-8 h-8" />,
-      title: "Expert Team",
-      text: "Licensed therapists with specialized training in evidence-based approaches",
-    },
+   
     {
       icon: <Heart className="w-8 h-8" />,
       title: "Personalized Care",
-      text: "Therapy that adapts to your unique needs and goals",
+      text: "Therapy that meets you where you are and is tailored to your unique needs and goals.",
     },
     {
       icon: <Sparkles className="w-8 h-8" />,
       title: "Inclusive Practice",
-      text: "Sex-positive, kink-affirming, welcoming to all identities",
+      text: "Sex-positive, kink-affirming, welcoming to all identities, genders and relationship styles",
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: "Collaborative Approach",
-      text: "You're the expert on your life - we provide tools and support",
+      text: "Offering tools, thoughtful challenge, and support, while honoring you as the expert on your life.",
     },
   ];
 
@@ -81,11 +77,10 @@ const WelcomeSection = () => {
                 </span>
               </h2>
 
-              <p className="text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto">
-                At EB & Flow Therapy, we believe every client's story is unique, and therapy should honor
-                that individuality. Our team provides personalized, evidence-based care that adapts to your
-                needs. We specialize in OCD, anxiety, personality disorders, and relationship challenges,
-                creating an inclusive space where all identities and experiences are respected.
+              <p className="text-lg text-text-secondary leading-relaxed max-w-3xl mx-auto">
+              At EB & Flow Therapy, every client's story is unique, and therapy should honor that individuality. 
+              I provide personalized, evidence-based care that adapts to your needs. With a speciality in OCD, anxiety, 
+              personality disorders, and relationship challenges, I create an inclusive space where all identities and experiences are respected.
               </p>
 
 
@@ -97,7 +92,7 @@ const WelcomeSection = () => {
         <div className="max-w-3xl mx-auto px-6 lg:px-6 mt-4">
           <div 
             ref={featuresRef}
-            className={`grid grid-cols-2 lg:grid-cols-4 gap-3 transform transition-all duration-700 delay-200
+            className={`grid grid-cols-2 lg:grid-cols-3 gap-3 transform transition-all duration-700 delay-200
               ${areFeaturesVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
           >
             {features.map((feature, index) => (

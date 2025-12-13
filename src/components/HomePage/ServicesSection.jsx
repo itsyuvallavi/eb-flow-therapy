@@ -97,7 +97,7 @@ const ServicesSection = () => {
         >
           <div className="space-y-4 max-w-3xl mx-auto">
             <h2 className="text-3xl lg:text-4xl font-light text-text-primary leading-tight">
-              Our <span className="font-medium text-primary-sage">Therapy Services</span>
+              <span className="font-medium text-primary-sage">Therapy Services</span>
               <span className="block text-2xl lg:text-3xl mt-2 text-text-secondary">
                 Comprehensive Care That Adapts
               </span>

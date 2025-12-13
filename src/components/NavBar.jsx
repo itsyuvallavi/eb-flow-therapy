@@ -11,8 +11,9 @@ const NavBar = () => {
   const navItems = [
     { id: 'home', label: 'Home', path: '/' },
     { id: 'about', label: 'About', path: '/about' },
-    { id: 'team', label: 'Meet the Therapists', path: '/our-team' },
+    // { id: 'team', label: 'Meet the Therapists', path: '/our-team' },
     { id: 'services', label: 'Services', path: '/services' },
+    { id: 'providers', label: 'Providers & Programs', path: '/providers-programs' },
     { id: 'media', label: 'Media', path: '/media' },
     { id: 'contact', label: 'Contact', path: '/contact' },
   ];
