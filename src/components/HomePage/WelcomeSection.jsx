@@ -92,7 +92,7 @@ const WelcomeSection = () => {
         <div className="max-w-3xl mx-auto px-6 lg:px-6 mt-4">
           <div 
             ref={featuresRef}
-            className={`grid grid-cols-2 lg:grid-cols-3 gap-3 transform transition-all duration-700 delay-200
+            className={`grid grid-cols-1 lg:grid-cols-3 gap-3 transform transition-all duration-700 delay-200
               ${areFeaturesVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
           >
             {features.map((feature, index) => (
